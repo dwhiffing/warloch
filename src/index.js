@@ -16,5 +16,5 @@ new Phaser.Game({
   zoom: 2,
   scene: [BootScene, GameScene],
   pixelArt: true,
-  roundPixels: true,
+  // roundPixels: true,
 })

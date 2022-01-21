@@ -1,14 +1,17 @@
 import { SPRITES } from '../constants'
+import { Bar } from '../services/Bar'
 
 export class Enemy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'tiles')
     this.scene.physics.world.enableBody(this, 0)
     this.setOrigin(0.5)
+    this.healthBar = new Bar(scene, this.x, this.y, 15, 2, 0xff0000)
   }
 
   hit(bullet) {
     this.health -= bullet.damage
+    this.healthBar.set(this.health)
     this.setTintFill(0xffffff)
 
     this.scene.time.delayedCall(100, this.clearTint.bind(this))
@@ -22,21 +25,31 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setVisible(true)
     this.x = x
     this.y = y
-    const { bodySize, bodyOffset, health, speed } = SPRITES[type]
+    const { bodySize, bodyOffset, health, speed, xp } = SPRITES[type]
     this.speed = speed
     this.health = health
+    this.xp = xp
+    this.healthBar.set(this.health, this.health)
+    this.healthBar.move(this.x, this.y)
     this.play(type)
       .setBodySize(...bodySize)
       .setOffset(...bodyOffset)
   }
 
   die() {
+    this.scene.player.xp += this.xp
+    this.scene.xpBar.set(this.scene.player.xp)
     this.setVisible(false)
     this.setActive(false)
+    this.healthBar.die()
   }
 
   update() {
-    if (!this.active || this.updateTimer-- > 0) return
+    if (!this.active) return
+
+    this.healthBar.move(this.x, this.y)
+
+    if (this.updateTimer-- > 0) return
 
     this.updateTimer = 20
 

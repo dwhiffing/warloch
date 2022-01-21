@@ -6,6 +6,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'tiles')
     this.shotTimer = 0
     this.scene.physics.world.enableBody(this, 0)
+    this.level = 1
+    this.xp = 0
     const { bodySize, bodyOffset, speed, health } = SPRITES.player
     this.play('player')
       .setCollideWorldBounds(true)

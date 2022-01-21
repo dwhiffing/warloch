@@ -1,4 +1,5 @@
 import { Player } from '../sprites/Player'
+import { Bar } from '../services/Bar'
 import { SPRITES } from '../constants'
 import { EnemyService } from '../services/EnemyService'
 
@@ -30,7 +31,9 @@ export default class extends Phaser.Scene {
       },
     )
     this.physics.add.collider(this.enemyService.enemies)
-
+    const width = this.cameras.main.width - 40
+    this.xpBar = new Bar(this, 20, 20, width, 8, 0x00ffff, false)
+    this.xpBar.set(0, 100)
     this.cameras.main.startFollow(this.player)
   }
 
