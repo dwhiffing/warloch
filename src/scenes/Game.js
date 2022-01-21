@@ -9,7 +9,9 @@ export default class extends Phaser.Scene {
 
   init() {
     this.input.mouse.disableContextMenu()
-    SPRITES.forEach((sprite) => this.createAnim(sprite.key, sprite.name))
+    Object.values(SPRITES).forEach((sprite) =>
+      this.createAnim(sprite.key, sprite.name),
+    )
   }
 
   create() {
@@ -27,6 +29,7 @@ export default class extends Phaser.Scene {
         bullet.hit(enemy)
       },
     )
+    this.physics.add.collider(this.enemyService.enemies)
 
     this.cameras.main.startFollow(this.player)
   }

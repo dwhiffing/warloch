@@ -1,3 +1,4 @@
+import { SPRITES } from '../constants'
 import { Bullet } from './Bullet'
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
@@ -5,11 +6,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'tiles')
     this.shotTimer = 0
     this.scene.physics.world.enableBody(this, 0)
+    const { bodySize, bodyOffset, speed, health } = SPRITES.player
     this.play('player')
       .setCollideWorldBounds(true)
-      .setBodySize(8, 8)
       .setOrigin(0.5)
-      .setOffset(12, 22)
+      .setBodySize(...bodySize)
+      .setOffset(...bodyOffset)
 
     const { W, A, S, D } = Phaser.Input.Keyboard.KeyCodes
     this.input = scene.input
@@ -17,6 +19,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.leftKey = this.input.keyboard.addKey(A)
     this.downKey = this.input.keyboard.addKey(S)
     this.rightKey = this.input.keyboard.addKey(D)
+    this.speed = speed
+    this.health = health
+    this.shotTiming = 10
+
     this.input.on('pointerdown', () => (this.isMouseDown = true))
     this.input.on('pointerup', () => (this.isMouseDown = false))
 
@@ -42,19 +48,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.shotTimer > 0) this.shotTimer--
     if (this.isMouseDown && this.shotTimer === 0) {
       this.shoot(this.input.activePointer)
-      this.shotTimer = 10
+      this.shotTimer = this.shotTiming
     }
 
     if (this.upKey.isDown) {
-      this.setVelocityY(-150)
+      this.setVelocityY(-this.speed)
     } else if (this.downKey.isDown) {
-      this.setVelocityY(150)
+      this.setVelocityY(this.speed)
     }
 
     if (this.leftKey.isDown) {
-      this.setVelocityX(-150)
+      this.setVelocityX(-this.speed)
     } else if (this.rightKey.isDown) {
-      this.setVelocityX(150)
+      this.setVelocityX(this.speed)
     }
   }
 }

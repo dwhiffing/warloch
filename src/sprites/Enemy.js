@@ -1,8 +1,10 @@
+import { SPRITES } from '../constants'
+
 export class Enemy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'tiles')
     this.scene.physics.world.enableBody(this, 0)
-    this.play('knight').setBodySize(8, 16).setOrigin(0.5).setOffset(12, 16)
+    this.setOrigin(0.5)
   }
 
   hit(bullet) {
@@ -15,13 +17,17 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  spawn(x, y) {
+  spawn(x, y, type = 'knight') {
     this.setActive(true)
     this.setVisible(true)
     this.x = x
     this.y = y
-    this.speed = 50
-    this.health = 10
+    const { bodySize, bodyOffset, health, speed } = SPRITES[type]
+    this.speed = speed
+    this.health = health
+    this.play(type)
+      .setBodySize(...bodySize)
+      .setOffset(...bodyOffset)
   }
 
   die() {

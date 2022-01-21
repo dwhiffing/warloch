@@ -3,26 +3,37 @@ import { Enemy } from '../sprites/Enemy'
 export class EnemyService {
   constructor(scene) {
     this.scene = scene
-    this.spawnTimer = 100
+    this.spawnRate = 50
+    this.spawnTimer = this.spawnRate
     this.enemies = this.scene.physics.add.group({
       classType: Enemy,
-      maxSize: 20,
+      maxSize: 50,
       runChildUpdate: true,
     })
-    this.enemies.createMultiple({ quantity: 20, active: false })
+    this.enemies.createMultiple({ quantity: 50, active: false })
     this.target = this.scene.player
     this.physics = this.scene.physics
   }
 
   spawn(x, y) {
-    this.enemies.get()?.spawn(x, y)
+    let type
+    const roll = Phaser.Math.RND.between(1, 20)
+    if (roll <= 14) {
+      type = Phaser.Math.RND.weightedPick(['knight'])
+    } else if (roll <= 16) {
+      type = Phaser.Math.RND.weightedPick(['heavyKnight'])
+    } else if (roll <= 19) {
+      type = Phaser.Math.RND.weightedPick(['eliteKnight'])
+    } else {
+      type = Phaser.Math.RND.weightedPick(['largeEliteKnight', 'executioner'])
+    }
+    this.enemies.get()?.spawn(x, y, type)
   }
 
   update() {
     if (this.spawnTimer-- > 0) return
-    console.log('wtf')
 
-    this.spawnTimer = 100
+    this.spawnTimer = this.spawnRate
     const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), 300)
     this.spawn(this.target.x + vel.x, this.target.y + vel.y)
   }
