@@ -31,7 +31,7 @@ export class Bar {
     this.inner.setActive(true)
     this.outer.setVisible(true)
     this.outer.setVisible(true)
-    this.value = value
+    this.value = Math.max(value, 0)
     if (typeof maxValue === 'number') this.maxValue = maxValue
     this.update()
   }

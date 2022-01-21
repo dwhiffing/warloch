@@ -19,7 +19,7 @@ export class EnemyService {
   spawn(x, y) {
     let type
     let roll = Phaser.Math.RND.between(1, 20)
-    roll += -10 + this.scene.player.level
+    roll += -10 + this.scene.registry.get('level')
     if (roll <= 14) {
       type = Phaser.Math.RND.weightedPick(['knight'])
     } else if (roll <= 16) {
