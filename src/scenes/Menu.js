@@ -38,7 +38,7 @@ export default class extends Phaser.Scene {
     // }
 
     this.add
-      .sprite(width / 2, height / 2, 'bar')
+      .sprite(width / 2, height / 2, 'tiles', 'bar.png')
       .setScale(1.2)
       .setInteractive()
       .on('pointerdown', () => {

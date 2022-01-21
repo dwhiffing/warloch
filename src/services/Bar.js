@@ -3,8 +3,8 @@ export class Bar {
     this.scene = scene
     this.width = width
     this.height = height
-    this.outer = this.scene.add.sprite(x, y, 'bar')
-    this.inner = this.scene.add.sprite(x, y, 'bar')
+    this.outer = this.scene.add.sprite(x, y, 'tiles', 'bar.png')
+    this.inner = this.scene.add.sprite(x, y, 'tiles', 'bar.png')
     this.inner
       .setScrollFactor(scroll ? 1 : 0)
       .setOrigin(0, 0.5)

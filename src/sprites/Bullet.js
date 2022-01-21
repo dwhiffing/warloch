@@ -1,6 +1,6 @@
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, 'shot')
+    super(scene, x, y, 'tiles', 'shot.png')
     this.scene.physics.world.enableBody(this, 0)
     this.speed = Phaser.Math.GetSpeed(400, 1)
     this.damage = 1

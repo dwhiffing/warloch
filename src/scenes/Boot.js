@@ -13,8 +13,6 @@ export default class extends Phaser.Scene {
     })
 
     this.load.image('background', 'assets/images/background.png')
-    this.load.image('shot', 'assets/images/shot.png')
-    this.load.image('bar', 'assets/images/bar.png')
     this.load.atlas(
       'tiles',
       'assets/images/tiles.png',
