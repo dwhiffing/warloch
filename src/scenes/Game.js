@@ -62,11 +62,16 @@ export default class extends Phaser.Scene {
     this.hpBar.set(this.player.health, this.player.health)
 
     this.cameras.main.startFollow(this.player)
+    this.debugKeys = this.input.keyboard.addKeys('P')
   }
 
   update(time, delta) {
     this.player.update(time, delta)
     this.enemyService.update(time, delta)
+
+    if (Phaser.Input.Keyboard.JustDown(this.debugKeys.P)) {
+      this.player.addXP(100)
+    }
   }
 
   render() {}
