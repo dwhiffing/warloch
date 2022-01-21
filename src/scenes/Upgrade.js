@@ -3,6 +3,8 @@ export const UPGRADES = {
   bulletCount: { tint: 0xf3722c, name: 'Bullet Count', key: 'bulletCount' },
   bulletSpeed: { tint: 0xf3722c, name: 'Bullet Speed', key: 'bulletSpeed' },
   bulletDamage: { tint: 0xf94144, name: 'Bullet Damage', key: 'bulletDamage' },
+  spawnRate: { tint: 0xf94144, name: 'Spawn Rate', key: 'spawnRate' },
+  moveSpeed: { tint: 0xf94144, name: 'Move Speed', key: 'moveSpeed' },
 }
 
 export default class Upgrade extends Phaser.Scene {

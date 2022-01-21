@@ -12,7 +12,7 @@ export default class extends Phaser.Scene {
       progress.fillRect(0, height / 2, width * value, 60)
     })
 
-    this.load.image('background', 'assets/images/debug-grid-1920x1920.png')
+    this.load.image('background', 'assets/images/background.png')
     this.load.image('shot', 'assets/images/shot.png')
     this.load.image('bar', 'assets/images/bar.png')
     this.load.atlas(

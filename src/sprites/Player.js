@@ -30,7 +30,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.leftKey = this.input.keyboard.addKey(A)
     this.downKey = this.input.keyboard.addKey(S)
     this.rightKey = this.input.keyboard.addKey(D)
-    this.speed = speed
     this.health = health
 
     this.input.on('pointerdown', () => (this.isMouseDown = true))
@@ -91,6 +90,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return this.scene.registry.get('level')
   }
 
+  get moveSpeed() {
+    return 40 + this.scene.registry.get('moveSpeed') * 40
+  }
+
   get bulletDelay() {
     return 25 - (this.scene.registry.get('bulletDelay') - 1) * 4
   }
@@ -117,15 +120,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if (this.upKey.isDown) {
-      this.setVelocityY(-this.speed)
+      this.setVelocityY(-this.moveSpeed)
     } else if (this.downKey.isDown) {
-      this.setVelocityY(this.speed)
+      this.setVelocityY(this.moveSpeed)
     }
 
     if (this.leftKey.isDown) {
-      this.setVelocityX(-this.speed)
+      this.setVelocityX(-this.moveSpeed)
     } else if (this.rightKey.isDown) {
-      this.setVelocityX(this.speed)
+      this.setVelocityX(this.moveSpeed)
     }
   }
 }

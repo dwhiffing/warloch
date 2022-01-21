@@ -1,10 +1,13 @@
+import { SPRITES } from '../constants'
 import { Enemy } from '../sprites/Enemy'
+
+const SPAWN_DISTANCE = 300
 
 export class EnemyService {
   constructor(scene) {
     this.scene = scene
-    this.spawnRate = 50
-    this.spawnTimer = this.spawnRate
+    this.scene.registry.set('spawnRate', 1)
+    this.spawnTimer = 0
     this.enemies = this.scene.physics.add.group({
       classType: Enemy,
       maxSize: 50,
@@ -18,25 +21,27 @@ export class EnemyService {
 
   spawn(x, y) {
     let type
-    let roll = Phaser.Math.RND.between(1, 20)
-    roll += -10 + this.scene.registry.get('level')
-    if (roll <= 14) {
-      type = Phaser.Math.RND.weightedPick(['knight'])
-    } else if (roll <= 16) {
-      type = Phaser.Math.RND.weightedPick(['heavyKnight'])
-    } else if (roll <= 19) {
-      type = Phaser.Math.RND.weightedPick(['eliteKnight'])
-    } else {
-      type = Phaser.Math.RND.weightedPick(['largeEliteKnight', 'executioner'])
-    }
+    let roll =
+      Phaser.Math.RND.between(1, 20) - 10 + this.scene.registry.get('level')
+
+    Object.entries(SPRITES)
+      .filter(([k, v]) => v.type === 'enemy' && roll >= v.roll)
+      .forEach(([k, v]) => (type = v.key))
     this.enemies.get()?.spawn(x, y, type)
   }
 
   update() {
     if (this.spawnTimer-- > 0) return
 
-    this.spawnTimer = this.spawnRate
-    const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), 300)
+    const vel = this.physics.velocityFromAngle(
+      Phaser.Math.RND.angle(),
+      SPAWN_DISTANCE,
+    )
     this.spawn(this.target.x + vel.x, this.target.y + vel.y)
+    this.spawnTimer = this.spawnRate
+  }
+
+  get spawnRate() {
+    return 60 - this.scene.registry.get('spawnRate') * 10
   }
 }
