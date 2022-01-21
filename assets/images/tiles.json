@@ -1,0 +1,604 @@
+{
+	"frames": [
+		{
+			"filename": "EliteKnight_Walk_1.png",
+			"frame": {
+				"x": 2,
+				"y": 2,
+				"w": 14,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 12,
+				"w": 14,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "EliteKnight_Walk_2.png",
+			"frame": {
+				"x": 18,
+				"y": 2,
+				"w": 14,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 10,
+				"w": 14,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "EliteKnight_Walk_3.png",
+			"frame": {
+				"x": 34,
+				"y": 2,
+				"w": 14,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 11,
+				"w": 14,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "EliteKnight_Walk_4.png",
+			"frame": {
+				"x": 50,
+				"y": 2,
+				"w": 14,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 12,
+				"w": 14,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Executioner_Walk_1.png",
+			"frame": {
+				"x": 66,
+				"y": 2,
+				"w": 20,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 6,
+				"y": 2,
+				"w": 20,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Executioner_Walk_2.png",
+			"frame": {
+				"x": 88,
+				"y": 2,
+				"w": 22,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 5,
+				"y": 0,
+				"w": 22,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Executioner_Walk_3.png",
+			"frame": {
+				"x": 112,
+				"y": 2,
+				"w": 22,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 4,
+				"y": 1,
+				"w": 22,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Executioner_Walk_4.png",
+			"frame": {
+				"x": 2,
+				"y": 34,
+				"w": 20,
+				"h": 32
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 6,
+				"y": 0,
+				"w": 20,
+				"h": 32
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "HeavyKnight_Walk_1.png",
+			"frame": {
+				"x": 24,
+				"y": 34,
+				"w": 16,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 12,
+				"w": 16,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "HeavyKnight_Walk_2.png",
+			"frame": {
+				"x": 42,
+				"y": 34,
+				"w": 16,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 10,
+				"w": 16,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "HeavyKnight_Walk_3.png",
+			"frame": {
+				"x": 60,
+				"y": 34,
+				"w": 16,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 11,
+				"w": 16,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "HeavyKnight_Walk_4.png",
+			"frame": {
+				"x": 78,
+				"y": 34,
+				"w": 16,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 14,
+				"w": 16,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Knight_Walk_1.png",
+			"frame": {
+				"x": 96,
+				"y": 34,
+				"w": 14,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 9,
+				"y": 14,
+				"w": 14,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Knight_Walk_2.png",
+			"frame": {
+				"x": 112,
+				"y": 34,
+				"w": 14,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 9,
+				"y": 12,
+				"w": 14,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Knight_Walk_3.png",
+			"frame": {
+				"x": 128,
+				"y": 34,
+				"w": 14,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 9,
+				"y": 13,
+				"w": 14,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Knight_Walk_4.png",
+			"frame": {
+				"x": 2,
+				"y": 68,
+				"w": 14,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 9,
+				"y": 14,
+				"w": 14,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeEliteKnight_Walk_1.png",
+			"frame": {
+				"x": 18,
+				"y": 68,
+				"w": 30,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 2,
+				"w": 30,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeEliteKnight_Walk_2.png",
+			"frame": {
+				"x": 50,
+				"y": 68,
+				"w": 30,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeEliteKnight_Walk_3.png",
+			"frame": {
+				"x": 82,
+				"y": 68,
+				"w": 30,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 1,
+				"w": 30,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeEliteKnight_Walk_4.png",
+			"frame": {
+				"x": 114,
+				"y": 68,
+				"w": 30,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 2,
+				"w": 30,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeKnight_Walk_1.png",
+			"frame": {
+				"x": 2,
+				"y": 100,
+				"w": 26,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 3,
+				"y": 2,
+				"w": 26,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeKnight_Walk_2.png",
+			"frame": {
+				"x": 30,
+				"y": 100,
+				"w": 26,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 3,
+				"y": 0,
+				"w": 26,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeKnight_Walk_3.png",
+			"frame": {
+				"x": 58,
+				"y": 100,
+				"w": 26,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 3,
+				"y": 1,
+				"w": 26,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "LargeKnight_Walk_4.png",
+			"frame": {
+				"x": 86,
+				"y": 100,
+				"w": 26,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 3,
+				"y": 2,
+				"w": 26,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Mage_Walk_1.png",
+			"frame": {
+				"x": 114,
+				"y": 100,
+				"w": 16,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 12,
+				"w": 16,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Mage_Walk_2.png",
+			"frame": {
+				"x": 132,
+				"y": 100,
+				"w": 16,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 12,
+				"w": 16,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Mage_Walk_3.png",
+			"frame": {
+				"x": 2,
+				"y": 132,
+				"w": 16,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 13,
+				"w": 16,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "Mage_Walk_4.png",
+			"frame": {
+				"x": 20,
+				"y": 132,
+				"w": 16,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 8,
+				"y": 14,
+				"w": 16,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		}
+	],
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker ",
+		"version": "1.0",
+		"image": "tiles.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 152,
+			"h": 152
+		},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:4a3347452afd1a4c831a6e659a31afaf:c50170abfef7c27faab028291d554faa:d7efee45036b89827ffab798ae124829$"
+	}
+}
