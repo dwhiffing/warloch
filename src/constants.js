@@ -7,6 +7,7 @@ export const SPRITES = {
     bodyOffset: [12, 14],
     speed: 50,
     health: 4,
+    damage: 1,
     xp: 1,
   },
   heavyKnight: {
@@ -17,6 +18,7 @@ export const SPRITES = {
     bodyOffset: [12, 14],
     speed: 40,
     health: 8,
+    damage: 1,
     xp: 5,
   },
   eliteKnight: {
@@ -27,6 +29,7 @@ export const SPRITES = {
     bodyOffset: [8, 14],
     speed: 20,
     health: 50,
+    damage: 1,
     xp: 10,
   },
   largeEliteKnight: {
@@ -37,6 +40,7 @@ export const SPRITES = {
     bodyOffset: [6, 10],
     speed: 10,
     health: 100,
+    damage: 1,
     xp: 20,
   },
   executioner: {
@@ -47,6 +51,7 @@ export const SPRITES = {
     bodyOffset: [6, 10],
     speed: 10,
     health: 100,
+    damage: 1,
     xp: 20,
   },
   player: {
@@ -57,6 +62,7 @@ export const SPRITES = {
     bodyOffset: [12, 22],
     speed: 150,
     health: 100,
+    damage: 1,
     xp: 0,
   },
 }

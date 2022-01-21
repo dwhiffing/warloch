@@ -1,6 +1,8 @@
 import { SPRITES } from '../constants'
 import { Bar } from '../services/Bar'
 
+// TODO: make enemies drop xp orbs that the player picks up
+
 export class Enemy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'tiles')
@@ -25,9 +27,11 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setVisible(true)
     this.x = x
     this.y = y
-    const { bodySize, bodyOffset, health, speed, xp } = SPRITES[type]
+    const { bodySize, bodyOffset, health, speed, xp, damage } = SPRITES[type]
     this.speed = speed
+    this.damage = damage
     this.health = health
+    this.hitTimer = 0
     this.xp = xp
     this.healthBar.set(this.health, this.health)
     this.healthBar.move(this.x, this.y)
@@ -49,6 +53,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.healthBar.move(this.x, this.y)
 
+    if (this.hitTimer > 0) this.hitTimer--
     if (this.updateTimer-- > 0) return
 
     this.updateTimer = 20

@@ -18,9 +18,13 @@ export default class extends Phaser.Scene {
   create() {
     this.physics.world.setBounds(0, 0, 2240, 2240)
     this.cameras.main.setBounds(0, 0, 2240, 2240)
+
     this.add.tileSprite(0, 0, 2240, 2240, 'background').setOrigin(0)
+
     this.player = this.add.existing(new Player(this, 960, 960))
     this.enemyService = new EnemyService(this)
+
+    this.physics.add.collider(this.enemyService.enemies)
     this.physics.add.overlap(
       this.player.bullets,
       this.enemyService.enemies,
@@ -30,10 +34,22 @@ export default class extends Phaser.Scene {
         bullet.hit(enemy)
       },
     )
-    this.physics.add.collider(this.enemyService.enemies)
+
+    this.physics.add.overlap(
+      this.player,
+      this.enemyService.enemies,
+      (player, enemy) => {
+        if (player.active && enemy.active) player.hit(enemy)
+      },
+    )
+
     const width = this.cameras.main.width - 40
-    this.xpBar = new Bar(this, 20, 20, width, 8, 0x00ffff, false)
+    this.xpBar = new Bar(this, 20, 20, width, 4, 0x00ffff, false)
     this.xpBar.set(0, 100)
+
+    this.hpBar = new Bar(this, 20, 30, width, 4, 0xff0000, false)
+    this.hpBar.set(100, 100)
+
     this.cameras.main.startFollow(this.player)
   }
 

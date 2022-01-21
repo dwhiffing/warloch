@@ -1,11 +1,17 @@
 import { SPRITES } from '../constants'
 import { Bullet } from './Bullet'
 
+// TODO: player level up
+// TODO: player level up triggers upgrade menu
+// TODO: upgrade menu
+// TODO: more weapon types/stats/upgrades
+
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'tiles')
     this.shotTimer = 0
     this.scene.physics.world.enableBody(this, 0)
+    this.health = 100
     this.level = 1
     this.xp = 0
     const { bodySize, bodyOffset, speed, health } = SPRITES.player
@@ -42,6 +48,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (!bullet) return
     const { scrollX, scrollY } = this.scene.cameras.main
     bullet.fire(scrollX + pointer.x, scrollY + pointer.y)
+  }
+
+  hit(enemy) {
+    if (enemy.hitTimer > 0) return
+
+    enemy.hitTimer = 10
+    this.health -= enemy.damage
+    this.scene.hpBar.set(this.health)
+    if (this.health <= 0) this.scene.scene.start('Game')
   }
 
   update() {

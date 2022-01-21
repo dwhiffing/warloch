@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import GameScene from './scenes/Game'
+import MenuScene from './scenes/Menu'
 import BootScene from './scenes/Boot'
 
 new Phaser.Game({
@@ -14,7 +15,7 @@ new Phaser.Game({
     arcade: { debug: false },
   },
   zoom: 2,
-  scene: [BootScene, GameScene],
+  scene: [BootScene, MenuScene, GameScene],
   pixelArt: true,
   // roundPixels: true,
 })
