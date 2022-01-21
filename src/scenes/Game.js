@@ -1,4 +1,6 @@
-import { CameraService } from '../services/cameraService'
+import { Player } from '../sprites/Player'
+import { SPRITES } from '../constants'
+import { EnemyService } from '../services/EnemyService'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -7,21 +9,34 @@ export default class extends Phaser.Scene {
 
   init() {
     this.input.mouse.disableContextMenu()
-    this.cameraService = new CameraService(this)
-
-    this.createAnim('knight', 'Knight')
-    this.createAnim('eliteKnight', 'EliteKnight')
-    this.createAnim('largeEliteKnight', 'LargeEliteKnight')
-    this.createAnim('executioner', 'Executioner')
-    this.createAnim('heavyKnight', 'HeavyKnight')
-    this.createAnim('player', 'Mage')
-    this.add.sprite(20, 20, 'tiles').play('knight')
-    this.add.sprite(40, 20, 'tiles').play('eliteKnight')
-    this.add.sprite(60, 20, 'tiles').play('largeEliteKnight')
-    this.add.sprite(80, 20, 'tiles').play('executioner')
-    this.add.sprite(100, 20, 'tiles').play('heavyKnight')
-    this.add.sprite(120, 20, 'tiles').play('player')
+    SPRITES.forEach((sprite) => this.createAnim(sprite.key, sprite.name))
   }
+
+  create() {
+    this.physics.world.setBounds(0, 0, 2240, 2240)
+    this.cameras.main.setBounds(0, 0, 2240, 2240)
+    this.add.tileSprite(0, 0, 2240, 2240, 'background').setOrigin(0)
+    this.player = this.add.existing(new Player(this, 960, 960))
+    this.enemyService = new EnemyService(this)
+    this.physics.add.overlap(
+      this.player.bullets,
+      this.enemyService.enemies,
+      (bullet, enemy) => {
+        if (!bullet.active || !enemy.active) return
+        enemy.hit(bullet)
+        bullet.hit(enemy)
+      },
+    )
+
+    this.cameras.main.startFollow(this.player)
+  }
+
+  update(time, delta) {
+    this.player.update(time, delta)
+    this.enemyService.update(time, delta)
+  }
+
+  render() {}
 
   createAnim(key, prefix) {
     this.anims.create({
@@ -34,11 +49,5 @@ export default class extends Phaser.Scene {
       }),
       repeat: -1,
     })
-  }
-
-  create() {}
-
-  update(time, delta) {
-    this.cameraService.update(delta)
   }
 }
