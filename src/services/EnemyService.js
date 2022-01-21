@@ -10,6 +10,7 @@ export class EnemyService {
       maxSize: 50,
       runChildUpdate: true,
     })
+
     this.enemies.createMultiple({ quantity: 50, active: false })
     this.target = this.scene.player
     this.physics = this.scene.physics

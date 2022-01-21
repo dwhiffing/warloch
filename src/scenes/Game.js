@@ -2,6 +2,7 @@ import { Player } from '../sprites/Player'
 import { Bar } from '../services/Bar'
 import { SPRITES } from '../constants'
 import { EnemyService } from '../services/EnemyService'
+import { Orb } from '../sprites/Orb'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -18,6 +19,9 @@ export default class extends Phaser.Scene {
   create() {
     this.physics.world.setBounds(0, 0, 2240, 2240)
     this.cameras.main.setBounds(0, 0, 2240, 2240)
+
+    this.orbs = this.physics.add.group({ classType: Orb, maxSize: 50 })
+    this.orbs.createMultiple({ quantity: 50, active: false })
 
     this.add.tileSprite(0, 0, 2240, 2240, 'background').setOrigin(0)
 
@@ -43,12 +47,19 @@ export default class extends Phaser.Scene {
       },
     )
 
-    const width = this.cameras.main.width - 40
-    this.xpBar = new Bar(this, 20, 20, width, 4, 0x00ffff, false)
-    this.xpBar.set(0, 100)
+    this.physics.add.overlap(this.player, this.orbs, (player, orb) => {
+      if (!player.active || !orb.active) return
+      player.addXP(orb.value)
+      orb.hit(player)
+    })
 
-    this.hpBar = new Bar(this, 20, 30, width, 4, 0xff0000, false)
-    this.hpBar.set(100, 100)
+    const offset = 20
+    const width = this.cameras.main.width - 40
+    this.xpBar = new Bar(this, offset, offset, width, 4, 0x00ffff, false)
+    this.xpBar.set(this.player.xp, this.player.getNextLevelXP())
+
+    this.hpBar = new Bar(this, offset, offset + 5, width, 4, 0xff0000, false)
+    this.hpBar.set(this.player.health, this.player.health)
 
     this.cameras.main.startFollow(this.player)
   }

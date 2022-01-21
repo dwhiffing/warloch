@@ -8,7 +8,7 @@ export const SPRITES = {
     speed: 50,
     health: 4,
     damage: 1,
-    xp: 1,
+    xp: 3,
   },
   heavyKnight: {
     type: 'enemy',
@@ -19,7 +19,7 @@ export const SPRITES = {
     speed: 40,
     health: 8,
     damage: 1,
-    xp: 5,
+    xp: 6,
   },
   eliteKnight: {
     type: 'enemy',
