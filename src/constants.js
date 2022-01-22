@@ -47,16 +47,14 @@ export const SPRITES = {
     xp: 20,
     roll: 19,
   },
-  executioner: {
+  player2: {
     type: 'player',
     name: 'Executioner',
-    key: 'executioner',
+    key: 'player2',
     bodySize: [18, 18],
     bodyOffset: [6, 10],
     speed: 10,
     hp: 100,
-    damage: 1,
-    xp: 20,
   },
   player: {
     type: 'player',
@@ -66,8 +64,6 @@ export const SPRITES = {
     bodyOffset: [12, 22],
     speed: 80,
     hp: 100,
-    damage: 1,
-    xp: 0,
   },
 }
 
@@ -106,9 +102,36 @@ export const GUNS = {
 
 // TODO: Revamp upgrades to change multiple guns in more complex ways
 export const UPGRADES = {
-  bulletDelay: { tint: 0xf8961e, name: 'Bullet Delay', key: 'bulletDelay' },
-  bulletCount: { tint: 0xf3722c, name: 'Bullet Count', key: 'bulletCount' },
-  bulletSpeed: { tint: 0xf3722c, name: 'Bullet Speed', key: 'bulletSpeed' },
-  bulletDamage: { tint: 0xf94144, name: 'Bullet Damage', key: 'bulletDamage' },
-  moveSpeed: { tint: 0xf94144, name: 'Move Speed', key: 'moveSpeed' },
+  upgrade1: { tint: 0xf8961e, name: 'Upgrade', key: 'upgrade' },
+  upgrade2: { tint: 0xf3722c, name: 'Upgrade', key: 'upgrade' },
+  upgrade3: { tint: 0xf94144, name: 'Upgrade', key: 'upgrade' },
 }
+
+// gun ideas
+// gun: shoots a weak shot at the cursor
+// shotgun: shoots in an arc with short range
+// Runetracer: passes through enemies, draws a line behind it, shoots every 3 seconds, bounces off walls
+// whip: attacks with low damage in a large area right in front of player
+// cross: aims at nearest enemy, boomerangs, moves faster over time
+// fire wand: aims at random enemy, high damage
+// garlic: does passive damage to nearby enemies
+// bible: orbits around player constantly
+// wand: aims at nearest enemy, low damage, high rate of fire
+// bone: bouncing projectile
+// axe: lobs up and down the screen, attacks in large area and pierces
+// water: generates aoe for duration
+
+// power ups
+// add one count to all weapons
+// increase damage globally by 10%
+// increase fire rate globally by 10%
+// increase attack size globally by 10%
+// increase xp gain rate by 10%
+// increase range of weapons by 10%
+// increase speed of weapons by 10%
+// increase max health by 10%
+// increase luck by 10%
+// increase hp gain by .1 ps
+// increase armor by 1. armor reduces incoming damage
+// increase pickup range
+// increase move speed

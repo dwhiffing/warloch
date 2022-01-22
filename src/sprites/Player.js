@@ -118,7 +118,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this._tp = val
     if (this._tp > this.maxTP) {
       this._tp = 0
-      this.play(this.form === 'light' ? 'executioner' : 'player')
+      this.play(this.form === 'light' ? 'player2' : 'player')
 
       if (this.form === 'light') {
         this.scene.cameras.main.shake(400, 0.02)

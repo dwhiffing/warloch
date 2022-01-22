@@ -1,6 +1,6 @@
 import { Orb } from '../sprites/Orb'
 
-const ORB_MAX = 200
+const ORB_MAX = 300
 
 export class OrbSpawner {
   constructor(scene) {
