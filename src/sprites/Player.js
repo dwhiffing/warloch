@@ -64,6 +64,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     enemy.hitTimer = 10
     this.health -= enemy.damage
     this.scene.hpBar.set(this.health)
+    this.movePenalty = 0.25
+
     if (this.health <= 0) this.scene.scene.start('Game')
   }
 
@@ -91,7 +93,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get moveSpeed() {
-    return 40 + this.scene.registry.get('moveSpeed') * 40
+    return (40 + this.scene.registry.get('moveSpeed') * 40) * this.movePenalty
   }
 
   get bulletDelay() {
@@ -112,6 +114,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   update() {
     this.setVelocity(0)
+
+    if (this.movePenalty < 1) this.movePenalty += 0.02
 
     if (this.shotTimer > 0) this.shotTimer--
     if (this.isMouseDown && this.shotTimer === 0) {

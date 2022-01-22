@@ -39,7 +39,7 @@ export default class extends Phaser.Scene {
       },
     )
 
-    this.physics.add.overlap(
+    this.physics.add.collider(
       this.player,
       this.enemyService.enemies,
       (player, enemy) => {
