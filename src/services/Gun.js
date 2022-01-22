@@ -27,13 +27,15 @@ export class Gun {
       volume: 0.1,
     })
 
-    for (let i = 0; i < this.bulletCount; i++) {
+    const c = this.bulletCount
+
+    for (let i = 0; i < c; i++) {
       let bullet = this.bullets.get()
       if (!bullet) continue
 
-      const o = i / (10 - this.spread)
       const angle =
-        Phaser.Math.Angle.Between(width / 2, height / 2, x, y) + (o / 2 - o)
+        Phaser.Math.Angle.Between(width / 2, height / 2, x, y) +
+        (c / 2 - (c - i) + 0.5) * (this.spread / c)
 
       bullet.fire(angle, this.speed, this.damage, this.size, this.range)
     }

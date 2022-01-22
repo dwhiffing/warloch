@@ -12,6 +12,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.level = 1
     this.form = 'light'
     this.movePenalty = 1
+    this.setDepth(70)
 
     this.body.setMaxSpeed(this.moveSpeed)
 
@@ -25,6 +26,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.guns = []
     this.guns.push(new Gun(this.scene, 'light'))
     this.guns.push(new Gun(this.scene, 'dark'))
+    this.guns.push(new Gun(this.scene, 'blast'))
   }
 
   update() {
@@ -60,7 +62,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.scene.cameras.main.shake(200, 0.01)
       this.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
       this.scene.time.delayedCall(100, this.clearTint.bind(this))
-      this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`)
+      this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
+        volume: 0.3,
+      })
     }
     this._hp = val
     this.movePenalty = 0.5
@@ -112,16 +116,26 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this._tp > this.maxTP) {
       this._tp = 0
       this.play(this.form === 'light' ? 'executioner' : 'player')
+
       if (this.form === 'light') {
-        this.scene.cameras.main.shake(400, 0.03)
+        this.scene.cameras.main.shake(400, 0.02)
         this.guns.find((g) => g.type === 'blast').shoot()
+        this.body.setMaxSpeed(0)
+        this.scene.time.delayedCall(500, () =>
+          this.body.setMaxSpeed(this.moveSpeed),
+        )
       }
+
       this.scene.sound.play(
         this.form === 'light' ? 'transform2' : 'transform',
-        { volume: 0.4 },
+        {
+          volume: this.form === 'light' ? 0.4 : 0.1,
+          rate: this.form === 'light' ? 1 : 2,
+        },
       )
 
       this.form = this.form === 'light' ? 'dark' : 'light'
+      if (this.form === 'light') this.body.setMaxSpeed(this.moveSpeed)
     }
     this.scene.hud?.set('tp', this._tp)
   }
