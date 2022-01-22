@@ -45,16 +45,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   shoot = (pointer) => {
-    let bullet = this.bullets.get()
-    if (!bullet) return
-    const { scrollX, scrollY } = this.scene.cameras.main
+    const { width, height } = this.scene.cameras.main
+    const { x, y } = pointer
     for (let i = 0; i < this.bulletCount; i++) {
-      bullet.fire(
-        scrollX + pointer.x,
-        scrollY + pointer.y,
-        this.bulletSpeed,
-        this.bulletDamage,
-      )
+      let bullet = this.bullets.get()
+      if (!bullet) continue
+      let angle = Phaser.Math.Angle.Between(width / 2, height / 2, x, y)
+      let thing = i / 10
+      angle += thing / 2 - thing
+      bullet.fire(angle, this.bulletSpeed, this.bulletDamage)
     }
   }
 
