@@ -1,8 +1,5 @@
 import { SPRITES } from '../constants'
-import { UPGRADES } from '../scenes/Upgrade'
-import { Bullet } from './Bullet'
-
-// TODO: player should change between 2 forms, changing their sprite, stats and attacks
+import { Gun } from '../services/Gun'
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
@@ -38,26 +35,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.input.on('pointerdown', () => (this.isMouseDown = true))
     this.input.on('pointerup', () => (this.isMouseDown = false))
 
-    this.bullets = this.scene.physics.add.group({
-      classType: Bullet,
-      maxSize: 20,
-      runChildUpdate: true,
-    })
-
-    this.bullets.createMultiple({ quantity: 20, active: false })
-  }
-
-  shoot = (pointer) => {
-    const { width, height } = this.scene.cameras.main
-    const { x, y } = pointer
-    for (let i = 0; i < this.bulletCount; i++) {
-      let bullet = this.bullets.get()
-      if (!bullet) continue
-      let angle = Phaser.Math.Angle.Between(width / 2, height / 2, x, y)
-      let thing = i / 10
-      angle += thing / 2 - thing
-      bullet.fire(angle, this.bulletSpeed, this.bulletDamage)
-    }
+    this.guns = []
+    this.guns.push(new Gun(this.scene, 'light'))
+    this.guns.push(new Gun(this.scene, 'dark'))
   }
 
   hit(enemy) {
@@ -92,6 +72,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return this.prevXp + 100 * Math.pow(1 + 0.2, this.level - 1)
   }
 
+  get bullets() {
+    return this.guns.map((gun) => gun.bullets)
+  }
+
   get level() {
     return this.scene.registry.get('level')
   }
@@ -102,22 +86,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.movePenalty *
       (this.form ? 1 : 0.45)
     )
-  }
-
-  get bulletDelay() {
-    return 25 - (this.scene.registry.get('bulletDelay') - 1) * 4
-  }
-
-  get bulletSpeed() {
-    return [120, 180, 240][this.scene.registry.get('bulletSpeed') - 1]
-  }
-
-  get bulletDamage() {
-    return [1, 3, 10][this.scene.registry.get('bulletDamage') - 1]
-  }
-
-  get bulletCount() {
-    return this.scene.registry.get('bulletCount')
   }
 
   transform() {
@@ -135,10 +103,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.tp > this.maxTp) this.transform()
     this.scene.tpBar.set(this.tp)
 
-    if (this.shotTimer > 0) this.shotTimer--
-    if (this.isMouseDown && this.shotTimer === 0) {
-      this.shoot(this.input.activePointer)
-      this.shotTimer = this.bulletDelay
+    this.guns.forEach((gun) => gun.update())
+    if (this.isMouseDown) {
+      const { x, y } = this.input.activePointer
+      this.guns.forEach((gun) => {
+        if (gun.type === (this.form === 1 ? 'light' : 'dark')) gun.shoot(x, y)
+      })
     }
 
     if (this.upKey.isDown) {

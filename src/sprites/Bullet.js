@@ -6,11 +6,12 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.damage = 1
   }
 
-  fire(angle, speed = 300, damage = 1) {
+  fire(angle, speed = 300, damage = 1, size = 1, range = 200) {
     this.x = this.scene.player.x
     this.y = this.scene.player.y
     this.damage = damage
-    this.setScale(1 + (damage - 1) / 2)
+    this.range = range
+    this.setScale(size)
     this.setVelocityX(speed * Math.cos(angle))
     this.setVelocityY(speed * Math.sin(angle))
     this.setActive(true)
@@ -33,6 +34,6 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       this.x,
       this.y,
     )
-    if (dist > 200) this.die()
+    if (dist > this.range) this.die()
   }
 }

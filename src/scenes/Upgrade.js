@@ -62,7 +62,8 @@ export default class Upgrade extends Phaser.Scene {
     )
     this.buttons.forEach((b, i) => {
       const upgrade = upgrades[i]
-      const currentLevel = this.registry.get(upgrade.key)
+      if (!upgrade) return
+      const currentLevel = this.registry.get(upgrade.key) || 0
       this.descriptions[i].setText(`${upgrade.name}: ${currentLevel + 1}`)
       b.setFillStyle(upgrade.tint)
       b.off('pointerdown')
