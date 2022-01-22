@@ -14,9 +14,9 @@ export class OrbSpawner {
     this.orbs.createMultiple({ quantity: ORB_MAX, active: false })
   }
 
-  spawn = (x, y) => {
+  spawn = (x, y, value) => {
     const orb = this.orbs.get()
-    orb.spawn(x, y)
+    orb.spawn(x, y, value)
   }
 
   update() {}
