@@ -20,6 +20,13 @@ export default class extends Phaser.Scene {
     Object.values(SPRITES).forEach(({ key, name }) =>
       createAnim(this, key, `${name}_Walk_`),
     )
+
+    this.game.events.addListener(Phaser.Core.Events.BLUR, () => {
+      this.scene.pause()
+    })
+    this.game.events.addListener(Phaser.Core.Events.FOCUS, () => {
+      this.scene.resume()
+    })
   }
 
   create() {
