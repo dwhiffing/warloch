@@ -5,6 +5,7 @@ export default class extends Phaser.Scene {
 
   init(opts = {}) {
     this.score = opts.score || 0
+    this.scene.start('Game')
   }
 
   create() {

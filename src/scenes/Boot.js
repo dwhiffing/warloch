@@ -21,7 +21,7 @@ export default class extends Phaser.Scene {
 
     this.load.on('complete', () => {
       progress.destroy()
-      this.scene.start('Game')
+      this.scene.start('Menu')
     })
   }
 }

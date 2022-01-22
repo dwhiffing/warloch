@@ -20,27 +20,21 @@ export class Bar {
   }
 
   die() {
-    this.inner.setActive(false)
-    this.inner.setActive(false)
-    this.outer.setVisible(false)
-    this.outer.setVisible(false)
+    this.inner.setActive(false).setVisible(false)
+    this.outer.setActive(false).setVisible(false)
   }
 
   set(value, maxValue) {
-    this.inner.setActive(true)
-    this.inner.setActive(true)
-    this.outer.setVisible(true)
-    this.outer.setVisible(true)
+    this.inner.setActive(true).setVisible(true)
+    this.outer.setActive(true).setVisible(true)
     this.value = Math.max(value, 0)
     if (typeof maxValue === 'number') this.maxValue = maxValue
     this.update()
   }
 
   move(x, y) {
-    this.inner.x = x - this.width / 2
-    this.inner.y = y - 6
-    this.outer.x = x - this.width / 2
-    this.outer.y = y - 6
+    this.inner.setPosition(x - this.width / 2, y - 6)
+    this.outer.setPosition(x - this.width / 2, y - 6)
   }
 
   update() {

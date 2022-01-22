@@ -1,11 +1,4 @@
-export const UPGRADES = {
-  bulletDelay: { tint: 0xf8961e, name: 'Bullet Delay', key: 'bulletDelay' },
-  bulletCount: { tint: 0xf3722c, name: 'Bullet Count', key: 'bulletCount' },
-  bulletSpeed: { tint: 0xf3722c, name: 'Bullet Speed', key: 'bulletSpeed' },
-  bulletDamage: { tint: 0xf94144, name: 'Bullet Damage', key: 'bulletDamage' },
-  spawnRate: { tint: 0xf94144, name: 'Spawn Rate', key: 'spawnRate' },
-  moveSpeed: { tint: 0xf94144, name: 'Move Speed', key: 'moveSpeed' },
-}
+import { UPGRADES } from '../constants'
 
 export default class Upgrade extends Phaser.Scene {
   constructor() {
@@ -68,7 +61,7 @@ export default class Upgrade extends Phaser.Scene {
       b.setFillStyle(upgrade.tint)
       b.off('pointerdown')
       b.on('pointerdown', () => {
-        this.registry.set(upgrade.key, currentLevel + 1)
+        // this.registry.set(upgrade.key, currentLevel + 1)
         this.scene.resume('Game')
         this.scene.sleep()
       })

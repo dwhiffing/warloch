@@ -9,10 +9,10 @@
     "start-server": "npm start --prefix ./server",
     "deploy": "npm run build; gh-pages -d dist"
   },
-  "author": "Daniel Whiffing <danielwhiffing@gmail.com> (http://www.infinite-ramble.com)",
+  "author": "Daniel Whiffing <danielwhiffing@gmail.com> (http://directive.software/)",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
-  "homepage": "https://dwhiffing.github.io/sweep",
+  "homepage": "https://dwhiffing.github.io/ggj22",
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-transform-react-jsx": "^7.14.5",
