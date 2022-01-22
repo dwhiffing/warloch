@@ -22,6 +22,11 @@ export class Gun {
     this.shotTimer = this.delay
     const { width, height } = this.scene.cameras.main
 
+    this.scene.sound.play('shoot', {
+      rate: this.stats.rate + Phaser.Math.RND.between(0, 10) / 80,
+      volume: 0.1,
+    })
+
     for (let i = 0; i < this.bulletCount; i++) {
       let bullet = this.bullets.get()
       if (!bullet) continue

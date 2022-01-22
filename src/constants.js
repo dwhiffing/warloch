@@ -80,6 +80,7 @@ export const GUNS = {
     range: 200,
     size: 1,
     spread: 0,
+    rate: 1.8,
   },
   dark: {
     damage: 4,
@@ -89,6 +90,7 @@ export const GUNS = {
     range: 80,
     size: 3,
     spread: 8,
+    rate: 0.5,
   },
 }
 

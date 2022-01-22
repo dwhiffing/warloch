@@ -43,6 +43,10 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hp -= bullet.damage
     this.hpBar.set(this.hp)
 
+    this.scene.sound.play(`Metal-medium-${Phaser.Math.RND.between(0, 4)}`, {
+      volume: 0.1,
+      rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
+    })
     this.setTintFill(0xffffff)
     this.scene.time.delayedCall(100, this.clearTint.bind(this))
 
@@ -53,5 +57,10 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setVisible(false).setActive(false)
     this.hpBar.die()
     this.scene.orbSpawner.spawn(this.x, this.y, this.xp)
+
+    this.scene.sound.play(`death-${Phaser.Math.RND.between(0, 3)}`, {
+      volume: 0.1,
+      rate: 0.8,
+    })
   }
 }
