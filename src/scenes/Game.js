@@ -3,6 +3,7 @@ import { Bar } from '../services/Bar'
 import { SPRITES } from '../constants'
 import { EnemyService } from '../services/EnemyService'
 import { Orb } from '../sprites/Orb'
+import { UPGRADES } from './Upgrade'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -10,6 +11,7 @@ export default class extends Phaser.Scene {
   }
 
   init() {
+    Object.keys(UPGRADES).forEach((k) => this.registry.set(k, 1))
     this.input.mouse.disableContextMenu()
     Object.values(SPRITES).forEach((sprite) =>
       this.createAnim(sprite.key, sprite.name),

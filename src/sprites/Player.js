@@ -10,7 +10,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enableBody(this, 0)
 
     this.scene.registry.set('level', 1)
-    Object.keys(UPGRADES).forEach((k) => this.scene.registry.set(k, 1))
 
     const { bodySize, bodyOffset, speed, health } = SPRITES.player
     this.shotTimer = 0
@@ -74,17 +73,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   addXP(val) {
     this.xp += val
-    if (this.xp >= this.getNextLevelXP()) {
-      this.prevXp = this.xp
-      this.scene.registry.set('level', this.level + 1)
-      this.scene.scene.wake('Upgrade')
-      this.scene.scene.pause()
-      this.scene.xpBar.set(
-        this.xp - this.prevXp,
-        this.getNextLevelXP() - this.prevXp,
-      )
-    }
+    if (this.xp >= this.getNextLevelXP()) this.onLevel()
     this.scene.xpBar.set(this.xp - this.prevXp)
+  }
+
+  onLevel() {
+    this.prevXp = this.xp
+    this.scene.registry.set('level', this.level + 1)
+    this.scene.scene.wake('Upgrade')
+    this.scene.scene.pause()
+    this.scene.xpBar.set(
+      this.xp - this.prevXp,
+      this.getNextLevelXP() - this.prevXp,
+    )
   }
 
   getNextLevelXP() {
