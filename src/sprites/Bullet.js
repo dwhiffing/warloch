@@ -11,7 +11,6 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.y = this.scene.player.y
     this.damage = damage
     this.setScale(1 + (damage - 1) / 2)
-    // this.scene.physics.moveTo(this, x, y, speed)
     this.setVelocityX(speed * Math.cos(angle))
     this.setVelocityY(speed * Math.sin(angle))
     this.setActive(true)

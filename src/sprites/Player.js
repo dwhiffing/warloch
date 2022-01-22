@@ -17,6 +17,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.health = 100
     this.prevXp = 0
     this.xp = 0
+    this.tp = 0
+    this.maxTp = 100
+    this.movePenalty = 1
+    this.form = 1
 
     this.play('player')
       .setCollideWorldBounds(true)
@@ -92,7 +96,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get moveSpeed() {
-    return (40 + this.scene.registry.get('moveSpeed') * 40) * this.movePenalty
+    return (
+      (40 + this.scene.registry.get('moveSpeed') * 40) *
+      this.movePenalty *
+      (this.form ? 1 : 0.45)
+    )
   }
 
   get bulletDelay() {
@@ -111,10 +119,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return this.scene.registry.get('bulletCount')
   }
 
+  transform() {
+    this.tp = 0
+    this.play(this.form ? 'executioner' : 'player')
+    this.form = this.form ? 0 : 1
+  }
+
   update() {
     this.setVelocity(0)
 
     if (this.movePenalty < 1) this.movePenalty += 0.02
+
+    this.tp += 0.1
+    if (this.tp > this.maxTp) this.transform()
+    this.scene.tpBar.set(this.tp)
 
     if (this.shotTimer > 0) this.shotTimer--
     if (this.isMouseDown && this.shotTimer === 0) {

@@ -61,8 +61,11 @@ export default class extends Phaser.Scene {
     this.hpBar = new Bar(this, offset, offset + 5, width, 4, 0xff0000, false)
     this.hpBar.set(this.player.health, this.player.health)
 
+    this.tpBar = new Bar(this, offset, offset + 10, width, 4, 0xffff00, false)
+    this.tpBar.set(this.player.tp, this.player.maxTp)
+
     this.cameras.main.startFollow(this.player)
-    this.debugKeys = this.input.keyboard.addKeys('P')
+    this.debugKeys = this.input.keyboard.addKeys('P,O')
   }
 
   update(time, delta) {
@@ -71,6 +74,10 @@ export default class extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(this.debugKeys.P)) {
       this.player.addXP(100)
+    }
+
+    if (Phaser.Input.Keyboard.JustDown(this.debugKeys.O)) {
+      this.player.tp += 99
     }
   }
 

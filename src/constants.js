@@ -48,7 +48,7 @@ export const SPRITES = {
     roll: 19,
   },
   executioner: {
-    type: 'player2',
+    type: 'player',
     name: 'Executioner',
     key: 'executioner',
     bodySize: [18, 18],
