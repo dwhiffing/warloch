@@ -13,6 +13,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.form = 'light'
     this.movePenalty = 1
 
+    this.body.setMaxSpeed(this.moveSpeed)
+
     const { bodySize, bodyOffset } = SPRITES.player
     this.play('player')
       .setCollideWorldBounds(true)
@@ -54,8 +56,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   set hp(val) {
+    if (this._hp > val) {
+      this.scene.cameras.main.shake(200, 0.01)
+      this.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
+      this.scene.time.delayedCall(100, this.clearTint.bind(this))
+    }
     this._hp = val
-    this.movePenalty = 0.25
+    this.movePenalty = 0.5
     if (this._hp <= 0) {
       this._hp = 0
       this.scene.scene.start('Game')

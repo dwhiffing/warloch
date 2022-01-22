@@ -33,6 +33,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.damage = damage
     this.hp = hp
     this.hitTimer = 0
+    this.hitTimerMax = 80
     this.xp = xp
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)

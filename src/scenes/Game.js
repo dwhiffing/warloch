@@ -62,7 +62,7 @@ export default class extends Phaser.Scene {
   hurtPlayer(player, enemy) {
     if (!player.active || !enemy.active || enemy.hitTimer > 0) return
 
-    enemy.hitTimer = 10
+    enemy.hitTimer = enemy.hitTimerMax
     player.hp -= enemy.damage
   }
 

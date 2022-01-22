@@ -41,6 +41,6 @@ export class EnemySpawner {
   }
 
   get spawnRate() {
-    return 50
+    return 100
   }
 }
