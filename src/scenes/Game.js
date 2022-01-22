@@ -21,6 +21,9 @@ export default class extends Phaser.Scene {
       createAnim(this, key, `${name}_Walk_`),
     )
 
+    this.sound.stopAll()
+    this.sound.play('game-music', { loop: true, volume: 0.5 })
+
     this.game.events.addListener(Phaser.Core.Events.BLUR, () => {
       this.scene.pause()
     })

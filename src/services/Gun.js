@@ -10,10 +10,10 @@ export class Gun {
 
     this.bullets = this.scene.physics.add.group({
       classType: Bullet,
-      maxSize: 50,
+      maxSize: 200,
       runChildUpdate: true,
     })
-    this.bullets.createMultiple({ quantity: 20, active: false })
+    this.bullets.createMultiple({ quantity: 200, active: false })
   }
 
   shoot(x = this.target.x, y = this.target.y) {
