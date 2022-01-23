@@ -100,7 +100,7 @@ export const GUNS = {
     soundRate: 1.8,
     target: 'randomPosition',
   },
-  light: {
+  bible: {
     damage: 1,
     delay: 50,
     speed: 120,
@@ -115,6 +115,32 @@ export const GUNS = {
     soundRate: 1.8,
     damageOverTime: true,
     target: 'orbit',
+  },
+  garlic: {
+    damage: 1,
+    delay: 150,
+    speed: 0,
+    range: 1,
+    frame: 'shot.png',
+    size: 25,
+    count: 1,
+    spread: 0,
+    bodySize: 4,
+    health: 999,
+    lifetime: 150,
+    soundRate: 1.8,
+    damageOverTime: true,
+    target: 'orbit',
+  },
+  light: {
+    damage: 1,
+    delay: 30,
+    speed: 150,
+    range: 150,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    soundRate: 1.8,
   },
   _light: {
     damage: 1,
@@ -186,9 +212,8 @@ export const UPGRADES = {
 }
 
 // gun ideas
-// bible: orbits around player constantly
-// cross: aims at nearest enemy, boomerangs, moves faster over time
 // garlic: does passive damage to nearby enemies
+// cross: aims at nearest enemy, boomerangs, moves faster over time
 // chain: bounces between n valid targets
 // bone: bounces off targets
 // axe: lobs up and down the screen, attacks in large area and pierces
