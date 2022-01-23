@@ -12,7 +12,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     let height = stats.height || stats.size || 1
     let bodyWidth = stats.bodyWidth || stats.bodySize || 1
     let bodyHeight = stats.bodyHeight || stats.bodySize || 1
-    this.health = stats.health || 9999
+    this.health = stats.health || 1
     this.offset = stats.offset || 16
     this.lifetime = stats.lifetime || 9999
     this.damage = stats.damage || 1
@@ -69,16 +69,19 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    const dist = Phaser.Math.Distance.Between(
-      this.initialX,
-      this.initialY,
-      this.x,
-      this.y,
-    )
     if (this.stats.lifetime) {
       this.setAlpha(this.lifetime / this.stats.lifetime)
       if (this.lifetime-- <= 0) this.die(true)
     }
-    if (dist > this.range) this.die(true)
+
+    if (
+      Phaser.Math.Distance.Between(
+        this.initialX,
+        this.initialY,
+        this.x,
+        this.y,
+      ) > this.range
+    )
+      this.die(true)
   }
 }

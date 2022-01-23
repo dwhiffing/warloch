@@ -44,7 +44,7 @@ export class Gun {
       volume: 0.1,
     })
 
-    const { target, count: c } = this.stats
+    const { target, count: c = 1 } = this.stats
     const getDist = Phaser.Math.Distance.Between
     const getAngle = Phaser.Math.Angle.Between
 
@@ -57,7 +57,8 @@ export class Gun {
       if (!bullet) continue
 
       bullet.setFlipX(false)
-      const finalSpread = (c / 2 - (c - i) + 0.5) * (this.stats.spread / c)
+      const s = this.stats.spread || 0
+      const finalSpread = (c / 2 - (c - i) + 0.5) * (s / c)
 
       if (!target) {
         bullet.fire(
@@ -81,6 +82,7 @@ export class Gun {
         .filter((e) => getDist(px, py, e.x, e.y) < this.stats.range)
         .sort((a, b) => getDist(px, py, a.x, a.y) - getDist(px, py, b.x, b.y))
 
+      let baseAngle
       if (target === 'nearestEnemy') {
         if (!enemies[0]) return
         baseAngle = getAngle(px, py, enemies[0].x, enemies[0].y)
