@@ -16,6 +16,7 @@ export class Gun {
     this.bullets.createMultiple({ quantity: 200, active: false })
 
     this.circle = new Phaser.Geom.Circle(0, 0, 0)
+    this.circle.tween = 0
 
     if (this.stats?.damageOverTime) {
       this.check = this.scene.time.addEvent({
@@ -48,14 +49,20 @@ export class Gun {
     const getDist = Phaser.Math.Distance.Between
     const getAngle = Phaser.Math.Angle.Between
 
-    this.circle.x = this.player.x
-    this.circle.y = this.player.y
     this.circle.diameter = this.stats.range
+    this.circleTween?.remove()
+    this.circleTween = this.scene.tweens.add({
+      targets: this.circle,
+      tween: { from: this.circle.tween, to: this.circle.tween + 1 },
+      duration: Math.max(10000 - this.stats.speed * 40, 1500),
+    })
 
     for (let i = 0; i < c; i++) {
       let bullet = this.bullets.get()
       if (!bullet) continue
 
+      bullet.gun = this
+      bullet.index = i
       bullet.setFlipX(false)
       const s = this.stats.spread || 0
       const finalSpread = (c / 2 - (c - i) + 0.5) * (s / c)
@@ -69,6 +76,14 @@ export class Gun {
       }
 
       const { x: px, y: py } = this.player
+
+      if (target === 'orbit') {
+        const { x, y } = this.circle.getPoint(
+          (this.circle.tween + i * (1 / c)) % 1,
+        )
+        bullet.fire({ x, y }, this.stats)
+        continue
+      }
 
       if (target === 'randomPosition') {
         const { x, y } = this.circle.getRandomPoint()
@@ -101,5 +116,8 @@ export class Gun {
 
   update() {
     if (this.shotTimer > 0) this.shotTimer--
+    if (this.circle && this.player) {
+      this.circle.setPosition(this.player.x, this.player.y + 5)
+    }
   }
 }

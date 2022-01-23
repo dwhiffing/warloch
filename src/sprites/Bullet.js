@@ -14,7 +14,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     let bodyHeight = stats.bodyHeight || stats.bodySize || 1
     this.health = stats.health || 1
     this.offset = stats.offset || 16
-    this.lifetime = stats.lifetime || 9999
+    this.lifetimeTimer = stats.lifetime || 9999
     this.damage = stats.damage || 1
     this.range = stats.range || 200
     this.speed = stats.speed || 300
@@ -69,9 +69,16 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    if (this.stats.lifetime) {
-      this.setAlpha(this.lifetime / this.stats.lifetime)
-      if (this.lifetime-- <= 0) this.die(true)
+    const { target, count, lifetime } = this.stats || {}
+    if (target === 'orbit') {
+      const c = this.gun.circle
+      const { x, y } = c.getPoint((c.tween + this.index * (1 / count)) % 1)
+      this.setPosition(x, y)
+    }
+
+    if (lifetime) {
+      if (target !== 'orbit') this.setAlpha(this.lifetimeTimer / lifetime)
+      if (this.lifetimeTimer-- <= 0) this.die(true)
     }
 
     if (
