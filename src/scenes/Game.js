@@ -63,8 +63,7 @@ export default class extends Phaser.Scene {
   }
 
   shootEnemy(bullet, enemy) {
-    if (!bullet.active || !enemy.active) return
-
+    if (!bullet.active || bullet.dying || !enemy.active) return
     enemy.hit(bullet)
     bullet.hit(enemy)
   }

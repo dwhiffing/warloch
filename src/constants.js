@@ -9,19 +9,6 @@ export const SPRITES = {
     hp: 3,
     damage: 1,
     xp: 5,
-    roll: -99,
-  },
-  heavyKnight: {
-    type: 'enemy',
-    name: 'HeavyKnight',
-    key: 'heavyKnight',
-    bodySize: [8, 16],
-    bodyOffset: [12, 14],
-    speed: 40,
-    hp: 8,
-    damage: 1,
-    xp: 6,
-    roll: 10,
   },
   eliteKnight: {
     type: 'enemy',
@@ -33,7 +20,6 @@ export const SPRITES = {
     hp: 50,
     damage: 1,
     xp: 10,
-    roll: 17,
   },
   largeEliteKnight: {
     type: 'enemy',
@@ -45,7 +31,6 @@ export const SPRITES = {
     hp: 100,
     damage: 1,
     xp: 20,
-    roll: 19,
   },
   player2: {
     type: 'player',
@@ -73,27 +58,27 @@ export const GUNS = {
     delay: 30,
     speed: 150,
     count: 1,
-    range: 200,
-    size: 1,
+    range: 150,
+    size: 2,
     spread: 0,
     rate: 1.8,
   },
   dark: {
     damage: 4,
-    delay: 110,
-    speed: 1,
-    count: 3,
-    range: 80,
-    size: 5,
-    spread: Math.PI / 4,
+    delay: 50,
+    speed: 8,
+    count: 5,
+    range: 30,
+    size: 3,
+    spread: Math.PI / 3,
     rate: 0.5,
   },
   blast: {
     damage: 3,
     delay: 100,
-    speed: 2,
+    speed: 60,
     count: 50,
-    range: 300,
+    range: 240,
     size: 3,
     spread: Math.PI * 2,
     rate: 0.5,
@@ -110,16 +95,17 @@ export const UPGRADES = {
 // gun ideas
 // gun: shoots a weak shot at the cursor
 // shotgun: shoots in an arc with short range
-// Runetracer: passes through enemies, draws a line behind it, shoots every 3 seconds, bounces off walls
 // whip: attacks with low damage in a large area right in front of player
-// cross: aims at nearest enemy, boomerangs, moves faster over time
 // fire wand: aims at random enemy, high damage
-// garlic: does passive damage to nearby enemies
-// bible: orbits around player constantly
 // wand: aims at nearest enemy, low damage, high rate of fire
+// water: generates aoe for duration
+
+// bible: orbits around player constantly
+// Runetracer: passes through enemies, draws a line behind it, shoots every 3 seconds, bounces off walls
+// cross: aims at nearest enemy, boomerangs, moves faster over time
+// garlic: does passive damage to nearby enemies
 // bone: bouncing projectile
 // axe: lobs up and down the screen, attacks in large area and pierces
-// water: generates aoe for duration
 
 // power ups
 // add one count to all weapons
@@ -135,3 +121,12 @@ export const UPGRADES = {
 // increase armor by 1. armor reduces incoming damage
 // increase pickup range
 // increase move speed
+
+// make it like hades except
+// you can pick 3 weapons, 6 powerups
+// you can pick a transform blast power
+//
+
+// bosses appear every n minutes
+// kill bosses to get new weapons
+// level up to get weapon upgrades
