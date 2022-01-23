@@ -39,7 +39,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.guns.forEach((gun) => {
       gun.update()
-      if (this.scene.isMouseDown && gun.type === this.form) {
+      if (gun.type === this.form) {
         gun.shoot()
       }
     })

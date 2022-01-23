@@ -45,7 +45,9 @@ export class InputHandler {
 
     if (this.leftKey.isDown) {
       this.player.setVelocityX(-this.player.moveSpeed)
+      this.player.setFlipX(true)
     } else if (this.rightKey.isDown) {
+      this.player.setFlipX(false)
       this.player.setVelocityX(this.player.moveSpeed)
     }
   }

@@ -6,18 +6,43 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enableBody(this, 0)
   }
 
-  fire(angle, speed = 300, damage = 1, size = 1, range = 200) {
+  fire(target, stats) {
+    const { x: px, y: py } = this.scene.player
+    let width = stats.width || stats.size || 1
+    let height = stats.height || stats.size || 1
+    let bodyWidth = stats.bodyWidth || stats.bodySize || 1
+    let bodyHeight = stats.bodyHeight || stats.bodySize || 1
+    this.health = stats.health || 9999
+    this.offset = stats.offset || 16
+    this.lifetime = stats.lifetime || 9999
+    this.damage = stats.damage || 1
+    this.range = stats.range || 200
+    this.speed = stats.speed || 300
+    this.hitEnemies = []
+    this.stats = stats
+
     this.setPosition(
-      this.scene.player.x + 20 * Math.cos(angle),
-      this.scene.player.y + 20 * Math.sin(angle),
+      px + this.offset * Math.cos(target),
+      py + this.offset * Math.sin(target),
     )
     this.initialX = this.x
     this.initialY = this.y
-    this.setScale(size)
-    this.setVelocity(speed * Math.cos(angle), speed * Math.sin(angle))
-    this.setActive(true).setVisible(true).setAlpha(1)
-    this.damage = damage
-    this.range = range
+
+    this.setActive(true)
+      .setVisible(true)
+      .setAlpha(1)
+      .setScale(width, height)
+      .setBodySize(bodyWidth, bodyHeight)
+      .setFrame(stats.frame)
+
+    if (target.x) {
+      this.setPosition(target.x, target.y)
+    } else {
+      this.setVelocity(
+        this.speed * Math.cos(target),
+        this.speed * Math.sin(target),
+      )
+    }
   }
 
   die(shouldFade) {
@@ -35,8 +60,12 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
-  hit() {
-    this.die()
+  hit(enemy) {
+    if (!this.active || this.hitEnemies.includes(enemy)) return
+
+    this.health -= 1
+    this.hitEnemies.push(enemy)
+    if (this.health <= 0) this.die()
   }
 
   update() {
@@ -46,6 +75,10 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       this.x,
       this.y,
     )
+    if (this.stats.lifetime) {
+      this.setAlpha(this.lifetime / this.stats.lifetime)
+      if (this.lifetime-- <= 0) this.die(true)
+    }
     if (dist > this.range) this.die(true)
   }
 }

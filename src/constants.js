@@ -53,25 +53,118 @@ export const SPRITES = {
 }
 
 export const GUNS = {
+  wand: {
+    damage: 1,
+    delay: 30,
+    speed: 50,
+    count: 1,
+    range: 250,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    spread: 0,
+    health: 1,
+    soundRate: 1.8,
+    target: 'nearestEnemy',
+  },
+  fire: {
+    damage: 3,
+    delay: 120,
+    speed: 150,
+    count: 1,
+    range: 250,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    spread: 0,
+    health: 1,
+    soundRate: 1.8,
+    target: 'randomEnemy',
+  },
   light: {
+    damage: 1,
+    delay: 200,
+    speed: 150,
+    count: 1,
+    range: 150,
+    frame: 'shot.png',
+    size: 12,
+    bodySize: 4,
+    spread: 0,
+    lifetime: 200,
+    soundRate: 1.8,
+    hitscan: true,
+    damageOverTime: true,
+    target: 'randomPosition',
+  },
+  mines: {
     damage: 1,
     delay: 30,
     speed: 150,
     count: 1,
     range: 150,
+    frame: 'shot.png',
     size: 2,
+    bodySize: 4,
     spread: 0,
-    rate: 1.8,
+    health: 1,
+    soundRate: 1.8,
+    hitscan: true,
+    target: 'randomPosition',
+  },
+  _light: {
+    damage: 1,
+    delay: 30,
+    speed: 150,
+    count: 1,
+    range: 150,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    spread: 0,
+    health: 1,
+    soundRate: 1.8,
+  },
+  tracer: {
+    damage: 2,
+    delay: 70,
+    speed: 150,
+    count: 1,
+    range: 150,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    spread: 0,
+    health: 10,
+    soundRate: 1.8,
+  },
+  whip: {
+    damage: 1,
+    delay: 70,
+    speed: 15,
+    count: 1,
+    range: 5,
+    frame: 'whip.png',
+    size: 1,
+    health: 10,
+    spread: Math.PI * 2,
+    soundRate: 0.5,
+    target: 'melee',
+    bodyWidth: 45,
+    bodyHeight: 18,
+    offset: 30,
   },
   dark: {
     damage: 4,
     delay: 50,
-    speed: 8,
+    speed: 12,
     count: 5,
     range: 30,
+    frame: 'shot.png',
     size: 3,
+    bodySize: 4,
     spread: Math.PI / 3,
-    rate: 0.5,
+    soundRate: 0.5,
   },
   blast: {
     damage: 3,
@@ -79,9 +172,11 @@ export const GUNS = {
     speed: 60,
     count: 50,
     range: 240,
+    frame: 'shot.png',
     size: 3,
+    bodySize: 4,
     spread: Math.PI * 2,
-    rate: 0.5,
+    soundRate: 0.5,
   },
 }
 
@@ -93,19 +188,14 @@ export const UPGRADES = {
 }
 
 // gun ideas
-// gun: shoots a weak shot at the cursor
-// shotgun: shoots in an arc with short range
-// whip: attacks with low damage in a large area right in front of player
-// fire wand: aims at random enemy, high damage
-// wand: aims at nearest enemy, low damage, high rate of fire
-// water: generates aoe for duration
-
 // bible: orbits around player constantly
-// Runetracer: passes through enemies, draws a line behind it, shoots every 3 seconds, bounces off walls
 // cross: aims at nearest enemy, boomerangs, moves faster over time
 // garlic: does passive damage to nearby enemies
-// bone: bouncing projectile
+// chain: bounces between n valid targets
+// bone: bounces off targets
 // axe: lobs up and down the screen, attacks in large area and pierces
+// orbs that fire randomly and float around
+// bubbler like in cave story
 
 // power ups
 // add one count to all weapons

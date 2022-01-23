@@ -40,6 +40,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   hit(bullet) {
+    if (bullet.hitEnemies.includes(this)) return
+
     this.hp -= bullet.damage
     this.hpBar.set(this.hp)
 

@@ -2,7 +2,7 @@
 
 {
 	"filename": "EliteKnight_Idle_1.png",
-	"frame": {"x":440,"y":34,"w":12,"h":20},
+	"frame": {"x":474,"y":2,"w":12,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":10,"y":12,"w":12,"h":20},
@@ -10,7 +10,7 @@
 },
 {
 	"filename": "EliteKnight_Idle_2.png",
-	"frame": {"x":426,"y":34,"w":12,"h":20},
+	"frame": {"x":468,"y":24,"w":12,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":10,"y":12,"w":12,"h":20},
@@ -18,7 +18,7 @@
 },
 {
 	"filename": "EliteKnight_Idle_3.png",
-	"frame": {"x":558,"y":22,"w":14,"h":18},
+	"frame": {"x":570,"y":42,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":14,"h":18},
@@ -26,7 +26,7 @@
 },
 {
 	"filename": "EliteKnight_Idle_4.png",
-	"frame": {"x":426,"y":34,"w":12,"h":20},
+	"frame": {"x":468,"y":24,"w":12,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":10,"y":12,"w":12,"h":20},
@@ -34,7 +34,7 @@
 },
 {
 	"filename": "EliteKnight_Walk_1.png",
-	"frame": {"x":410,"y":34,"w":14,"h":20},
+	"frame": {"x":458,"y":2,"w":14,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":14,"h":20},
@@ -42,7 +42,7 @@
 },
 {
 	"filename": "EliteKnight_Walk_2.png",
-	"frame": {"x":394,"y":34,"w":14,"h":20},
+	"frame": {"x":452,"y":34,"w":14,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":10,"w":14,"h":20},
@@ -50,7 +50,7 @@
 },
 {
 	"filename": "EliteKnight_Walk_3.png",
-	"frame": {"x":378,"y":34,"w":14,"h":20},
+	"frame": {"x":436,"y":34,"w":14,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":11,"w":14,"h":20},
@@ -58,7 +58,7 @@
 },
 {
 	"filename": "EliteKnight_Walk_4.png",
-	"frame": {"x":362,"y":34,"w":14,"h":20},
+	"frame": {"x":420,"y":34,"w":14,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":14,"h":20},
@@ -130,7 +130,7 @@
 },
 {
 	"filename": "HeavyKnight_Idle_1.png",
-	"frame": {"x":344,"y":34,"w":16,"h":20},
+	"frame": {"x":402,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -138,7 +138,7 @@
 },
 {
 	"filename": "HeavyKnight_Idle_2.png",
-	"frame": {"x":512,"y":2,"w":16,"h":18},
+	"frame": {"x":536,"y":22,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -146,7 +146,7 @@
 },
 {
 	"filename": "HeavyKnight_Idle_3.png",
-	"frame": {"x":508,"y":22,"w":16,"h":18},
+	"frame": {"x":520,"y":42,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -154,7 +154,7 @@
 },
 {
 	"filename": "HeavyKnight_Idle_4.png",
-	"frame": {"x":490,"y":42,"w":16,"h":18},
+	"frame": {"x":524,"y":2,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -162,7 +162,7 @@
 },
 {
 	"filename": "HeavyKnight_Walk_1.png",
-	"frame": {"x":326,"y":34,"w":16,"h":20},
+	"frame": {"x":384,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -170,7 +170,7 @@
 },
 {
 	"filename": "HeavyKnight_Walk_2.png",
-	"frame": {"x":308,"y":34,"w":16,"h":20},
+	"frame": {"x":366,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":10,"w":16,"h":20},
@@ -178,7 +178,7 @@
 },
 {
 	"filename": "HeavyKnight_Walk_3.png",
-	"frame": {"x":290,"y":34,"w":16,"h":20},
+	"frame": {"x":348,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":11,"w":16,"h":20},
@@ -186,7 +186,7 @@
 },
 {
 	"filename": "HeavyKnight_Walk_4.png",
-	"frame": {"x":494,"y":2,"w":16,"h":18},
+	"frame": {"x":518,"y":22,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -194,7 +194,7 @@
 },
 {
 	"filename": "Knight_Idle_1.png",
-	"frame": {"x":546,"y":2,"w":14,"h":18},
+	"frame": {"x":570,"y":22,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":14,"w":14,"h":18},
@@ -202,7 +202,7 @@
 },
 {
 	"filename": "Knight_Idle_2.png",
-	"frame": {"x":542,"y":22,"w":14,"h":18},
+	"frame": {"x":554,"y":42,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":14,"w":14,"h":18},
@@ -210,7 +210,7 @@
 },
 {
 	"filename": "Knight_Idle_3.png",
-	"frame": {"x":556,"y":42,"w":14,"h":16},
+	"frame": {"x":468,"y":46,"w":14,"h":16},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":16,"w":14,"h":16},
@@ -218,7 +218,7 @@
 },
 {
 	"filename": "Knight_Idle_4.png",
-	"frame": {"x":540,"y":42,"w":14,"h":18},
+	"frame": {"x":554,"y":22,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":14,"w":14,"h":18},
@@ -226,7 +226,7 @@
 },
 {
 	"filename": "Knight_Walk_1.png",
-	"frame": {"x":530,"y":2,"w":14,"h":18},
+	"frame": {"x":574,"y":2,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":14,"w":14,"h":18},
@@ -234,7 +234,7 @@
 },
 {
 	"filename": "Knight_Walk_2.png",
-	"frame": {"x":526,"y":22,"w":14,"h":18},
+	"frame": {"x":558,"y":2,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":12,"w":14,"h":18},
@@ -242,7 +242,7 @@
 },
 {
 	"filename": "Knight_Walk_3.png",
-	"frame": {"x":524,"y":42,"w":14,"h":18},
+	"frame": {"x":538,"y":42,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":13,"w":14,"h":18},
@@ -250,7 +250,7 @@
 },
 {
 	"filename": "Knight_Walk_4.png",
-	"frame": {"x":508,"y":42,"w":14,"h":18},
+	"frame": {"x":542,"y":2,"w":14,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":14,"w":14,"h":18},
@@ -386,7 +386,7 @@
 },
 {
 	"filename": "Mage_Idle_1.png",
-	"frame": {"x":272,"y":34,"w":16,"h":20},
+	"frame": {"x":330,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -394,7 +394,7 @@
 },
 {
 	"filename": "Mage_Idle_2.png",
-	"frame": {"x":490,"y":22,"w":16,"h":18},
+	"frame": {"x":502,"y":42,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -402,7 +402,7 @@
 },
 {
 	"filename": "Mage_Idle_3.png",
-	"frame": {"x":472,"y":42,"w":16,"h":18},
+	"frame": {"x":506,"y":2,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -410,7 +410,7 @@
 },
 {
 	"filename": "Mage_Idle_4.png",
-	"frame": {"x":476,"y":2,"w":16,"h":18},
+	"frame": {"x":500,"y":22,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -418,7 +418,7 @@
 },
 {
 	"filename": "Mage_Walk_1.png",
-	"frame": {"x":254,"y":34,"w":16,"h":20},
+	"frame": {"x":312,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -426,7 +426,7 @@
 },
 {
 	"filename": "Mage_Walk_2.png",
-	"frame": {"x":472,"y":22,"w":16,"h":18},
+	"frame": {"x":488,"y":2,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":18},
@@ -434,7 +434,7 @@
 },
 {
 	"filename": "Mage_Walk_3.png",
-	"frame": {"x":458,"y":2,"w":16,"h":18},
+	"frame": {"x":484,"y":44,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":13,"w":16,"h":18},
@@ -442,7 +442,7 @@
 },
 {
 	"filename": "Mage_Walk_4.png",
-	"frame": {"x":454,"y":34,"w":16,"h":18},
+	"frame": {"x":482,"y":24,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":14,"w":16,"h":18},
@@ -450,7 +450,7 @@
 },
 {
 	"filename": "bar.png",
-	"frame": {"x":254,"y":56,"w":20,"h":5},
+	"frame": {"x":312,"y":56,"w":20,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":5},
@@ -466,7 +466,7 @@
 },
 {
 	"filename": "shot.png",
-	"frame": {"x":276,"y":56,"w":4,"h":4},
+	"frame": {"x":254,"y":58,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":4},
@@ -479,14 +479,22 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":22,"h":24},
 	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "whip.png",
+	"frame": {"x":254,"y":34,"w":56,"h":22},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":5,"w":56,"h":22},
+	"sourceSize": {"w":64,"h":32}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
 	"version": "1.0",
 	"image": "tiles.png",
 	"format": "RGBA8888",
-	"size": {"w":574,"h":64},
+	"size": {"w":590,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f90850840559a8ccd2c093039de50b98:37fda5411f8a8f41b3cf2b299590a240:accbe1e7e294ded8391337fc1c446319$"
+	"smartupdate": "$TexturePacker:SmartUpdate:79f29138d3346888ccf7e972639c5b1e:6b9981d4c83691bdfe75122c261c27fb:accbe1e7e294ded8391337fc1c446319$"
 }
 }
