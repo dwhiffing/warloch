@@ -39,6 +39,11 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hpBar.move(this.x, this.y)
   }
 
+  flash(tint = 0xffffff, duration = 150) {
+    this.setTintFill(tint)
+    this.scene.time.delayedCall(duration, this.clearTint.bind(this))
+  }
+
   hit(bullet) {
     if (bullet.hitEnemies.includes(this)) return
 
@@ -49,8 +54,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       volume: 0.1,
       rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
     })
-    this.setTintFill(0xffffff)
-    this.scene.time.delayedCall(100, this.clearTint.bind(this))
+    this.flash()
 
     if (this.hp <= 0) this.die()
   }

@@ -39,10 +39,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     if (target.x) {
       this.setPosition(target.x, target.y)
     } else {
-      this.setVelocity(
-        this.speed * Math.cos(target),
-        this.speed * Math.sin(target),
-      )
+      this.moveTowardTarget()
     }
   }
 
@@ -64,13 +61,30 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   hit(enemy) {
     if (!this.active || this.hitEnemies.includes(enemy)) return
 
-    this.health -= 1
     this.hitEnemies.push(enemy)
+
+    this.health -= 1
     if (this.health <= 0) this.die()
+
+    if (this.stats.reacquire) {
+      const newTarget = this.scene.enemySpawner
+        .getClosest({ x: this.x, y: this.y })
+        .filter((e) => !this.hitEnemies.includes(e))[0]
+      if (!newTarget) return this.die()
+      this.target = Phaser.Math.Angle.BetweenPoints(this, newTarget)
+      this.moveTowardTarget()
+    }
+  }
+
+  moveTowardTarget() {
+    this.setVelocity(
+      this.speed * Math.cos(this.target),
+      this.speed * Math.sin(this.target),
+    )
   }
 
   update() {
-    const { target, count, lifetime } = this.stats || {}
+    const { target, count, lifetime, accel } = this.stats || {}
     if (target === 'orbit') {
       const c = this.gun.circle
       const { x, y } = c.getPoint((c.tween + this.index * (1 / count)) % 1)
@@ -82,12 +96,9 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       if (this.lifetimeTimer-- <= 0) this.die(true)
     }
 
-    if (this.stats.accel) {
-      this.speed += this.stats.accel
-      this.setVelocity(
-        this.speed * Math.cos(this.target),
-        this.speed * Math.sin(this.target),
-      )
+    if (accel) {
+      this.speed += accel
+      this.moveTowardTarget()
     }
 
     const dist = Phaser.Math.Distance.Between(

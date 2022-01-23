@@ -29,6 +29,16 @@ export class EnemySpawner {
     this.enemies.createMultiple({ quantity: 50, active: false })
   }
 
+  getClosest = (point) =>
+    this.enemies
+      .getChildren()
+      .filter((e) => e.active)
+      .sort(
+        (a, b) =>
+          Phaser.Math.Distance.BetweenPoints(a, point) -
+          Phaser.Math.Distance.BetweenPoints(b, point),
+      )
+
   spawn = (type = 'knight') => {
     const angle = Phaser.Math.RND.angle()
     const vel = this.physics.velocityFromAngle(angle, SPAWN_DISTANCE)

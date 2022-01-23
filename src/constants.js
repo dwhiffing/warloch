@@ -5,7 +5,7 @@ export const SPRITES = {
     key: 'knight',
     bodySize: [8, 16],
     bodyOffset: [12, 14],
-    speed: 50,
+    speed: 30,
     hp: 3,
     damage: 1,
     xp: 5,
@@ -53,6 +53,19 @@ export const SPRITES = {
 }
 
 export const GUNS = {
+  chain: {
+    damage: 1,
+    delay: 100,
+    speed: 250,
+    range: 650,
+    frame: 'shot.png',
+    size: 2,
+    health: 99,
+    bodySize: 4,
+    soundRate: 1.8,
+    reacquire: true,
+    target: 'nearestEnemy',
+  },
   wand: {
     damage: 1,
     delay: 30,
@@ -144,7 +157,7 @@ export const GUNS = {
     bodySize: 4,
     soundRate: 1.8,
   },
-  light: {
+  _light: {
     damage: 1,
     delay: 30,
     speed: 150,
@@ -154,7 +167,7 @@ export const GUNS = {
     bodySize: 4,
     soundRate: 1.8,
   },
-  _light: {
+  light: {
     damage: 1,
     delay: 30,
     speed: 150,
