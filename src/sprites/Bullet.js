@@ -20,6 +20,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.speed = stats.speed || 300
     this.hitEnemies = []
     this.stats = stats
+    this.target = target
 
     this.setPosition(
       px + this.offset * Math.cos(target),
@@ -81,14 +82,20 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       if (this.lifetimeTimer-- <= 0) this.die(true)
     }
 
-    if (
-      Phaser.Math.Distance.Between(
-        this.initialX,
-        this.initialY,
-        this.x,
-        this.y,
-      ) > this.range
+    if (this.stats.accel) {
+      this.speed += this.stats.accel
+      this.setVelocity(
+        this.speed * Math.cos(this.target),
+        this.speed * Math.sin(this.target),
+      )
+    }
+
+    const dist = Phaser.Math.Distance.Between(
+      this.initialX,
+      this.initialY,
+      this.x,
+      this.y,
     )
-      this.die(true)
+    if (dist >= this.range) this.die(true)
   }
 }

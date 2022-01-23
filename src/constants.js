@@ -132,6 +132,18 @@ export const GUNS = {
     damageOverTime: true,
     target: 'orbit',
   },
+  cross: {
+    damage: 2,
+    delay: 50,
+    speed: 150,
+    range: 200,
+    frame: 'shot.png',
+    accel: -5,
+    size: 4,
+    health: 10,
+    bodySize: 4,
+    soundRate: 1.8,
+  },
   light: {
     damage: 1,
     delay: 30,
@@ -212,8 +224,6 @@ export const UPGRADES = {
 }
 
 // gun ideas
-// garlic: does passive damage to nearby enemies
-// cross: aims at nearest enemy, boomerangs, moves faster over time
 // chain: bounces between n valid targets
 // bone: bounces off targets
 // axe: lobs up and down the screen, attacks in large area and pierces
