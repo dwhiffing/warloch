@@ -13,7 +13,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.active) return
 
     if (this.hitTimer > 0) this.hitTimer--
-    this.hpBar.move(this.x, this.y)
+    this.hpBar.move(this.x, this.y - this.body.height / 2)
 
     if (this.updateTimer-- > 0) return
 
