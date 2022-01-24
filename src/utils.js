@@ -11,10 +11,8 @@ export const createAnim = (scene, key, prefix) => {
   })
 }
 
-export const applyUpgrade = ([k, v], obj) => {
-  if (typeof v === 'number') {
-    obj[k] += v
-  } else if (typeof v === 'function') {
-    obj[k] = v(obj[k])
-  }
+export const applyUpgrade = ([k, [type, val]], obj) => {
+  obj[k] = obj[k] || 0
+  if (type === '+') obj[k] += val
+  if (type === '*') obj[k] *= val
 }

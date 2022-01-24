@@ -11,7 +11,6 @@ export default class Upgrade extends Phaser.Scene {
 
   create() {
     const camera = this.cameras.main
-    const b = 8
     const bufferY = 8
     const bufferX = 45
     const menuWidth = camera.width - bufferX * 2
@@ -26,37 +25,47 @@ export default class Upgrade extends Phaser.Scene {
       })
       .setOrigin(0.5)
 
-    const buttonSizeX = menuWidth - b * 2
+    const buttonSizeX = menuWidth - bufferY * 2
     const buttonSizeY = (menuHeight - bufferY * 2) / 5
     this.buttons = []
     this.nameTexts = []
+    this.images = []
     this.descriptionTexts = []
     this.levelTexts = []
     const BUTTONS = new Array(4).fill({})
     BUTTONS.forEach((_, index) => {
       const yBase = bufferY * 6 + index * (buttonSizeY + 5)
       this.buttons[index] = this.add
-        .rectangle(bufferX + b, yBase, buttonSizeX, buttonSizeY)
+        .rectangle(bufferX + bufferY, yBase, buttonSizeX, buttonSizeY)
         .setOrigin(0, 0)
         .setStrokeStyle(2, 0x333333)
         .setInteractive()
+      const imageBuffer = 5
 
-      this.add
-        .rectangle(bufferX + b + 3, yBase + 3, buttonSizeY - 6, buttonSizeY - 6)
+      this.images[index] = this.add
+        .rectangle(
+          bufferX + bufferY + imageBuffer,
+          yBase + imageBuffer,
+          buttonSizeY - imageBuffer * 2,
+          buttonSizeY - imageBuffer * 2,
+        )
         .setOrigin(0, 0)
         .setFillStyle('black')
 
       this.nameTexts[index] = this.add.text(
-        bufferX + b + 4 + buttonSizeY,
+        bufferX + bufferY + 4 + buttonSizeY,
         yBase + 4,
         '',
         { font: '18px Roboto Mono' },
       )
 
       this.descriptionTexts[index] = this.add
-        .text(bufferX + b + 4 + buttonSizeY, yBase + buttonSizeY - 3, '', {
-          font: '14px Roboto Mono',
-        })
+        .text(
+          bufferX + bufferY + 4 + buttonSizeY,
+          yBase + buttonSizeY - 3,
+          '',
+          { font: '14px Roboto Mono' },
+        )
         .setOrigin(0, 1)
 
       this.levelTexts[index] = this.add
@@ -71,32 +80,42 @@ export default class Upgrade extends Phaser.Scene {
 
   wake() {
     this.levelText.text = `Level ${this.registry.get('level')}`
-    const purchases = Object.values(PURCHASES).filter((p) => {
-      const currentLevel = this.registry.get(p.key) || 0
-      const maxLevel = (UPGRADES[p.key] || WEAPONS[p.key]).levels.length + 1
-      console.log(currentLevel, maxLevel)
-      return currentLevel < maxLevel
-    })
-    const upgrades = Phaser.Math.RND.shuffle(purchases).slice(0, 4)
+    const possiblePurchases = Object.values(PURCHASES)
+      .map((p) => {
+        const upgrade = UPGRADES[p.key] || WEAPONS[p.key]
+        return {
+          ...p,
+          level: this.registry.get(p.key) || 0,
+          maxLevel: upgrade.levels.length,
+          upgrade,
+        }
+      })
+      .filter((p) => p.level < p.maxLevel)
+
+    const purchases = Phaser.Math.RND.shuffle(possiblePurchases).slice(0, 4)
     this.buttons.forEach((b, i) => {
-      const upgrade = upgrades[i]
-      if (!upgrade) return
-      const currentLevel = this.registry.get(upgrade.key) || 0
-      this.nameTexts[i].setText(`${upgrade.name}`)
-      this.levelTexts[i].setText(`${currentLevel} -> ${currentLevel + 1}`)
-      if (currentLevel === 0) {
-        this.descriptionTexts[i].setText(upgrade.description)
-      } else {
-        this.descriptionTexts[i].setText(
-          upgrade.upgradeDescription
-            ? upgrade.upgradeDescription(10)
-            : 'Upgrade to ' + (currentLevel + 1),
-        )
-      }
+      const purchase = purchases[i]
+      if (!purchase) return
+
+      const { name, level, upgrade, description, type } = purchase
+
+      this.nameTexts[i].setText(`${name}`)
+      this.levelTexts[i].setText(`Lvl ${level} -> ${level + 1}`)
+
+      const upgradeDesc = Object.entries(upgrade.levels[level] || {})
+        .map((a) => a.flat().join(' '))
+        .join(', ')
+
+      this.descriptionTexts[i].setText(level === 0 ? description : upgradeDesc)
+
+      this.images[i]
+        .setFillStyle(type === 'weapon' ? 0xff0000 : 0xffff00)
+        .setStrokeStyle(2, 0x333333)
+
       b.setFillStyle(0x777777)
       b.off('pointerdown')
       b.on('pointerdown', () => {
-        this.registry.inc(upgrade.key)
+        this.registry.inc(purchase.key)
         this.scene.resume('Game')
         this.scene.sleep()
       })

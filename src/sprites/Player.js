@@ -23,7 +23,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         return scene.registry.get(`${w.name}`) || 0
       },
     }))
-    this.levelWeapon('one')
+    this.levelUpgrade('one')
 
     this.body.setMaxSpeed(this.moveSpeed)
 
@@ -68,8 +68,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
-  levelWeapon(weapon) {
-    this.scene.registry.inc(weapon)
+  levelUpgrade(weapon) {
+    const maxLevel = (WEAPONS[weapon] || UPGRADES[weapon]).levels.length
+    if ((this.scene.registry.get(weapon) || 0) < maxLevel)
+      this.scene.registry.inc(weapon)
   }
 
   applyUpgrade(key, obj) {

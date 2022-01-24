@@ -351,9 +351,10 @@ export const WEAPONS = {
     dswitch: 'blast',
     lswitch: null,
     levels: [
-      { count: 1, damage: 1 },
-      { count: 1, damage: 1 },
-      { count: 1, damage: 1 },
+      {},
+      { count: ['+', 1], damage: ['+', 1] },
+      { count: ['+', 2], damage: ['+', 2] },
+      { count: ['+', 3], damage: ['+', 3] },
     ],
   },
   // adds extra bullets on switch
@@ -363,7 +364,12 @@ export const WEAPONS = {
     dark: 'orbs',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // adds axes on switch
   three: {
@@ -372,7 +378,12 @@ export const WEAPONS = {
     dark: 'axe',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // adds large aoe on switch
   four: {
@@ -381,7 +392,12 @@ export const WEAPONS = {
     dark: 'garlic',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // adds extra bullets to switch
   five: {
@@ -390,7 +406,12 @@ export const WEAPONS = {
     dark: 'fire',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // explosion on switch
   six: {
@@ -399,7 +420,12 @@ export const WEAPONS = {
     dark: 'rocket',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // adds extra bullets to switch
   seven: {
@@ -408,7 +434,12 @@ export const WEAPONS = {
     dark: 'bone',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // adds boomerang to switch blast
   eight: {
@@ -417,7 +448,12 @@ export const WEAPONS = {
     dark: 'cross',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
   // fireball for dark?
   // adds fireballs on switch
@@ -427,7 +463,12 @@ export const WEAPONS = {
     dark: 'tracer',
     dswitch: 'blast',
     lswitch: null,
-    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+    levels: [
+      {},
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+      { damage: ['+', 1] },
+    ],
   },
 }
 
@@ -436,16 +477,16 @@ export const UPGRADES = {
     name: 'Duplicator',
     key: 'duplicator',
     type: 'gun',
-    levels: [{ count: 1 }, { count: 1 }, { count: 1 }],
+    levels: [{ count: ['+', 1] }, { count: ['+', 2] }, { count: ['+', 3] }],
   },
   damageBoost: {
     name: 'Damage Boost',
     key: 'damageBoost',
     type: 'gun',
     levels: [
-      { damage: (d) => d * 1.1 },
-      { damage: (d) => d * 1.1 },
-      { damage: (d) => d * 1.1 },
+      { damage: ['*', 1.1] },
+      { damage: ['*', 1.2] },
+      { damage: ['*', 1.3] },
     ],
   },
   fireDelay: {
@@ -453,9 +494,9 @@ export const UPGRADES = {
     key: 'fireDelay',
     type: 'gun',
     levels: [
-      { delay: (d) => d * 0.9 },
-      { delay: (d) => d * 0.9 },
-      { delay: (d) => d * 0.9 },
+      { delay: ['*', 0.9] },
+      { delay: ['*', 0.8] },
+      { delay: ['*', 0.7] },
     ],
   },
   range: {
@@ -463,9 +504,9 @@ export const UPGRADES = {
     key: 'range',
     type: 'gun',
     levels: [
-      { range: (d) => d * 1.1 },
-      { range: (d) => d * 1.1 },
-      { range: (d) => d * 1.1 },
+      { range: ['*', 1.1] },
+      { range: ['*', 1.2] },
+      { range: ['*', 1.3] },
     ],
   },
   bulletSpeed: {
@@ -473,29 +514,25 @@ export const UPGRADES = {
     key: 'bulletSpeed',
     type: 'gun',
     levels: [
-      { speed: (d) => d * 1.1 },
-      { speed: (d) => d * 1.1 },
-      { speed: (d) => d * 1.1 },
+      { speed: ['*', 1.1] },
+      { speed: ['*', 1.2] },
+      { speed: ['*', 1.3] },
     ],
   },
   bulletSize: {
     name: 'Bullet Size',
     key: 'bulletSize',
     type: 'gun',
-    levels: [
-      { size: (d) => d * 1.1 },
-      { size: (d) => d * 1.1 },
-      { size: (d) => d * 1.1 },
-    ],
+    levels: [{ size: ['*', 1.1] }, { size: ['*', 1.2] }, { size: ['*', 1.3] }],
   },
   maxHP: {
     name: 'Max Health',
     key: 'maxHP',
     type: 'player',
     levels: [
-      { maxHP: (d) => d * 1.1 },
-      { maxHP: (d) => d * 1.1 },
-      { maxHP: (d) => d * 1.1 },
+      { maxHP: ['*', 1.1] },
+      { maxHP: ['*', 1.2] },
+      { maxHP: ['*', 1.3] },
     ],
   },
   healthRegen: {
@@ -503,29 +540,25 @@ export const UPGRADES = {
     key: 'healthRegen',
     type: 'player',
     levels: [
-      { regen: (d) => d + 0.01 },
-      { regen: (d) => d + 0.01 },
-      { regen: (d) => d + 0.01 },
+      { regen: ['+', 1.01] },
+      { regen: ['+', 1.02] },
+      { regen: ['+', 1.03] },
     ],
   },
   moveSpeed: {
     name: 'Move Speed',
     key: 'moveSpeed',
     type: 'player',
-    levels: [
-      { speed: (d) => d + 12 },
-      { speed: (d) => d + 12 },
-      { speed: (d) => d + 12 },
-    ],
+    levels: [{ speed: ['+', 1] }, { speed: ['+', 2] }, { speed: ['+', 3] }],
   },
   pickupRange: {
     name: 'Pickup Range',
     key: 'pickupRange',
     type: 'player',
     levels: [
-      { pickupRange: (d) => d + 5 },
-      { pickupRange: (d) => d + 5 },
-      { pickupRange: (d) => d + 5 },
+      { pickupRange: ['+', 1] },
+      { pickupRange: ['+', 2] },
+      { pickupRange: ['+', 3] },
     ],
   },
   xpRate: {
@@ -533,9 +566,9 @@ export const UPGRADES = {
     key: 'xpRate',
     type: 'player',
     levels: [
-      { xpRate: (d) => d * 1.1 },
-      { xpRate: (d) => d * 1.1 },
-      { xpRate: (d) => d * 1.1 },
+      { xpRate: ['*', 1.1] },
+      { xpRate: ['*', 1.2] },
+      { xpRate: ['*', 1.3] },
     ],
   },
   // luck: {
@@ -564,113 +597,134 @@ export const PURCHASES = {
   one: {
     name: 'Basic + Shotgun',
     key: 'one',
+    type: 'weapon',
     description: 'Normal medium range attack',
   },
   two: {
     name: 'Bible + Orbs',
     key: 'two',
+    type: 'weapon',
     description: 'Offers protections up close',
   },
   three: {
     name: 'Whip + Axe',
     key: 'three',
+    type: 'weapon',
     description: 'Powerful short range',
   },
   four: {
     name: 'Water + Garlic',
     key: 'four',
+    type: 'weapon',
     description: 'Automatic short range attack',
   },
   five: {
     name: 'Wand + Fire',
     key: 'five',
+    type: 'weapon',
     description: 'Automatic medium range attack',
   },
   six: {
     name: 'Splitter + Rocket',
     key: 'six',
+    type: 'weapon',
     description: 'Powerful explosive medium range',
   },
   seven: {
     name: 'Chain + Bone',
     key: 'seven',
+    type: 'weapon',
     description: 'Bouncy all around attack',
   },
   eight: {
     name: 'Bubble + Cross',
     key: 'eight',
+    type: 'weapon',
     description: 'Boomerang shots',
   },
   nine: {
     name: 'Tracer + Fireball',
     key: 'nine',
+    type: 'weapon',
     description: 'Piercing attacks',
   },
   //upgrades
   duplicator: {
     name: 'Duplicator',
     key: 'duplicator',
+    type: 'upgrade',
     description: 'Adds one bullet to all attacks',
   },
   damageBoost: {
     name: 'Damage Boost',
     key: 'damageBoost',
+    type: 'upgrade',
     description: 'Adds damage to all attacks',
-    upgradeDescription: (d) => `Deal ${d}% more damage`,
   },
   fireDelay: {
     name: 'Attack Speed',
     key: 'fireDelay',
+    type: 'upgrade',
     description: 'Attack faster than before',
   },
   range: {
     name: 'Extra Range',
     key: 'range',
+    type: 'upgrade',
     description: 'Attacks go further before vanishing',
   },
   bulletSpeed: {
     name: 'Bullet Speed',
     key: 'bulletSpeed',
+    type: 'upgrade',
     description: 'Attacks move faster',
   },
   bulletSize: {
     name: 'Bullet Size',
     key: 'bulletSize',
+    type: 'upgrade',
     description: 'Attacks are larger',
   },
   maxHP: {
     name: 'Max Health',
     key: 'maxHP',
+    type: 'upgrade',
     description: 'Gain more total hp',
   },
   healthRegen: {
     name: 'Health Regen',
     key: 'healthRegen',
+    type: 'upgrade',
     description: 'Slowly gain hp',
   },
   moveSpeed: {
     name: 'Move Speed',
     key: 'moveSpeed',
+    type: 'upgrade',
     description: 'Move faster',
   },
   pickupRange: {
     name: 'Pickup Range',
     key: 'pickupRange',
+    type: 'upgrade',
     description: 'Pickup xp from further',
   },
   xpRate: {
     name: 'XP Gain',
     key: 'xpRate',
+    type: 'upgrade',
     description: 'More xp',
   },
   // armor: {
   //   name: 'Armor',
   //   key: 'armor',
+  // type: 'upgrade',
   //   description: 'Reduce incoming damage',
   // },
   // luck: {
   //   name: 'Luck',
   //   key: 'luck',
+  // type: 'upgrade',
   //   description: 'More luck',
   // },
 }

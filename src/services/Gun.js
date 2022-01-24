@@ -173,19 +173,13 @@ export class Gun {
     }
 
     Object.values(UPGRADES).forEach((upgrade) => {
-      upgrade.levels
-        .filter((_, i) => upgrade.type === 'gun' && reg(upgrade.key) > i)
-        .forEach((boost) =>
-          Object.entries(boost).forEach((u) => applyUpgrade(u, stats)),
-        )
+      const boost = upgrade.levels[reg(upgrade.key) - 1]
+      if (boost) Object.entries(boost).forEach((u) => applyUpgrade(u, stats))
     })
 
     if (this.weapon?.level > 0) {
-      this.weapon.levels
-        .filter((_, i) => this.weapon.level - 1 > i)
-        .forEach((boost) =>
-          Object.entries(boost).forEach((u) => applyUpgrade(u, stats)),
-        )
+      const boost = this.weapon.levels[this.weapon.level - 1]
+      if (boost) Object.entries(boost).forEach((u) => applyUpgrade(u, stats))
     }
 
     stats.count = Math.min(stats.maxCount, stats.count)
