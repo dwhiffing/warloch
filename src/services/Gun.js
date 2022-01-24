@@ -3,6 +3,7 @@ import { Bullet } from '../sprites/Bullet'
 
 export class Gun {
   constructor(scene, type = 'light') {
+    this.source = scene.player
     this.scene = scene
     this.stats = GUNS[type]
     this.type = type
@@ -17,6 +18,10 @@ export class Gun {
 
     this.circle = new Phaser.Geom.Circle(0, 0, 0)
     this.circle.tween = 0
+
+    if (this.stats.explode) {
+      this.explodeGun = new Gun(scene, this.stats.explode)
+    }
 
     if (this.stats?.damageOverTime) {
       this.check = this.scene.time.addEvent({
@@ -33,8 +38,6 @@ export class Gun {
   }
 
   shoot(x = this.target.x, y = this.target.y) {
-    this.player = this.scene.player
-
     if (this.shotTimer > 0) return
 
     this.shotTimer = this.stats.delay
@@ -65,7 +68,10 @@ export class Gun {
       bullet.index = i
       bullet.setFlipX(false)
       const s = this.stats.spread || 0
-      const finalSpread = (c / 2 - (c - i) + 0.5) * (s / c)
+
+      const finalSpread = this.stats.randomAngle
+        ? Phaser.Math.RND.realInRange(-this.stats.spread, this.stats.spread)
+        : (c / 2 - (c - i) + 0.5) * (s / c)
 
       if (!target) {
         bullet.fire(
@@ -75,7 +81,7 @@ export class Gun {
         continue
       }
 
-      const { x: px, y: py } = this.player
+      const { x: px, y: py } = this.source
 
       if (target === 'orbit') {
         const { x, y } = this.circle.getPoint(
@@ -109,8 +115,8 @@ export class Gun {
         if (!enemy) return
         baseAngle = getAngle(px, py, enemy.x, enemy.y)
       } else if (target === 'melee') {
-        bullet.setFlipX(this.player.flipX)
-        baseAngle = Phaser.Math.Angle.Wrap(this.player.flipX ? Math.PI : 0)
+        bullet.setFlipX(this.source.flipX)
+        baseAngle = Phaser.Math.Angle.Wrap(this.source.flipX ? Math.PI : 0)
       }
 
       bullet.fire(baseAngle + finalSpread, this.stats)
@@ -119,8 +125,9 @@ export class Gun {
 
   update() {
     if (this.shotTimer > 0) this.shotTimer--
-    if (this.circle && this.player) {
-      this.circle.setPosition(this.player.x, this.player.y + 5)
+    if (this.explodeGun) this.explodeGun.update()
+    if (this.circle && this.source) {
+      this.circle.setPosition(this.source.x, this.source.y + 5)
     }
   }
 }

@@ -24,6 +24,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       .setOffset(...bodyOffset)
 
     this.guns = []
+  }
+
+  init() {
     this.guns.push(new Gun(this.scene, 'light'))
     this.guns.push(new Gun(this.scene, 'dark'))
     this.guns.push(new Gun(this.scene, 'blast'))
@@ -46,7 +49,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get bullets() {
-    return this.guns.map((gun) => gun.bullets)
+    return this.guns.map((gun) => [gun.explodeGun?.bullets, gun.bullets]).flat()
   }
 
   get moveSpeed() {

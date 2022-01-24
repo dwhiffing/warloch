@@ -7,7 +7,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   }
 
   fire(target, stats) {
-    const { x: px, y: py } = this.scene.player
+    const { x: px, y: py } = this.gun.source
     let width = stats.width || stats.size || 1
     let height = stats.height || stats.size || 1
     let bodyWidth = stats.bodyWidth || stats.bodySize || 1
@@ -21,6 +21,8 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.hitEnemies = []
     this.stats = stats
     this.target = target
+
+    if (this.stats.gravity) this.setGravityY(this.stats.gravity)
 
     this.setPosition(
       px + this.offset * Math.cos(target),
@@ -41,6 +43,8 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     } else {
       this.moveTowardTarget()
     }
+
+    if (this.stats.speedY) this.setVelocityY(this.stats.speedY)
   }
 
   die(shouldFade) {
@@ -65,6 +69,11 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     this.health -= 1
     if (this.health <= 0) this.die()
+
+    if (this.gun.explodeGun) {
+      this.gun.explodeGun.source = { x: enemy.x, y: enemy.y }
+      this.gun.explodeGun.shoot()
+    }
 
     if (this.stats.reacquire) {
       if (this.stats.target === 'nearestEnemy') {

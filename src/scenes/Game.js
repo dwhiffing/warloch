@@ -38,6 +38,7 @@ export default class extends Phaser.Scene {
     this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0)
 
     this.player = this.add.existing(new Player(this, WIDTH / 2, HEIGHT / 2))
+    this.player.init()
     this.cameras.main.startFollow(this.player)
 
     this.orbSpawner = new OrbSpawner(this)

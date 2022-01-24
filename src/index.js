@@ -11,7 +11,7 @@ new Phaser.Game({
   width: 500,
   height: 270,
   scale: { mode: Phaser.Scale.FIT, autoCenter: true },
-  physics: { default: 'arcade', arcade: { debug: true } },
+  physics: { default: 'arcade', arcade: { debug: false } },
   zoom: 2,
   scene: [BootScene, MenuScene, GameScene, UpgradeScene],
   pixelArt: true,

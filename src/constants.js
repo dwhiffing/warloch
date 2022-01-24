@@ -102,6 +102,19 @@ export const GUNS = {
     damageOverTime: true,
     target: 'randomPosition',
   },
+  rocketExplode: {
+    damage: 1,
+    delay: 1,
+    speed: 1,
+    offset: 1,
+    range: 1,
+    frame: 'shot.png',
+    size: 14,
+    bodySize: 4,
+    health: 9999,
+    lifetime: 200,
+    soundRate: 1.8,
+  },
   mines: {
     damage: 1,
     delay: 30,
@@ -170,17 +183,58 @@ export const GUNS = {
     soundRate: 1.8,
     target: 'randomAngle',
   },
-  light: {
+  rocket: {
+    damage: 1,
+    delay: 120,
+    speed: 60,
+    range: 150,
+    frame: 'shot.png',
+    size: 2,
+    explode: 'rocketExplode',
+    bodySize: 4,
+    soundRate: 1.8,
+  },
+  splitter: {
     damage: 1,
     delay: 30,
     speed: 150,
     range: 150,
     frame: 'shot.png',
     size: 2,
+    explode: 'smallBlast',
     bodySize: 4,
     soundRate: 1.8,
   },
-  _light: {
+  bubbler: {
+    damage: 0.1,
+    delay: 3,
+    count: 1,
+    speed: 150,
+    range: 150,
+    offset: 4,
+    spread: 0.25,
+    // lower will make it boomerang
+    accel: -1,
+    randomAngle: true,
+    frame: 'shot.png',
+    size: 1,
+    bodySize: 4,
+    soundRate: 1.8,
+  },
+  axe: {
+    damage: 1,
+    delay: 30,
+    speed: 50,
+    speedY: -200,
+    range: 250,
+    frame: 'shot.png',
+    size: 4,
+    bodySize: 4,
+    soundRate: 1.8,
+    gravity: 300,
+    target: 'melee',
+  },
+  light: {
     damage: 1,
     delay: 30,
     speed: 150,
@@ -253,20 +307,26 @@ export const GUNS = {
     spread: Math.PI * 2,
     soundRate: 0.5,
   },
+  smallBlast: {
+    damage: 1,
+    delay: 10,
+    speed: 80,
+    count: 10,
+    offset: 1,
+    range: 20,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    spread: Math.PI * 2,
+    soundRate: 0.5,
+  },
 }
 
-// TODO: Revamp upgrades to change multiple guns in more complex ways
 export const UPGRADES = {
   upgrade1: { tint: 0xf8961e, name: 'Upgrade', key: 'upgrade' },
   upgrade2: { tint: 0xf3722c, name: 'Upgrade', key: 'upgrade' },
   upgrade3: { tint: 0xf94144, name: 'Upgrade', key: 'upgrade' },
 }
-
-// gun ideas
-// axe: lobs up and down the screen, attacks in large area and pierces
-// rocket: explodes into blast on first impact
-// splitter: explodes into shrapnel
-// bubbler like in cave story
 
 // power ups
 // add one count to all weapons
