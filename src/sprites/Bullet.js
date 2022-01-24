@@ -33,7 +33,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     this.setActive(true)
       .setVisible(true)
-      .setAlpha(1)
+      .setAlpha(stats.alpha || 1)
       .setScale(width, height)
       .setBodySize(bodyWidth, bodyHeight)
       .setFrame(stats.frame)
@@ -108,7 +108,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     if (lifetime) {
       if (target !== 'orbit') this.setAlpha(this.lifetimeTimer / lifetime)
-      if (this.lifetimeTimer-- <= 0) this.die(true)
+      if (this.lifetimeTimer-- <= 0) this.die(target !== 'orbit')
     }
 
     if (accel) {

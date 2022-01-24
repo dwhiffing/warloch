@@ -30,7 +30,10 @@ export class InputHandler {
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.debugKeys.U)) {
-      this.scene.enemySpawner.spawn('largeEliteKnight')
+      this.scene.registry.set(
+        'duplicator',
+        (this.scene.registry.get('duplicator') || 0) + 1,
+      )
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.debugKeys.M)) {

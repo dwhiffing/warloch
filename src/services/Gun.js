@@ -74,7 +74,10 @@ export class Gun {
       bullet.gun = this
       bullet.index = i
       bullet.setFlipX(false)
-      const s = this.stats.spread || 0
+      let s = this.stats.spread
+      if (this.stats.count > 1 && s < 0.2) {
+        s = 0.2 * this.stats.count
+      }
 
       const finalSpread = this.stats.randomAngle
         ? Phaser.Math.RND.realInRange(-this.stats.spread, this.stats.spread)
@@ -112,6 +115,8 @@ export class Gun {
       } else if (target === 'melee') {
         bullet.setFlipX(this.source.flipX)
         baseAngle = Phaser.Math.Angle.Wrap(this.source.flipX ? Math.PI : 0)
+        if (this.stats.name === 'whip' && this.stats.count > 1)
+          baseAngle -= 1.55
       }
 
       // handle guns that target an in range enemy
@@ -146,11 +151,21 @@ export class Gun {
       damage: 1,
       range: 200,
       speed: 300,
+      maxCount: 9,
       ...GUNS[this.type],
+    }
+    const resolve = (key) => {
+      const t = baseStats[key]
+      return t?.min ? Phaser.Math.RND.between(t.min, t.max) : t
     }
     return {
       ...baseStats,
-      // count: baseStats.count + 3,
+      speed: resolve('speed'),
+      speedY: resolve('speedY'),
+      count: Math.min(
+        baseStats.maxCount,
+        baseStats.count + (this.scene.registry.get('duplicator') || 0),
+      ),
     }
   }
 }

@@ -55,6 +55,7 @@ export const SPRITES = {
 export const GUNS = {
   // things that shoot toward the pointer
   basic: {
+    type: 'basic',
     damage: 1,
     delay: 25,
     speed: 170,
@@ -65,6 +66,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   shotgun: {
+    type: 'shotgun',
     damage: 0.66,
     delay: 80,
     offset: 10,
@@ -79,6 +81,7 @@ export const GUNS = {
     soundRate: 0.5,
   },
   cross: {
+    type: 'cross',
     damage: 0.5,
     delay: 50,
     speed: 120,
@@ -91,6 +94,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   rocket: {
+    type: 'rocket',
     damage: 3,
     delay: 90,
     speed: 60,
@@ -102,6 +106,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   splitter: {
+    type: 'splitter',
     damage: 1,
     delay: 30,
     speed: 150,
@@ -113,6 +118,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   bubbler: {
+    type: 'bubbler',
     damage: 0.1,
     delay: 3,
     count: 1,
@@ -129,6 +135,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   bone: {
+    type: 'bone',
     damage: 1,
     delay: 40,
     speed: 200,
@@ -142,6 +149,7 @@ export const GUNS = {
     target: 'randomAngle',
   },
   tracer: {
+    type: 'tracer',
     damage: 2,
     delay: 70,
     speed: 150,
@@ -155,6 +163,7 @@ export const GUNS = {
 
   // things that aim automatically toward an enemy
   wand: {
+    type: 'wand',
     damage: 1,
     delay: 30,
     speed: 50,
@@ -166,6 +175,7 @@ export const GUNS = {
     target: 'nearestEnemy',
   },
   fire: {
+    type: 'fire',
     damage: 3,
     delay: 120,
     speed: 150,
@@ -177,6 +187,7 @@ export const GUNS = {
     target: 'randomEnemy',
   },
   chain: {
+    type: 'chain',
     damage: 1,
     delay: 100,
     speed: 250,
@@ -192,6 +203,7 @@ export const GUNS = {
 
   // things that float on/around player
   bible: {
+    type: 'bible',
     damage: 1,
     delay: 50,
     speed: 120,
@@ -208,17 +220,20 @@ export const GUNS = {
     target: 'orbit',
   },
   garlic: {
+    type: 'garlic',
     damage: 0.05,
-    delay: 30,
+    delay: 150,
     speed: 0,
     range: 1,
     frame: 'shot.png',
-    size: 25,
+    size: 20,
     count: 1,
+    maxCount: 1,
     spread: 0,
+    alpha: 0.5,
     bodySize: 4,
     health: 99,
-    lifetime: 30,
+    lifetime: 147,
     soundRate: 1.8,
     damageOverTime: true,
     target: 'orbit',
@@ -226,6 +241,7 @@ export const GUNS = {
 
   // things that fire around player
   orbs: {
+    type: 'orbs',
     damage: 1,
     delay: 40,
     speed: 40,
@@ -239,15 +255,16 @@ export const GUNS = {
     target: 'randomAngle',
   },
   water: {
+    type: 'water',
     damage: 1,
-    delay: 200,
+    delay: 400,
     speed: 150,
     range: 150,
     frame: 'shot.png',
     size: 12,
     bodySize: 4,
     health: 9999,
-    lifetime: 200,
+    lifetime: 400,
     soundRate: 1.8,
     damageOverTime: true,
     target: 'randomPosition',
@@ -255,6 +272,7 @@ export const GUNS = {
 
   // things that fire in front of player
   whip: {
+    type: 'whip',
     damage: 1,
     delay: 70,
     speed: 15,
@@ -270,13 +288,15 @@ export const GUNS = {
     offset: 30,
   },
   axe: {
+    type: 'axe',
     damage: 1,
     delay: 30,
-    speed: 50,
-    speedY: -200,
+    speed: { min: 50, max: 100 },
+    speedY: { min: -230, max: -170 },
     range: 250,
     frame: 'shot.png',
     size: 4,
+    health: 10,
     bodySize: 4,
     soundRate: 1.8,
     gravity: 300,
@@ -324,14 +344,23 @@ export const GUNS = {
 
 export const WEAPONS = {
   one: { light: 'basic', dark: 'shotgun', dswitch: 'blast', lswitch: null },
-  two: { light: 'axe', dark: 'water', dswitch: 'blast', lswitch: null },
-  three: { light: 'whip', dark: 'orbs', dswitch: 'blast', lswitch: null },
-  four: { light: 'garlic', dark: 'chain', dswitch: 'blast', lswitch: null },
-  five: { light: 'bible', dark: 'fire', dswitch: 'blast', lswitch: null },
-  six: { light: 'bubbler', dark: 'tracer', dswitch: 'blast', lswitch: null },
-  seven: { light: 'bone', dark: 'wand', dswitch: 'blast', lswitch: null },
-  eight: { light: 'splitter', dark: 'cross', dswitch: 'blast', lswitch: null },
-  nine: { light: 'rocket', dark: '', dswitch: 'blast', lswitch: null },
+  // adds extra bullets on switch
+  two: { light: 'bible', dark: 'orbs', dswitch: 'blast', lswitch: null },
+  // adds axes on switch
+  three: { light: 'whip', dark: 'axe', dswitch: 'blast', lswitch: null },
+  // adds large aoe on switch
+  four: { light: 'water', dark: 'garlic', dswitch: 'blast', lswitch: null },
+  // adds extra bullets to switch
+  five: { light: 'wand', dark: 'fire', dswitch: 'blast', lswitch: null },
+  // explosion on switch
+  six: { light: 'splitter', dark: 'rocket', dswitch: 'blast', lswitch: null },
+  // adds extra bullets to switch
+  seven: { light: 'chain', dark: 'bone', dswitch: 'blast', lswitch: null },
+  // adds boomerang to switch blast
+  eight: { light: 'bubbler', dark: 'cross', dswitch: 'blast', lswitch: null },
+  // fireball for dark?
+  // adds fireballs on switch
+  nine: { light: 'tracer', dark: '', dswitch: 'blast', lswitch: null },
 }
 
 export const UPGRADES = {
