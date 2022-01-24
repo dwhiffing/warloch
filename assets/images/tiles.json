@@ -569,8 +569,16 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "shot-shotgun.png",
+	"filename": "shot-rocket.png",
 	"frame": {"x":464,"y":54,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "shot-shotgun.png",
+	"frame": {"x":454,"y":54,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -586,7 +594,7 @@
 },
 {
 	"filename": "shot-tracer.png",
-	"frame": {"x":454,"y":54,"w":8,"h":8},
+	"frame": {"x":464,"y":54,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -639,6 +647,6 @@
 	"format": "RGBA8888",
 	"size": {"w":692,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b10f7df330bc94d985d61030a7695bf5:9d277877e566078c84d84c6422094f8d:accbe1e7e294ded8391337fc1c446319$"
+	"smartupdate": "$TexturePacker:SmartUpdate:3f36401d7b24c30dd49e28b438661ffb:69c2c654dfc3dfe0a20b25e8320dd2a1:accbe1e7e294ded8391337fc1c446319$"
 }
 }

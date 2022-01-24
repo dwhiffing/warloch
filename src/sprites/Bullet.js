@@ -22,6 +22,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.hitEnemies = []
     this.stats = stats
     this.target = target
+    this.setDepth(stats.depth)
 
     if (this.stats.gravity) this.setGravityY(this.stats.gravity)
 
