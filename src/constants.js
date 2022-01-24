@@ -55,7 +55,7 @@ export const SPRITES = {
 export const GUNS = {
   // things that shoot toward the pointer
   basic: {
-    type: 'basic',
+    name: 'basic',
     damage: 1,
     delay: 25,
     speed: 170,
@@ -66,7 +66,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   shotgun: {
-    type: 'shotgun',
+    name: 'shotgun',
     damage: 0.66,
     delay: 80,
     offset: 10,
@@ -81,7 +81,7 @@ export const GUNS = {
     soundRate: 0.5,
   },
   cross: {
-    type: 'cross',
+    name: 'cross',
     damage: 0.5,
     delay: 50,
     speed: 120,
@@ -94,7 +94,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   rocket: {
-    type: 'rocket',
+    name: 'rocket',
     damage: 3,
     delay: 90,
     speed: 60,
@@ -106,7 +106,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   splitter: {
-    type: 'splitter',
+    name: 'splitter',
     damage: 1,
     delay: 30,
     speed: 150,
@@ -118,7 +118,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   bubbler: {
-    type: 'bubbler',
+    name: 'bubbler',
     damage: 0.1,
     delay: 3,
     count: 1,
@@ -135,7 +135,7 @@ export const GUNS = {
     soundRate: 1.8,
   },
   bone: {
-    type: 'bone',
+    name: 'bone',
     damage: 1,
     delay: 40,
     speed: 200,
@@ -149,7 +149,7 @@ export const GUNS = {
     target: 'randomAngle',
   },
   tracer: {
-    type: 'tracer',
+    name: 'tracer',
     damage: 2,
     delay: 70,
     speed: 150,
@@ -163,7 +163,7 @@ export const GUNS = {
 
   // things that aim automatically toward an enemy
   wand: {
-    type: 'wand',
+    name: 'wand',
     damage: 1,
     delay: 30,
     speed: 50,
@@ -175,7 +175,7 @@ export const GUNS = {
     target: 'nearestEnemy',
   },
   fire: {
-    type: 'fire',
+    name: 'fire',
     damage: 3,
     delay: 120,
     speed: 150,
@@ -187,7 +187,7 @@ export const GUNS = {
     target: 'randomEnemy',
   },
   chain: {
-    type: 'chain',
+    name: 'chain',
     damage: 1,
     delay: 100,
     speed: 250,
@@ -203,7 +203,7 @@ export const GUNS = {
 
   // things that float on/around player
   bible: {
-    type: 'bible',
+    name: 'bible',
     damage: 1,
     delay: 50,
     speed: 120,
@@ -220,7 +220,7 @@ export const GUNS = {
     target: 'orbit',
   },
   garlic: {
-    type: 'garlic',
+    name: 'garlic',
     damage: 0.05,
     delay: 150,
     speed: 0,
@@ -241,7 +241,7 @@ export const GUNS = {
 
   // things that fire around player
   orbs: {
-    type: 'orbs',
+    name: 'orbs',
     damage: 1,
     delay: 40,
     speed: 40,
@@ -255,7 +255,7 @@ export const GUNS = {
     target: 'randomAngle',
   },
   water: {
-    type: 'water',
+    name: 'water',
     damage: 1,
     delay: 400,
     speed: 150,
@@ -272,9 +272,9 @@ export const GUNS = {
 
   // things that fire in front of player
   whip: {
-    type: 'whip',
+    name: 'whip',
     damage: 1,
-    delay: 70,
+    delay: 100,
     speed: 15,
     range: 5,
     frame: 'whip.png',
@@ -288,7 +288,7 @@ export const GUNS = {
     offset: 30,
   },
   axe: {
-    type: 'axe',
+    name: 'axe',
     damage: 1,
     delay: 30,
     speed: { min: 50, max: 100 },
@@ -364,20 +364,17 @@ export const WEAPONS = {
 }
 
 export const UPGRADES = {
-  upgrade1: { tint: 0xf8961e, name: 'Upgrade', key: 'upgrade' },
-  upgrade2: { tint: 0xf3722c, name: 'Upgrade', key: 'upgrade' },
-  upgrade3: { tint: 0xf94144, name: 'Upgrade', key: 'upgrade' },
+  duplicator: { tint: 0xf8961e, name: 'Duplicator', key: 'duplicator' },
+  damageBoost: { tint: 0xf8961e, name: 'Damage Boost', key: 'damageBoost' },
+  fireDelay: { tint: 0xf8961e, name: 'Fire Delay', key: 'fireDelay' },
+  range: { tint: 0xf8961e, name: 'Range', key: 'range' },
+  bulletSpeed: { tint: 0xf8961e, name: 'Bullet Speed', key: 'bulletSpeed' },
+  bulletSize: { tint: 0xf8961e, name: 'Bullet Size', key: 'bulletSize' },
 }
 
 // power ups
-// add one count to all weapons
-// increase damage globally by 10%
-// increase fire rate globally by 10%
-// increase attack size globally by 10%
-// increase xp gain rate by 10%
-// increase range of weapons by 10%
-// increase speed of weapons by 10%
 // increase max health by 10%
+// increase xp gain rate by 10%
 // increase luck by 10%
 // increase hp gain by .1 ps
 // increase armor by 1. armor reduces incoming damage

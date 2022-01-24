@@ -154,17 +154,22 @@ export class Gun {
       maxCount: 9,
       ...GUNS[this.type],
     }
+    const reg = (key, def) => this.scene.registry.get(key) || def
     const resolve = (key) => {
       const t = baseStats[key]
       return t?.min ? Phaser.Math.RND.between(t.min, t.max) : t
     }
     return {
       ...baseStats,
-      speed: resolve('speed'),
+      speed: resolve('speed') * (1 + reg('bulletSpeed', 0) / 10),
+      size: resolve('size') * (1 + reg('bulletSize', 0) / 10),
       speedY: resolve('speedY'),
+      range: resolve('range') * (1 + reg('range', 0) / 10),
+      delay: resolve('delay') * (1 - reg('fireDelay', 0) / 20),
+      damage: resolve('damage') * (1 + reg('damageBoost', 0) / 10),
       count: Math.min(
         baseStats.maxCount,
-        baseStats.count + (this.scene.registry.get('duplicator') || 0),
+        baseStats.count + reg('duplicator', 0),
       ),
     }
   }
