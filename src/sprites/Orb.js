@@ -4,7 +4,8 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.physics.world.enableBody(this, 0)
 
-    this.setScale(2).setTint(0xffff00).setSize(20, 20)
+    this.setScale(2).setTint(0xffff00)
+    this.resize()
   }
 
   spawn(x, y, value = 1) {
@@ -16,6 +17,10 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
 
   hit() {
     this.die()
+  }
+
+  resize() {
+    this.setSize(this.scene.player.pickupRange, this.scene.player.pickupRange)
   }
 
   die() {

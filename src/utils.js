@@ -10,3 +10,11 @@ export const createAnim = (scene, key, prefix) => {
     repeat: -1,
   })
 }
+
+export const applyUpgrade = ([k, v], obj) => {
+  if (typeof v === 'number') {
+    obj[k] += v
+  } else if (typeof v === 'function') {
+    obj[k] = v(obj[k])
+  }
+}

@@ -1,20 +1,29 @@
-import { WEAPONS, SPRITES } from '../constants'
+import { WEAPONS, SPRITES, UPGRADES } from '../constants'
 import { Gun } from '../services/Gun'
+import { applyUpgrade } from '../utils'
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'tiles')
     this.scene.physics.world.enableBody(this, 0)
 
-    this.hp = 100
+    this._maxHP = 100
+    this._xpRate = 1
+    this._pickupRange = 20
+    this.hp = this.maxHP
     this.xp = 0
     this.tp = 0
     this.level = 1
     this.form = 'light'
     this.movePenalty = 1
     this.setDepth(70)
-    this.weapons = Object.values(WEAPONS)
-    this.unlockedWeapons = [this.weapons[0]]
+    this.weapons = Object.values(WEAPONS).map((w) => ({
+      ...w,
+      get level() {
+        return scene.registry.get(`${w.name}`) || 0
+      },
+    }))
+    this.levelWeapon('one')
 
     this.body.setMaxSpeed(this.moveSpeed)
 
@@ -32,10 +41,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.activeGunIndex = 0
     this.weapons.forEach((w) => {
       const { light, dark, lswitch, dswitch } = w
-      if (light) this.guns.push(new Gun(this.scene, light))
-      if (dark) this.guns.push(new Gun(this.scene, dark))
-      if (lswitch) this.guns.push(new Gun(this.scene, lswitch))
-      if (dswitch) this.guns.push(new Gun(this.scene, dswitch))
+      if (light) this.guns.push(new Gun(this.scene, light, w))
+      if (dark) this.guns.push(new Gun(this.scene, dark, w))
+      if (lswitch) this.guns.push(new Gun(this.scene, lswitch, w))
+      if (dswitch) this.guns.push(new Gun(this.scene, dswitch, w))
     })
   }
 
@@ -47,18 +56,34 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.movePenalty += 0.02
     }
 
-    const activeWeapons = this.unlockedWeapons.map((w) =>
-      this.form === 'light' ? w.light : w.dark,
-    )
+    this.hp += this.regen
+    if (this.hp > this.maxHP) this.hp = this.maxHP
+
+    const activeWeapons = this.weapons
+      .filter((w) => w.level > 0)
+      .map((w) => (this.form === 'light' ? w.light : w.dark))
     this.guns.forEach((gun) => {
       gun.update()
       if (activeWeapons.includes(gun.type)) gun.shoot()
     })
   }
 
-  unlockWeapon(i) {
-    if (this.unlockedWeapons.indexOf(this.weapons[i]) > -1) return
-    this.unlockedWeapons.push(this.weapons[i])
+  levelWeapon(weapon) {
+    this.scene.registry.inc(weapon)
+  }
+
+  applyUpgrade(key, obj) {
+    UPGRADES[key].levels
+      .filter((_, i) => (this.scene.registry.get(key) || 0) > i)
+      .forEach((boost) =>
+        Object.entries(boost).forEach((u) => applyUpgrade(u, obj)),
+      )
+    return obj
+  }
+
+  get regen() {
+    const obj = this.applyUpgrade('healthRegen', { regen: 0 })
+    return obj.regen
   }
 
   get bullets() {
@@ -66,7 +91,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get moveSpeed() {
-    return 70 * this.movePenalty * (this.form === 'light' ? 1 : 0.45)
+    const speed = 70 * this.movePenalty * (this.form === 'light' ? 1 : 0.45)
+    const obj = this.applyUpgrade('moveSpeed', { speed })
+    this.body.setMaxSpeed(obj.speed)
+    return obj.speed
   }
 
   get hp() {
@@ -74,26 +102,43 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   set hp(val) {
-    if (this._hp > val) {
+    if (this._hp > val && this._hp <= this.maxHP) {
       this.scene.cameras.main.shake(200, 0.01)
       this.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
       this.scene.time.delayedCall(100, this.clearTint.bind(this))
       this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
         volume: 0.3,
       })
+      this.movePenalty = 0.5
     }
     this._hp = val
-    this.movePenalty = 0.5
+    this.scene.hud?.set('hp', this._hp, this.maxHP)
     if (this._hp <= 0) {
       this._hp = 0
       this.scene.sound.play('death', { volume: 0.4 })
       this.scene.scene.start('Game')
     }
-    this.scene.hud?.set('hp', this._hp)
+  }
+
+  get maxHP() {
+    const obj = this.applyUpgrade('maxHP', { maxHP: this._maxHP })
+    return obj.maxHP
   }
 
   get xp() {
     return this._xp
+  }
+
+  get pickupRange() {
+    const obj = this.applyUpgrade('pickupRange', {
+      pickupRange: this._pickupRange,
+    })
+    return obj.pickupRange
+  }
+
+  get xpRate() {
+    const obj = this.applyUpgrade('xpRate', { xpRate: this._xpRate })
+    return obj.xpRate
   }
 
   set xp(val) {

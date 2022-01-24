@@ -88,7 +88,7 @@ export default class extends Phaser.Scene {
   getOrb(player, orb) {
     if (!player.active || !orb.active) return
 
-    player.xp += orb.value
+    player.xp += orb.value * player.xpRate
     orb.hit(player)
   }
 

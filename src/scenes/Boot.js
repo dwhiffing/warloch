@@ -1,6 +1,14 @@
 const IMPACT_SOUND_TYPES = ['Glass', 'Metal', 'Plate']
 const IMPACT_SOUND_SIZES = ['heavy', 'medium', 'light']
 const IMPACT_SOUND_COUNT = 5
+
+window.WebFontConfig = {
+  active: function () {},
+  google: {
+    families: ['Roboto Mono:100,300,700'],
+  },
+}
+
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'Boot' })
@@ -14,6 +22,11 @@ export default class extends Phaser.Scene {
       progress.fillStyle(0xffffff, 1)
       progress.fillRect(0, height / 2, width * value, 60)
     })
+
+    this.load.script(
+      'webfont',
+      '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js',
+    )
 
     this.load.audio('chord', 'assets/sounds/pickup.mp3')
     IMPACT_SOUND_TYPES.forEach((type) => {

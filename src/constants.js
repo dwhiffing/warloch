@@ -342,44 +342,338 @@ export const GUNS = {
   },
 }
 
+// TODO: define 3 levels for each weapon
 export const WEAPONS = {
-  one: { light: 'basic', dark: 'shotgun', dswitch: 'blast', lswitch: null },
+  one: {
+    name: 'one',
+    light: 'basic',
+    dark: 'shotgun',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [
+      { count: 1, damage: 1 },
+      { count: 1, damage: 1 },
+      { count: 1, damage: 1 },
+    ],
+  },
   // adds extra bullets on switch
-  two: { light: 'bible', dark: 'orbs', dswitch: 'blast', lswitch: null },
+  two: {
+    name: 'two',
+    light: 'bible',
+    dark: 'orbs',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // adds axes on switch
-  three: { light: 'whip', dark: 'axe', dswitch: 'blast', lswitch: null },
+  three: {
+    name: 'three',
+    light: 'whip',
+    dark: 'axe',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // adds large aoe on switch
-  four: { light: 'water', dark: 'garlic', dswitch: 'blast', lswitch: null },
+  four: {
+    name: 'four',
+    light: 'water',
+    dark: 'garlic',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // adds extra bullets to switch
-  five: { light: 'wand', dark: 'fire', dswitch: 'blast', lswitch: null },
+  five: {
+    name: 'five',
+    light: 'wand',
+    dark: 'fire',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // explosion on switch
-  six: { light: 'splitter', dark: 'rocket', dswitch: 'blast', lswitch: null },
+  six: {
+    name: 'six',
+    light: 'splitter',
+    dark: 'rocket',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // adds extra bullets to switch
-  seven: { light: 'chain', dark: 'bone', dswitch: 'blast', lswitch: null },
+  seven: {
+    name: 'seven',
+    light: 'chain',
+    dark: 'bone',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // adds boomerang to switch blast
-  eight: { light: 'bubbler', dark: 'cross', dswitch: 'blast', lswitch: null },
+  eight: {
+    name: 'eight',
+    light: 'bubbler',
+    dark: 'cross',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
   // fireball for dark?
   // adds fireballs on switch
-  nine: { light: 'tracer', dark: '', dswitch: 'blast', lswitch: null },
+  nine: {
+    name: 'nine',
+    light: 'tracer',
+    dark: 'tracer',
+    dswitch: 'blast',
+    lswitch: null,
+    levels: [{ damage: 0 }, { damage: 0 }, { damage: 0 }],
+  },
 }
 
 export const UPGRADES = {
-  duplicator: { tint: 0xf8961e, name: 'Duplicator', key: 'duplicator' },
-  damageBoost: { tint: 0xf8961e, name: 'Damage Boost', key: 'damageBoost' },
-  fireDelay: { tint: 0xf8961e, name: 'Fire Delay', key: 'fireDelay' },
-  range: { tint: 0xf8961e, name: 'Range', key: 'range' },
-  bulletSpeed: { tint: 0xf8961e, name: 'Bullet Speed', key: 'bulletSpeed' },
-  bulletSize: { tint: 0xf8961e, name: 'Bullet Size', key: 'bulletSize' },
+  duplicator: {
+    name: 'Duplicator',
+    key: 'duplicator',
+    type: 'gun',
+    levels: [{ count: 1 }, { count: 1 }, { count: 1 }],
+  },
+  damageBoost: {
+    name: 'Damage Boost',
+    key: 'damageBoost',
+    type: 'gun',
+    levels: [
+      { damage: (d) => d * 1.1 },
+      { damage: (d) => d * 1.1 },
+      { damage: (d) => d * 1.1 },
+    ],
+  },
+  fireDelay: {
+    name: 'Attack Speed',
+    key: 'fireDelay',
+    type: 'gun',
+    levels: [
+      { delay: (d) => d * 0.9 },
+      { delay: (d) => d * 0.9 },
+      { delay: (d) => d * 0.9 },
+    ],
+  },
+  range: {
+    name: 'Extra Range',
+    key: 'range',
+    type: 'gun',
+    levels: [
+      { range: (d) => d * 1.1 },
+      { range: (d) => d * 1.1 },
+      { range: (d) => d * 1.1 },
+    ],
+  },
+  bulletSpeed: {
+    name: 'Bullet Speed',
+    key: 'bulletSpeed',
+    type: 'gun',
+    levels: [
+      { speed: (d) => d * 1.1 },
+      { speed: (d) => d * 1.1 },
+      { speed: (d) => d * 1.1 },
+    ],
+  },
+  bulletSize: {
+    name: 'Bullet Size',
+    key: 'bulletSize',
+    type: 'gun',
+    levels: [
+      { size: (d) => d * 1.1 },
+      { size: (d) => d * 1.1 },
+      { size: (d) => d * 1.1 },
+    ],
+  },
+  maxHP: {
+    name: 'Max Health',
+    key: 'maxHP',
+    type: 'player',
+    levels: [
+      { maxHP: (d) => d * 1.1 },
+      { maxHP: (d) => d * 1.1 },
+      { maxHP: (d) => d * 1.1 },
+    ],
+  },
+  healthRegen: {
+    name: 'Health Regen',
+    key: 'healthRegen',
+    type: 'player',
+    levels: [
+      { regen: (d) => d + 0.01 },
+      { regen: (d) => d + 0.01 },
+      { regen: (d) => d + 0.01 },
+    ],
+  },
+  moveSpeed: {
+    name: 'Move Speed',
+    key: 'moveSpeed',
+    type: 'player',
+    levels: [
+      { speed: (d) => d + 12 },
+      { speed: (d) => d + 12 },
+      { speed: (d) => d + 12 },
+    ],
+  },
+  pickupRange: {
+    name: 'Pickup Range',
+    key: 'pickupRange',
+    type: 'player',
+    levels: [
+      { pickupRange: (d) => d + 5 },
+      { pickupRange: (d) => d + 5 },
+      { pickupRange: (d) => d + 5 },
+    ],
+  },
+  xpRate: {
+    name: 'XP Gain',
+    key: 'xpRate',
+    type: 'player',
+    levels: [
+      { xpRate: (d) => d * 1.1 },
+      { xpRate: (d) => d * 1.1 },
+      { xpRate: (d) => d * 1.1 },
+    ],
+  },
+  // luck: {
+  //   name: 'Luck',
+  //   key: 'luck',
+  //   type: 'player',
+  //   levels: [
+  //     { luck: (d) => d * 1.1 },
+  //     { luck: (d) => d * 1.1 },
+  //     { luck: (d) => d * 1.1 },
+  //   ],
+  // },
+  // armor: {
+  //   name: 'Armor',
+  //   key: 'armor',
+  //   type: 'player',
+  //   levels: [
+  //     { armor: (d) => d + 0.1 },
+  //     { armor: (d) => d + 0.1 },
+  //     { armor: (d) => d + 0.1 },
+  //   ],
+  // },
 }
 
-// power ups
-// increase max health by 10%
-// increase xp gain rate by 10%
-// increase luck by 10%
-// increase hp gain by .1 ps
-// increase armor by 1. armor reduces incoming damage
-// increase pickup range
-// increase move speed
+export const PURCHASES = {
+  one: {
+    name: 'Basic + Shotgun',
+    key: 'one',
+    description: 'Normal medium range attack',
+  },
+  two: {
+    name: 'Bible + Orbs',
+    key: 'two',
+    description: 'Offers protections up close',
+  },
+  three: {
+    name: 'Whip + Axe',
+    key: 'three',
+    description: 'Powerful short range',
+  },
+  four: {
+    name: 'Water + Garlic',
+    key: 'four',
+    description: 'Automatic short range attack',
+  },
+  five: {
+    name: 'Wand + Fire',
+    key: 'five',
+    description: 'Automatic medium range attack',
+  },
+  six: {
+    name: 'Splitter + Rocket',
+    key: 'six',
+    description: 'Powerful explosive medium range',
+  },
+  seven: {
+    name: 'Chain + Bone',
+    key: 'seven',
+    description: 'Bouncy all around attack',
+  },
+  eight: {
+    name: 'Bubble + Cross',
+    key: 'eight',
+    description: 'Boomerang shots',
+  },
+  nine: {
+    name: 'Tracer + Fireball',
+    key: 'nine',
+    description: 'Piercing attacks',
+  },
+  //upgrades
+  duplicator: {
+    name: 'Duplicator',
+    key: 'duplicator',
+    description: 'Adds one bullet to all attacks',
+  },
+  damageBoost: {
+    name: 'Damage Boost',
+    key: 'damageBoost',
+    description: 'Adds damage to all attacks',
+    upgradeDescription: (d) => `Deal ${d}% more damage`,
+  },
+  fireDelay: {
+    name: 'Attack Speed',
+    key: 'fireDelay',
+    description: 'Attack faster than before',
+  },
+  range: {
+    name: 'Extra Range',
+    key: 'range',
+    description: 'Attacks go further before vanishing',
+  },
+  bulletSpeed: {
+    name: 'Bullet Speed',
+    key: 'bulletSpeed',
+    description: 'Attacks move faster',
+  },
+  bulletSize: {
+    name: 'Bullet Size',
+    key: 'bulletSize',
+    description: 'Attacks are larger',
+  },
+  maxHP: {
+    name: 'Max Health',
+    key: 'maxHP',
+    description: 'Gain more total hp',
+  },
+  healthRegen: {
+    name: 'Health Regen',
+    key: 'healthRegen',
+    description: 'Slowly gain hp',
+  },
+  moveSpeed: {
+    name: 'Move Speed',
+    key: 'moveSpeed',
+    description: 'Move faster',
+  },
+  pickupRange: {
+    name: 'Pickup Range',
+    key: 'pickupRange',
+    description: 'Pickup xp from further',
+  },
+  xpRate: {
+    name: 'XP Gain',
+    key: 'xpRate',
+    description: 'More xp',
+  },
+  // armor: {
+  //   name: 'Armor',
+  //   key: 'armor',
+  //   description: 'Reduce incoming damage',
+  // },
+  // luck: {
+  //   name: 'Luck',
+  //   key: 'luck',
+  //   description: 'More luck',
+  // },
+}
 
 // bosses appear every n minutes
 // kill bosses to get new weapons

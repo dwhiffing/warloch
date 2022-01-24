@@ -10,7 +10,7 @@ export class InputHandler {
     this.rightKey = this.input.keyboard.addKey(D)
 
     this.debugKeys = this.input.keyboard.addKeys(
-      'T,Y,U,I,O,P,F,G,H,J,K,L,M,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT',
+      'R,T,Y,U,I,O,P,F,G,H,J,K,L,M,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE',
     )
     this.input.on('pointerdown', () => (this.scene.isMouseDown = true))
     this.input.on('pointerup', () => (this.scene.isMouseDown = false))
@@ -22,15 +22,21 @@ export class InputHandler {
   }
 
   update() {
-    this.onKey('ONE', () => this.scene.player.unlockWeapon(1))
-    this.onKey('TWO', () => this.scene.player.unlockWeapon(2))
-    this.onKey('THREE', () => this.scene.player.unlockWeapon(3))
-    this.onKey('FOUR', () => this.scene.player.unlockWeapon(4))
-    this.onKey('FIVE', () => this.scene.player.unlockWeapon(5))
-    this.onKey('SIX', () => this.scene.player.unlockWeapon(6))
-    this.onKey('SEVEN', () => this.scene.player.unlockWeapon(7))
-    this.onKey('EIGHT', () => this.scene.player.unlockWeapon(8))
+    this.onKey('ONE', () => this.scene.player.levelWeapon('one'))
+    this.onKey('TWO', () => this.scene.player.levelWeapon('two'))
+    this.onKey('THREE', () => this.scene.player.levelWeapon('three'))
+    this.onKey('FOUR', () => this.scene.player.levelWeapon('four'))
+    this.onKey('FIVE', () => this.scene.player.levelWeapon('five'))
+    this.onKey('SIX', () => this.scene.player.levelWeapon('six'))
+    this.onKey('SEVEN', () => this.scene.player.levelWeapon('seven'))
+    this.onKey('EIGHT', () => this.scene.player.levelWeapon('eight'))
+    this.onKey('NINE', () => this.scene.player.levelWeapon('nine'))
 
+    this.onKey('Y', () => this.reg.inc('maxHP'))
+    this.onKey('U', () => this.reg.inc('healthRegen'))
+    this.onKey('I', () => this.reg.inc('moveSpeed'))
+    this.onKey('O', () => this.reg.inc('pickupRange'))
+    this.onKey('P', () => this.reg.inc('xpRate'))
     this.onKey('F', () => this.reg.inc('duplicator'))
     this.onKey('G', () => this.reg.inc('damageBoost'))
     this.onKey('H', () => this.reg.inc('fireDelay'))
@@ -38,9 +44,9 @@ export class InputHandler {
     this.onKey('K', () => this.reg.inc('bulletSpeed'))
     this.onKey('L', () => this.reg.inc('bulletSize'))
 
-    this.onKey('P', () => (this.player.xp += 100))
-    this.onKey('O', () => (this.player.tp += 99))
-    this.onKey('I', () => {
+    this.onKey('V', () => (this.player.xp += 1000))
+    this.onKey('B', () => (this.player.tp += 99))
+    this.onKey('N', () => {
       for (let i = 0; i < 10; i++) this.scene.enemySpawner.spawn()
     })
     this.onKey('M', () => this.scene.hud.toggleMute())

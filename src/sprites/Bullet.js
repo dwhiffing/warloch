@@ -7,7 +7,8 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   }
 
   fire(target, stats) {
-    const { x: px, y: py } = this.gun.source
+    let { x: px, y: py } = this.gun.source
+    py += 5
     let width = stats.width || stats.size
     let height = stats.height || stats.size
     let bodyWidth = stats.bodyWidth || stats.bodySize

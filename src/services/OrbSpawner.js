@@ -1,3 +1,4 @@
+import { filter } from 'lodash'
 import { Orb } from '../sprites/Orb'
 
 const ORB_MAX = 300
@@ -17,6 +18,10 @@ export class OrbSpawner {
   spawn = (x, y, value) => {
     const orb = this.orbs.get()
     orb.spawn(x, y, value)
+    this.orbs
+      .getChildren()
+      .filter((o) => o.active)
+      .forEach((o) => o.resize())
   }
 
   update() {}

@@ -1,12 +1,14 @@
-import { GUNS } from '../constants'
+import { GUNS, UPGRADES } from '../constants'
 import { Bullet } from '../sprites/Bullet'
+import { applyUpgrade } from '../utils'
 
 export class Gun {
-  constructor(scene, type = 'light') {
+  constructor(scene, type = 'light', weapon) {
     this.source = scene.player
     this.scene = scene
     this.type = type
     this.target = this.scene.input.activePointer
+    this.weapon = weapon
 
     this.bullets = this.scene.physics.add.group({
       classType: Bullet,
@@ -92,7 +94,8 @@ export class Gun {
         continue
       }
 
-      const { x: px, y: py } = this.source
+      let { x: px, y: py } = this.source
+      py += 5
 
       // handle guns that orbit around the player
       if (target === 'orbit') {
@@ -142,7 +145,7 @@ export class Gun {
   }
 
   get stats() {
-    const baseStats = {
+    let stats = {
       count: 1,
       health: 1,
       offset: 16,
@@ -156,21 +159,36 @@ export class Gun {
     }
     const reg = (key, def) => this.scene.registry.get(key) || def
     const resolve = (key) => {
-      const t = baseStats[key]
+      const t = stats[key]
       return t?.min ? Phaser.Math.RND.between(t.min, t.max) : t
     }
-    return {
-      ...baseStats,
-      speed: resolve('speed') * (1 + reg('bulletSpeed', 0) / 10),
-      size: resolve('size') * (1 + reg('bulletSize', 0) / 10),
+    stats = {
+      ...stats,
+      speed: resolve('speed'),
+      size: resolve('size'),
       speedY: resolve('speedY'),
-      range: resolve('range') * (1 + reg('range', 0) / 10),
-      delay: resolve('delay') * (1 - reg('fireDelay', 0) / 20),
-      damage: resolve('damage') * (1 + reg('damageBoost', 0) / 10),
-      count: Math.min(
-        baseStats.maxCount,
-        baseStats.count + reg('duplicator', 0),
-      ),
+      range: resolve('range'),
+      delay: resolve('delay'),
+      damage: resolve('damage'),
     }
+
+    Object.values(UPGRADES).forEach((upgrade) => {
+      upgrade.levels
+        .filter((_, i) => upgrade.type === 'gun' && reg(upgrade.key) > i)
+        .forEach((boost) =>
+          Object.entries(boost).forEach((u) => applyUpgrade(u, stats)),
+        )
+    })
+
+    if (this.weapon?.level > 0) {
+      this.weapon.levels
+        .filter((_, i) => this.weapon.level - 1 > i)
+        .forEach((boost) =>
+          Object.entries(boost).forEach((u) => applyUpgrade(u, stats)),
+        )
+    }
+
+    stats.count = Math.min(stats.maxCount, stats.count)
+    return stats
   }
 }
