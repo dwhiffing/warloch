@@ -61,7 +61,7 @@ export default class Upgrade extends Phaser.Scene {
       b.setFillStyle(upgrade.tint)
       b.off('pointerdown')
       b.on('pointerdown', () => {
-        // this.registry.set(upgrade.key, currentLevel + 1)
+        this.registry.inc(upgrade.key)
         this.scene.resume('Game')
         this.scene.sleep()
       })

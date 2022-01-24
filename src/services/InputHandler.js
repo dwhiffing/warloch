@@ -9,7 +9,9 @@ export class InputHandler {
     this.downKey = this.input.keyboard.addKey(S)
     this.rightKey = this.input.keyboard.addKey(D)
 
-    this.debugKeys = this.input.keyboard.addKeys('T,Y,U,I,O,P,F,G,H,J,K,L,M')
+    this.debugKeys = this.input.keyboard.addKeys(
+      'T,Y,U,I,O,P,F,G,H,J,K,L,M,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT',
+    )
     this.input.on('pointerdown', () => (this.scene.isMouseDown = true))
     this.input.on('pointerup', () => (this.scene.isMouseDown = false))
 
@@ -20,19 +22,27 @@ export class InputHandler {
   }
 
   update() {
-    this.onKey('Y', () => this.scene.player.changeWeapon(-1))
-    this.onKey('U', () => this.scene.player.changeWeapon(1))
-    this.onKey('I', () => {
-      for (let i = 0; i < 10; i++) this.scene.enemySpawner.spawn()
-    })
-    this.onKey('P', () => (this.player.xp += 100))
-    this.onKey('O', () => (this.player.tp += 99))
+    this.onKey('ONE', () => this.scene.player.unlockWeapon(1))
+    this.onKey('TWO', () => this.scene.player.unlockWeapon(2))
+    this.onKey('THREE', () => this.scene.player.unlockWeapon(3))
+    this.onKey('FOUR', () => this.scene.player.unlockWeapon(4))
+    this.onKey('FIVE', () => this.scene.player.unlockWeapon(5))
+    this.onKey('SIX', () => this.scene.player.unlockWeapon(6))
+    this.onKey('SEVEN', () => this.scene.player.unlockWeapon(7))
+    this.onKey('EIGHT', () => this.scene.player.unlockWeapon(8))
+
     this.onKey('F', () => this.reg.inc('duplicator'))
     this.onKey('G', () => this.reg.inc('damageBoost'))
     this.onKey('H', () => this.reg.inc('fireDelay'))
     this.onKey('J', () => this.reg.inc('range'))
     this.onKey('K', () => this.reg.inc('bulletSpeed'))
     this.onKey('L', () => this.reg.inc('bulletSize'))
+
+    this.onKey('P', () => (this.player.xp += 100))
+    this.onKey('O', () => (this.player.tp += 99))
+    this.onKey('I', () => {
+      for (let i = 0; i < 10; i++) this.scene.enemySpawner.spawn()
+    })
     this.onKey('M', () => this.scene.hud.toggleMute())
 
     if (this.upKey.isDown) {

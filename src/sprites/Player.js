@@ -14,6 +14,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.movePenalty = 1
     this.setDepth(70)
     this.weapons = Object.values(WEAPONS)
+    this.unlockedWeapons = [this.weapons[0]]
 
     this.body.setMaxSpeed(this.moveSpeed)
 
@@ -46,17 +47,18 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.movePenalty += 0.02
     }
 
-    const activeWeapon = this.weapons[this.activeGunIndex][this.form]
+    const activeWeapons = this.unlockedWeapons.map((w) =>
+      this.form === 'light' ? w.light : w.dark,
+    )
     this.guns.forEach((gun) => {
       gun.update()
-      if (gun.type === activeWeapon) gun.shoot()
+      if (activeWeapons.includes(gun.type)) gun.shoot()
     })
   }
 
-  changeWeapon(direction) {
-    this.activeGunIndex += direction
-    if (this.activeGunIndex < 0) this.activeGunIndex = this.weapons.length - 1
-    if (this.activeGunIndex >= this.weapons.length) this.activeGunIndex = 0
+  unlockWeapon(i) {
+    if (this.unlockedWeapons.indexOf(this.weapons[i]) > -1) return
+    this.unlockedWeapons.push(this.weapons[i])
   }
 
   get bullets() {
