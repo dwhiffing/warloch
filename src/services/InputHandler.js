@@ -9,7 +9,7 @@ export class InputHandler {
     this.downKey = this.input.keyboard.addKey(S)
     this.rightKey = this.input.keyboard.addKey(D)
 
-    this.debugKeys = this.input.keyboard.addKeys('P,O,I,M,U')
+    this.debugKeys = this.input.keyboard.addKeys('P,O,I,M,U,K,L')
     this.input.on('pointerdown', () => (this.scene.isMouseDown = true))
     this.input.on('pointerup', () => (this.scene.isMouseDown = false))
   }
@@ -35,6 +35,12 @@ export class InputHandler {
 
     if (Phaser.Input.Keyboard.JustDown(this.debugKeys.M)) {
       this.scene.hud.toggleMute()
+    }
+
+    if (Phaser.Input.Keyboard.JustDown(this.debugKeys.K)) {
+      this.scene.player.changeWeapon(1)
+    } else if (Phaser.Input.Keyboard.JustDown(this.debugKeys.L)) {
+      this.scene.player.changeWeapon(-1)
     }
 
     if (this.upKey.isDown) {
