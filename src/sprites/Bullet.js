@@ -8,16 +8,16 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
   fire(target, stats) {
     const { x: px, y: py } = this.gun.source
-    let width = stats.width || stats.size || 1
-    let height = stats.height || stats.size || 1
-    let bodyWidth = stats.bodyWidth || stats.bodySize || 1
-    let bodyHeight = stats.bodyHeight || stats.bodySize || 1
-    this.health = stats.health || 1
-    this.offset = stats.offset || 16
-    this.lifetimeTimer = stats.lifetime || 9999
-    this.damage = stats.damage || 1
-    this.range = stats.range || 200
-    this.speed = stats.speed || 300
+    let width = stats.width || stats.size
+    let height = stats.height || stats.size
+    let bodyWidth = stats.bodyWidth || stats.bodySize
+    let bodyHeight = stats.bodyHeight || stats.bodySize
+    this.health = stats.health
+    this.offset = stats.offset
+    this.lifetimeTimer = stats.lifetime
+    this.damage = stats.damage
+    this.range = stats.range
+    this.speed = stats.speed
     this.hitEnemies = []
     this.stats = stats
     this.target = target

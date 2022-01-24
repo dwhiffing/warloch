@@ -208,8 +208,8 @@ export const GUNS = {
     target: 'orbit',
   },
   garlic: {
-    damage: 1,
-    delay: 150,
+    damage: 0.05,
+    delay: 30,
     speed: 0,
     range: 1,
     frame: 'shot.png',
@@ -217,8 +217,8 @@ export const GUNS = {
     count: 1,
     spread: 0,
     bodySize: 4,
-    health: 999,
-    lifetime: 150,
+    health: 99,
+    lifetime: 30,
     soundRate: 1.8,
     damageOverTime: true,
     target: 'orbit',
@@ -283,7 +283,6 @@ export const GUNS = {
     target: 'melee',
   },
   rocketExplode: {
-    type: 'special',
     damage: 1,
     delay: 1,
     speed: 1,
@@ -297,7 +296,6 @@ export const GUNS = {
     soundRate: 1.8,
   },
   blast: {
-    type: 'special',
     damage: 3,
     delay: 100,
     speed: 60,
@@ -310,7 +308,6 @@ export const GUNS = {
     soundRate: 0.5,
   },
   smallBlast: {
-    type: 'special',
     damage: 1,
     delay: 10,
     speed: 80,
@@ -323,6 +320,18 @@ export const GUNS = {
     spread: Math.PI * 2,
     soundRate: 0.5,
   },
+}
+
+export const WEAPONS = {
+  one: { light: 'basic', dark: 'shotgun', dswitch: 'blast', lswitch: null },
+  two: { light: 'axe', dark: 'water', dswitch: 'blast', lswitch: null },
+  three: { light: 'whip', dark: 'orbs', dswitch: 'blast', lswitch: null },
+  four: { light: 'garlic', dark: 'chain', dswitch: 'blast', lswitch: null },
+  five: { light: 'bible', dark: 'fire', dswitch: 'blast', lswitch: null },
+  six: { light: 'bubbler', dark: 'tracer', dswitch: 'blast', lswitch: null },
+  seven: { light: 'bone', dark: 'wand', dswitch: 'blast', lswitch: null },
+  eight: { light: 'splitter', dark: 'cross', dswitch: 'blast', lswitch: null },
+  nine: { light: 'rocket', dark: '', dswitch: 'blast', lswitch: null },
 }
 
 export const UPGRADES = {
@@ -345,11 +354,6 @@ export const UPGRADES = {
 // increase armor by 1. armor reduces incoming damage
 // increase pickup range
 // increase move speed
-
-// make it like hades except
-// you can pick 3 weapons, 6 powerups
-// you can pick a transform blast power
-//
 
 // bosses appear every n minutes
 // kill bosses to get new weapons

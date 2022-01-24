@@ -1,4 +1,4 @@
-import { GUNS, SPRITES } from '../constants'
+import { WEAPONS, SPRITES } from '../constants'
 import { Gun } from '../services/Gun'
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
@@ -13,9 +13,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.form = 'light'
     this.movePenalty = 1
     this.setDepth(70)
-    this.gunTypes = Object.entries(GUNS)
-      .filter(([k, v]) => v.type !== 'special')
-      .map(([k]) => k)
+    this.weapons = Object.values(WEAPONS)
 
     this.body.setMaxSpeed(this.moveSpeed)
 
@@ -31,10 +29,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   init() {
     this.activeGunIndex = 0
-    this.gunTypes.forEach((g) => this.guns.push(new Gun(this.scene, g)))
-    // this.guns.push(new Gun(this.scene, 'light'))
-    // this.guns.push(new Gun(this.scene, 'dark'))
-    this.guns.push(new Gun(this.scene, 'blast'))
+    this.weapons.forEach((w) => {
+      const { light, dark, lswitch, dswitch } = w
+      if (light) this.guns.push(new Gun(this.scene, light))
+      if (dark) this.guns.push(new Gun(this.scene, dark))
+      if (lswitch) this.guns.push(new Gun(this.scene, lswitch))
+      if (dswitch) this.guns.push(new Gun(this.scene, dswitch))
+    })
   }
 
   update() {
@@ -45,19 +46,17 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.movePenalty += 0.02
     }
 
-    this.guns.forEach((gun, index) => {
+    const activeWeapon = this.weapons[this.activeGunIndex][this.form]
+    this.guns.forEach((gun) => {
       gun.update()
-      // if (gun.type === this.form) {
-      if (index === this.activeGunIndex) {
-        gun.shoot()
-      }
+      if (gun.type === activeWeapon) gun.shoot()
     })
   }
 
   changeWeapon(direction) {
     this.activeGunIndex += direction
-    if (this.activeGunIndex < 0) this.activeGunIndex = this.gunTypes.length
-    if (this.activeGunIndex > this.gunTypes.length) this.activeGunIndex = 0
+    if (this.activeGunIndex < 0) this.activeGunIndex = this.weapons.length - 1
+    if (this.activeGunIndex >= this.weapons.length) this.activeGunIndex = 0
   }
 
   get bullets() {
@@ -135,14 +134,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this._tp = 0
       this.play(this.form === 'light' ? 'player2' : 'player')
 
+      let switchGunKey = 'lswitch'
+
       if (this.form === 'light') {
         this.scene.cameras.main.shake(400, 0.02)
-        this.guns.find((g) => g.type === 'blast').shoot()
+        switchGunKey = 'dswitch'
         this.body.setMaxSpeed(0)
         this.scene.time.delayedCall(500, () =>
           this.body.setMaxSpeed(this.moveSpeed),
         )
       }
+      this.guns
+        .find((g) => g.type === this.weapons[this.activeGunIndex][switchGunKey])
+        ?.shoot()
 
       this.scene.sound.play(
         this.form === 'light' ? 'transform2' : 'transform',

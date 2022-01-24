@@ -5,7 +5,6 @@ export class Gun {
   constructor(scene, type = 'light') {
     this.source = scene.player
     this.scene = scene
-    this.stats = GUNS[type]
     this.type = type
     this.target = this.scene.input.activePointer
 
@@ -134,6 +133,24 @@ export class Gun {
       }
 
       bullet.fire(baseAngle + finalSpread, this.stats)
+    }
+  }
+
+  get stats() {
+    const baseStats = {
+      count: 1,
+      health: 1,
+      offset: 16,
+      spread: 0,
+      lifetime: 9999,
+      damage: 1,
+      range: 200,
+      speed: 300,
+      ...GUNS[this.type],
+    }
+    return {
+      ...baseStats,
+      // count: baseStats.count + 3,
     }
   }
 }
