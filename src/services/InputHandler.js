@@ -38,9 +38,9 @@ export class InputHandler {
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.debugKeys.K)) {
-      this.scene.player.changeWeapon(1)
-    } else if (Phaser.Input.Keyboard.JustDown(this.debugKeys.L)) {
       this.scene.player.changeWeapon(-1)
+    } else if (Phaser.Input.Keyboard.JustDown(this.debugKeys.L)) {
+      this.scene.player.changeWeapon(1)
     }
 
     if (this.upKey.isDown) {

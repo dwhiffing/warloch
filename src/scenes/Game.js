@@ -20,6 +20,15 @@ export default class extends Phaser.Scene {
     Object.values(SPRITES).forEach(({ key, name }) =>
       createAnim(this, key, `${name}_Walk_`),
     )
+    this.anims.create({
+      key: 'explosion',
+      frames: this.anims.generateFrameNames('tiles', {
+        prefix: 'explosion',
+        suffix: '.png',
+        start: 0,
+        end: 3,
+      }),
+    })
 
     this.sound.stopAll()
     this.sound.play('game-music', { loop: true, volume: 0.5 })
