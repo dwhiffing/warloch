@@ -85,7 +85,10 @@ export class Gun {
         continue
       }
 
-      if (target === 'randomPosition') {
+      if (target === 'randomAngle') {
+        bullet.fire(Phaser.Math.RND.angle(), this.stats)
+        continue
+      } else if (target === 'randomPosition') {
         const { x, y } = this.circle.getRandomPoint()
         bullet.fire({ x, y }, this.stats)
         continue

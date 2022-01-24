@@ -157,15 +157,18 @@ export const GUNS = {
     bodySize: 4,
     soundRate: 1.8,
   },
-  _light: {
+  orbs: {
     damage: 1,
-    delay: 30,
-    speed: 150,
-    range: 150,
+    delay: 40,
+    speed: 40,
+    range: 350,
     frame: 'shot.png',
-    size: 2,
+    size: 7,
+    health: 10,
+    lifetime: 300,
     bodySize: 4,
     soundRate: 1.8,
+    target: 'randomAngle',
   },
   light: {
     damage: 1,
@@ -176,6 +179,29 @@ export const GUNS = {
     size: 2,
     bodySize: 4,
     soundRate: 1.8,
+  },
+  _light: {
+    damage: 1,
+    delay: 30,
+    speed: 150,
+    range: 150,
+    frame: 'shot.png',
+    size: 2,
+    bodySize: 4,
+    soundRate: 1.8,
+  },
+  bone: {
+    damage: 1,
+    delay: 40,
+    speed: 200,
+    range: 350,
+    frame: 'shot.png',
+    size: 2,
+    health: 10,
+    bodySize: 4,
+    soundRate: 1.8,
+    reacquire: true,
+    target: 'randomAngle',
   },
   tracer: {
     damage: 2,
@@ -237,10 +263,9 @@ export const UPGRADES = {
 }
 
 // gun ideas
-// chain: bounces between n valid targets
-// bone: bounces off targets
 // axe: lobs up and down the screen, attacks in large area and pierces
-// orbs that fire randomly and float around
+// rocket: explodes into blast on first impact
+// splitter: explodes into shrapnel
 // bubbler like in cave story
 
 // power ups

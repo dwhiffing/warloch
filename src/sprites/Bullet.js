@@ -67,11 +67,15 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     if (this.health <= 0) this.die()
 
     if (this.stats.reacquire) {
-      const newTarget = this.scene.enemySpawner
-        .getClosest({ x: this.x, y: this.y })
-        .filter((e) => !this.hitEnemies.includes(e))[0]
-      if (!newTarget) return this.die()
-      this.target = Phaser.Math.Angle.BetweenPoints(this, newTarget)
+      if (this.stats.target === 'nearestEnemy') {
+        const newTarget = this.scene.enemySpawner
+          .getClosest({ x: this.x, y: this.y })
+          .filter((e) => !this.hitEnemies.includes(e))[0]
+        if (!newTarget) return this.die()
+        this.target = Phaser.Math.Angle.BetweenPoints(this, newTarget)
+      } else {
+        this.target = Phaser.Math.RND.angle()
+      }
       this.moveTowardTarget()
     }
   }
