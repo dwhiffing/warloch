@@ -336,7 +336,8 @@ export const GUNS = {
     damage: 3,
     delay: 100,
     speed: 60,
-    count: 50,
+    count: 20,
+    maxCount: 20,
     range: 240,
     depth: 20,
     frame: 'shot.png',
@@ -362,13 +363,12 @@ export const GUNS = {
 }
 
 // TODO: define 3 levels for each weapon
+// idea: blast is based on unlocked weapons/levels
 export const WEAPONS = {
   one: {
     name: 'one',
     light: 'basic',
     dark: 'shotgun',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { count: ['+', 1], damage: ['+', 1] },
@@ -376,13 +376,10 @@ export const WEAPONS = {
       { count: ['+', 3], damage: ['+', 3] },
     ],
   },
-  // adds extra bullets on switch
   two: {
     name: 'two',
     light: 'bible',
     dark: 'orbs',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -390,13 +387,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // adds axes on switch
   three: {
     name: 'three',
     light: 'whip',
     dark: 'axe',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -404,13 +398,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // adds large aoe on switch
   four: {
     name: 'four',
     light: 'water',
     dark: 'garlic',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -418,13 +409,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // adds extra bullets to switch
   five: {
     name: 'five',
     light: 'wand',
     dark: 'fire',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -432,13 +420,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // explosion on switch
   six: {
     name: 'six',
     light: 'splitter',
     dark: 'rocket',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -446,13 +431,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // adds extra bullets to switch
   seven: {
     name: 'seven',
     light: 'chain',
     dark: 'bone',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -460,13 +442,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // adds boomerang to switch blast
   eight: {
     name: 'eight',
     light: 'bubbler',
     dark: 'cross',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },
@@ -474,14 +453,10 @@ export const WEAPONS = {
       { damage: ['+', 1] },
     ],
   },
-  // fireball for dark?
-  // adds fireballs on switch
   nine: {
     name: 'nine',
     light: 'tracer',
     dark: 'tracer',
-    dswitch: 'blast',
-    lswitch: null,
     levels: [
       {},
       { damage: ['+', 1] },

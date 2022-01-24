@@ -40,12 +40,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   init() {
     this.activeGunIndex = 0
     this.weapons.forEach((w) => {
-      const { light, dark, lswitch, dswitch } = w
+      const { light, dark } = w
       if (light) this.guns.push(new Gun(this.scene, light, w))
       if (dark) this.guns.push(new Gun(this.scene, dark, w))
-      if (lswitch) this.guns.push(new Gun(this.scene, lswitch, w))
-      if (dswitch) this.guns.push(new Gun(this.scene, dswitch, w))
     })
+    // TODO: blast gun needs to be based on existing guns?
+    this.guns.push(new Gun(this.scene, 'blast'))
   }
 
   update() {
@@ -183,19 +183,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this._tp = 0
       this.play(this.form === 'light' ? 'player2' : 'player')
 
-      let switchGunKey = 'lswitch'
-
       if (this.form === 'light') {
         this.scene.cameras.main.shake(400, 0.02)
-        switchGunKey = 'dswitch'
         this.body.setMaxSpeed(0)
+        this.guns.find((g) => g.type === 'blast')?.shoot()
         this.scene.time.delayedCall(500, () =>
           this.body.setMaxSpeed(this.moveSpeed),
         )
       }
-      this.guns
-        .find((g) => g.type === this.weapons[this.activeGunIndex][switchGunKey])
-        ?.shoot()
 
       this.scene.sound.play(
         this.form === 'light' ? 'transform2' : 'transform',
