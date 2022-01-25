@@ -6,18 +6,15 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
+  devServer: {
+    static: [{ directory: path.join(__dirname, './') }],
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: [/\.vert$/, /\.frag$/],
-        use: 'raw-loader',
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
@@ -26,11 +23,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin({
-      root: path.resolve(__dirname, '../'),
-    }),
-    new HtmlWebpackPlugin({
-      template: './index.html',
-    }),
+    new CleanWebpackPlugin({ root: path.resolve(__dirname, '../') }),
+    new HtmlWebpackPlugin({ template: './index.html' }),
   ],
 }
