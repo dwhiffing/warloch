@@ -49,7 +49,7 @@ export class InputHandler {
     this.onKey('N', () => (this.scene.registry.values.gameTimer += 10))
     this.onKey('M', () => this.scene.hud.toggleMute())
 
-    const speed = this.player.moveSpeed
+    const speed = this.player.moveSpeed * 2
     if (this.upKey.isDown) {
       this.player.setAccelerationY(-speed)
     } else if (this.downKey.isDown) {

@@ -37,6 +37,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
     this.play(type).setOrigin(0.5)
+    this.body.enable = true
 
     this.speed = speed
     this.damage = damage
@@ -72,6 +73,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.registry.inc('killCount')
     this.scene.registry.values.score += this.xp
     this.setVisible(false).setActive(false)
+    this.body.enable = false
     this.hpBar.die()
     this.scene.orbSpawner.spawn(this.x, this.y, this.xp)
 

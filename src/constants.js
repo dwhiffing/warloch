@@ -46,6 +46,7 @@ export const ENEMIES = {
   },
 }
 
+// TODO: need to balance guns better
 export const GUNS = {
   // things that shoot toward the pointer
   basic: {

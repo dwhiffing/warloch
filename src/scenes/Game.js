@@ -100,7 +100,7 @@ export default class extends Phaser.Scene {
   }
 
   showUpgradeMenu() {
-    this.scene.wake('Upgrade')
     this.scene.pause()
+    this.scene.wake('Upgrade')
   }
 }
