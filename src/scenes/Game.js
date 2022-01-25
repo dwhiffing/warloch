@@ -17,9 +17,7 @@ export default class extends Phaser.Scene {
   init() {
     this.input.mouse.disableContextMenu()
 
-    Object.values(SPRITES).forEach(({ key, name }) =>
-      createAnim(this, key, `${name}_Walk_`),
-    )
+    SPRITES.forEach(({ key, name }) => createAnim(this, key, `${name}_Walk_`))
     this.anims.create({
       key: 'explosion',
       frames: this.anims.generateFrameNames('tiles', {
@@ -32,6 +30,13 @@ export default class extends Phaser.Scene {
 
     this.sound.stopAll()
     this.sound.play('game-music', { loop: true, volume: 0.5 })
+  }
+
+  create() {
+    this.registry.events.removeAllListeners()
+    this.game.events.removeAllListeners()
+    this.time.removeAllEvents()
+    this.registry.reset()
 
     this.game.events.addListener(Phaser.Core.Events.BLUR, () => {
       this.scene.pause()
@@ -39,9 +44,11 @@ export default class extends Phaser.Scene {
     this.game.events.addListener(Phaser.Core.Events.FOCUS, () => {
       this.scene.resume()
     })
-  }
 
-  create() {
+    this.registry.set('gameTimer', 0)
+    this.registry.set('score', 0)
+    this.registry.set('killCount', 0)
+
     this.physics.world.setBounds(0, 0, WIDTH, HEIGHT)
     this.cameras.main.setBounds(0, 0, WIDTH, HEIGHT)
     this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0)

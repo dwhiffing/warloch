@@ -13,15 +13,18 @@ export class OrbSpawner {
       runChildUpdate: true,
     })
     this.orbs.createMultiple({ quantity: ORB_MAX, active: false })
+
+    this.scene.registry.events.on('changedata-pickupRange', () => {
+      this.orbs
+        .getChildren()
+        .filter((o) => o.active)
+        .forEach((o) => o.resize())
+    })
   }
 
   spawn = (x, y, value) => {
     const orb = this.orbs.get()
     orb.spawn(x, y, value)
-    this.orbs
-      .getChildren()
-      .filter((o) => o.active)
-      .forEach((o) => o.resize())
   }
 
   update() {}

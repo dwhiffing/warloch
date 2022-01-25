@@ -46,23 +46,22 @@ export class InputHandler {
 
     this.onKey('V', () => (this.player.xp += this.player.nextXP))
     this.onKey('B', () => (this.player.tp += 100))
-    this.onKey('N', () => {
-      for (let i = 0; i < 10; i++) this.scene.enemySpawner.spawn()
-    })
+    this.onKey('N', () => (this.scene.registry.values.gameTimer += 10))
     this.onKey('M', () => this.scene.hud.toggleMute())
 
+    const speed = this.player.moveSpeed
     if (this.upKey.isDown) {
-      this.player.setVelocityY(-this.player.moveSpeed)
+      this.player.setAccelerationY(-speed)
     } else if (this.downKey.isDown) {
-      this.player.setVelocityY(this.player.moveSpeed)
+      this.player.setAccelerationY(speed)
     }
 
     if (this.leftKey.isDown) {
-      this.player.setVelocityX(-this.player.moveSpeed)
+      this.player.setAccelerationX(-speed)
       this.player.setFlipX(true)
     } else if (this.rightKey.isDown) {
       this.player.setFlipX(false)
-      this.player.setVelocityX(this.player.moveSpeed)
+      this.player.setAccelerationX(speed)
     }
   }
 }

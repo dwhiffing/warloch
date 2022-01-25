@@ -1,4 +1,4 @@
-import { WEAPONS, SPRITES, UPGRADES } from '../constants'
+import { WEAPONS, UPGRADES } from '../constants'
 import { Gun } from '../services/Gun'
 import { applyUpgrade } from '../utils'
 
@@ -17,6 +17,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.form = 'light'
     this.movePenalty = 1
     this.setDepth(70)
+
     this.weapons = Object.values(WEAPONS).map((w) => ({
       ...w,
       get level() {
@@ -27,12 +28,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.body.setMaxSpeed(this.moveSpeed)
 
-    const { bodySize, bodyOffset } = SPRITES.player
     this.play('player')
       .setCollideWorldBounds(true)
       .setOrigin(0.5)
-      .setBodySize(...bodySize)
-      .setOffset(...bodyOffset)
+      .setBodySize(8, 8)
+      .setMass(1)
+      .setOffset(12, 22)
 
     this.guns = []
   }
@@ -49,11 +50,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    this.setVelocity(0)
+    this.setAcceleration(0)
+    this.setDrag(100)
     this.tp += 0.05
 
     if (this.movePenalty < 1) {
-      this.movePenalty += 0.02
+      this.movePenalty += 0.01
     }
 
     this.hp += this.regen
@@ -104,14 +106,16 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   set hp(val) {
-    if (this._hp > val && this._hp <= this.maxHP) {
-      this.scene.cameras.main.shake(200, 0.01)
-      this.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
-      this.scene.time.delayedCall(100, this.clearTint.bind(this))
-      this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
-        volume: 0.3,
-      })
+    if (this._hp > val) {
       this.movePenalty = 0.5
+      if (this._hp <= this.maxHP) {
+        this.scene.cameras.main.shake(200, 0.01)
+        this.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
+        this.scene.time.delayedCall(100, this.clearTint.bind(this))
+        this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
+          volume: 0.3,
+        })
+      }
     }
     this._hp = val
     this.scene.hud?.set('hp', this._hp, this.maxHP)
@@ -155,7 +159,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get nextXP() {
-    return this.prevXp + 100 * Math.pow(1 + 0.2, this.level - 1)
+    return this.prevXp + 100 * Math.pow(1.4, this.level - 1) - 50
   }
 
   get level() {
@@ -165,7 +169,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   set level(value) {
     this.scene.registry.set('level', value)
     this.prevXp = this.xp
-    this.scene.hud?.set('xp', this.xp - this.prevXp, this.nextXP - this.prevXp)
+    this.scene.hud?.set('xp', this.xp, this.nextXP)
     if (value !== 1) {
       this.scene.sound.play('level', { volume: 0.1 })
       this.scene.showUpgradeMenu()

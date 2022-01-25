@@ -17,8 +17,40 @@ export class Hud {
     this.tpBar = new Bar(this.scene, o, o + 10, w, 4, 0xffff00, false)
     this.tpBar.set(player.tp, player.maxTP)
 
+    this.killText = this.scene.add
+      .text(20, 40, '0', { font: '12px Roboto Mono' })
+      .setScrollFactor(0)
+      .setDepth(99)
+
+    this.scoreText = this.scene.add
+      .text(w + 20, 40, '0', { font: '12px Roboto Mono' })
+      .setScrollFactor(0)
+      .setDepth(99)
+      .setOrigin(1, 0)
+
+    this.timeText = this.scene.add
+      .text((w + 40) / 2, 40, '0:00', { font: '12px Roboto Mono' })
+      .setScrollFactor(0)
+      .setDepth(99)
+      .setOrigin(0.5, 0)
+
     const frame =
       localStorage.getItem('ggj-mute') === '1' ? 'mute.png' : 'unmute.png'
+
+    this.scene.registry.events.on('changedata-gameTimer', (_, current) => {
+      this.timeText.text = `${Math.floor(current / 60)}:${(current % 60)
+        .toString()
+        .padStart(2, '0')}`
+    })
+
+    this.scene.registry.events.on('changedata-killCount', (_, current) => {
+      this.killText.text = current
+    })
+
+    this.scene.registry.events.on('changedata-score', (_, current) => {
+      this.scoreText.text = current
+    })
+
     this.muteButton = this.scene.add
       .sprite(w + 20, h + 20, 'tiles', frame)
       .setScrollFactor(0)

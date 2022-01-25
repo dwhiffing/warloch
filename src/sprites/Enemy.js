@@ -1,4 +1,3 @@
-import { SPRITES } from '../constants'
 import { Bar } from '../services/Bar'
 
 export class Enemy extends Phaser.Physics.Arcade.Sprite {
@@ -7,6 +6,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enableBody(this, 0)
 
     this.hpBar = new Bar(scene, this.x, this.y, 15, 2, 0xff0000)
+    this.setMass(100)
   }
 
   update() {
@@ -19,11 +19,20 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.updateTimer = 20
     const { x, y } = this.scene.player
-    this.scene.physics.moveTo(this, x, y, this.speed)
+    const dist = Phaser.Math.Distance.BetweenPoints(this, this.scene.player)
+    const angle = Phaser.Math.Angle.Wrap(
+      Phaser.Math.Angle.BetweenPoints(this, this.scene.player) + Math.PI / 2,
+    )
+    this.setFlipX(angle < 0)
+    if (dist > 20) {
+      this.scene.physics.moveTo(this, x, y, this.speed)
+    } else {
+      this.setVelocity(0)
+    }
   }
 
-  spawn(x, y, type = 'knight') {
-    const { bodySize, bodyOffset, hp, speed, xp, damage } = SPRITES[type]
+  spawn(x, y, stats) {
+    const { bodySize, bodyOffset, hp, speed, xp, damage, type } = stats
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
@@ -60,6 +69,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   die() {
+    this.scene.registry.inc('killCount')
+    this.scene.registry.values.score += this.xp
     this.setVisible(false).setActive(false)
     this.hpBar.die()
     this.scene.orbSpawner.spawn(this.x, this.y, this.xp)

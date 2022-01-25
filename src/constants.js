@@ -1,8 +1,15 @@
-export const SPRITES = {
+export const SPRITES = [
+  { name: 'Knight', key: 'knight' },
+  { name: 'EliteKnight', key: 'eliteKnight' },
+  { name: 'LargeKnight', key: 'largeKnight' },
+  { name: 'LargeEliteKnight', key: 'largeEliteKnight' },
+  { name: 'Executioner', key: 'player2' },
+  { name: 'Mage', key: 'player' },
+]
+
+export const ENEMIES = {
   knight: {
-    type: 'enemy',
-    name: 'Knight',
-    key: 'knight',
+    type: 'knight',
     bodySize: [8, 16],
     bodyOffset: [12, 14],
     speed: 30,
@@ -11,9 +18,7 @@ export const SPRITES = {
     xp: 5,
   },
   eliteKnight: {
-    type: 'enemy',
-    name: 'EliteKnight',
-    key: 'eliteKnight',
+    type: 'eliteKnight',
     bodySize: [8, 16],
     bodyOffset: [8, 14],
     speed: 20,
@@ -21,10 +26,8 @@ export const SPRITES = {
     damage: 1,
     xp: 10,
   },
-  largeEliteKnight: {
-    type: 'enemy',
-    name: 'LargeEliteKnight',
-    key: 'largeEliteKnight',
+  largeKnight: {
+    type: 'largeKnight',
     bodySize: [18, 18],
     bodyOffset: [6, 10],
     speed: 10,
@@ -32,23 +35,14 @@ export const SPRITES = {
     damage: 1,
     xp: 20,
   },
-  player2: {
-    type: 'player',
-    name: 'Executioner',
-    key: 'player2',
+  largeEliteKnight: {
+    type: 'largeEliteKnight',
     bodySize: [18, 18],
     bodyOffset: [6, 10],
     speed: 10,
     hp: 100,
-  },
-  player: {
-    type: 'player',
-    name: 'Mage',
-    key: 'player',
-    bodySize: [8, 8],
-    bodyOffset: [12, 22],
-    speed: 80,
-    hp: 100,
+    damage: 1,
+    xp: 20,
   },
 }
 
@@ -68,12 +62,12 @@ export const GUNS = {
   },
   shotgun: {
     name: 'shotgun',
-    damage: 0.66,
+    damage: 1,
     delay: 80,
     offset: 10,
     speed: 140,
     count: 5,
-    range: 30,
+    range: 40,
     health: 3,
     depth: 20,
     frame: 'shot-shotgun.png',
@@ -722,7 +716,3 @@ export const PURCHASES = {
   //   description: 'More luck',
   // },
 }
-
-// bosses appear every n minutes
-// kill bosses to get new weapons
-// level up to get weapon upgrades
