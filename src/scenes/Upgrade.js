@@ -92,7 +92,14 @@ export default class Upgrade extends Phaser.Scene {
       })
       .filter((p) => p.level < p.maxLevel)
 
-    const purchases = Phaser.Math.RND.shuffle(possiblePurchases).slice(0, 4)
+    const purchases = [
+      ...Phaser.Math.RND.shuffle(
+        possiblePurchases.filter((p) => p.type === 'weapon'),
+      ).slice(0, 1),
+      ...Phaser.Math.RND.shuffle(
+        possiblePurchases.filter((p) => p.type === 'upgrade'),
+      ).slice(0, 2),
+    ]
     this.buttons.forEach((b, i) => {
       const purchase = purchases[i]
       if (!purchase) return

@@ -9,7 +9,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this._maxHP = 100
     this._xpRate = 1
-    this._pickupRange = 20
+    this._pickupRange = 15
     this.hp = this.maxHP
     this.xp = 0
     this.tp = 0
@@ -155,11 +155,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       rate: 1 + this._xp / this.nextXP || 0,
       volume: 0.4,
     })
-    this.scene.hud?.set('xp', this._xp - this.prevXp)
+    this.scene.hud?.set('xp', this.xp - this.prevXP)
   }
 
   get nextXP() {
-    return this.prevXp + 100 * Math.pow(1.4, this.level - 1) - 50
+    return this.prevXP + 400 * Math.pow(1.5, this.level - 1) - 350
   }
 
   get level() {
@@ -168,8 +168,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   set level(value) {
     this.scene.registry.set('level', value)
-    this.prevXp = this.xp
-    this.scene.hud?.set('xp', this.xp, this.nextXP)
+    this.prevXP = this.xp
+    this.scene.hud?.set('xp', this.xp - this.prevXP, this.nextXP - this.prevXP)
     if (value !== 1) {
       this.scene.sound.play('level', { volume: 0.1 })
       this.scene.showUpgradeMenu()

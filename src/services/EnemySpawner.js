@@ -21,10 +21,10 @@ export class EnemySpawner {
 
     this.enemies = scene.physics.add.group({
       classType: Enemy,
-      maxSize: 200,
+      maxSize: 300,
       runChildUpdate: true,
     })
-    this.enemies.createMultiple({ quantity: 200, active: false })
+    this.enemies.createMultiple({ quantity: 300, active: false })
 
     this.scene.time.addEvent({
       callback: () => this.tick(),
@@ -32,7 +32,7 @@ export class EnemySpawner {
       delay: 1000,
     })
 
-    this.spawn(10)
+    this.spawn(5)
   }
 
   getClosest = (point) =>
@@ -47,6 +47,7 @@ export class EnemySpawner {
 
   spawn = (count = 1) => {
     for (let i = 0; i < count; i++) {
+      console.log('spawn')
       const angle = Phaser.Math.RND.angle()
       const vel = this.physics.velocityFromAngle(angle, SPAWN_DISTANCE)
       const x = this.target.x + vel.x
@@ -73,23 +74,23 @@ export class EnemySpawner {
   }
 
   getSpawnTimer() {
-    return [3, 3, 2, 2, 1, 1][this.getLevel()]
+    return [3, 3, 3, 2, 2, 1][this.getLevel()]
   }
 
   getSpeedMultiplier() {
-    return [1, 1.1, 1.2, 1.3, 1.4, 1.5][this.getLevel()]
+    return [1, 1, 1.1, 1.2, 1.3, 1.4][this.getLevel()]
   }
 
   getDamageMultiplier() {
-    return [1, 1.5, 2, 2.5, 3, 3.5][this.getLevel()]
+    return [1, 1, 1.5, 2, 2.5, 3][this.getLevel()]
   }
 
   getHPMultiplier() {
-    return [1, 1.5, 2, 2.5, 3, 3.5][this.getLevel()]
+    return [1, 1, 1.5, 2, 3, 4][this.getLevel()]
   }
 
   getXPMultiplier() {
-    return [1, 1.5, 2, 2.5, 3, 3.5][this.getLevel()]
+    return [1, 1, 1, 1, 1, 1][this.getLevel()]
   }
 
   getSpawnTypes() {
@@ -105,20 +106,20 @@ export class EnemySpawner {
 
   getSpawnCount() {
     return [
-      [1, 2],
-      [2, 4],
-      [4, 8],
-      [8, 16],
-      [16, 32],
-      [32, 64],
+      [3, 6],
+      [5, 8],
+      [7, 12],
+      [10, 18],
+      [20, 30],
+      [26, 42],
     ][this.getLevel()]
   }
 
   getLevel() {
     const timer = this.scene.registry.get('gameTimer')
-    // 0-30 seconds
-    if (timer < 30) return 0
-    // .5-2 minutes
+    // 0-60 seconds
+    if (timer < 60) return 0
+    // 1-2 minutes
     else if (timer < 120) return 1
     // 2-5 minutes
     else if (timer < 300) return 2

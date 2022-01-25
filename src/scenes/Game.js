@@ -39,10 +39,16 @@ export default class extends Phaser.Scene {
     this.registry.reset()
 
     this.game.events.addListener(Phaser.Core.Events.BLUR, () => {
-      this.scene.pause()
+      if (!this.scene.isPaused()) {
+        this.shouldUnpause = true
+        this.scene.pause()
+      }
     })
     this.game.events.addListener(Phaser.Core.Events.FOCUS, () => {
-      this.scene.resume()
+      if (this.shouldUnpause) {
+        this.shouldUnpause = false
+        this.scene.resume()
+      }
     })
 
     this.registry.set('gameTimer', 0)
