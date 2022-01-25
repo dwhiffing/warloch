@@ -6,7 +6,6 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enableBody(this, 0)
 
     this.hpBar = new Bar(scene, this.x, this.y, 15, 2, 0xff0000)
-    this.setMass(100)
   }
 
   update() {
@@ -45,6 +44,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimer = 0
     this.hitTimerMax = 80
     this.xp = xp
+    this.setMass(stats.mass)
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)
   }

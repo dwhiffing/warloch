@@ -32,7 +32,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       .setCollideWorldBounds(true)
       .setOrigin(0.5)
       .setBodySize(8, 8)
-      .setMass(1)
+      .setMass(5)
       .setOffset(12, 22)
 
     this.guns = []
