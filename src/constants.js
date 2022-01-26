@@ -60,7 +60,6 @@ export const ENEMIES = {
   },
 }
 
-// TODO: need to balance guns better
 export const GUNS = {
   // things that shoot toward the pointer
   basic: {
@@ -380,7 +379,6 @@ export const GUNS = {
   },
 }
 
-// TODO: define 3 levels for each weapon
 // idea: blast is based on unlocked weapons/levels
 export const WEAPONS = {
   one: {

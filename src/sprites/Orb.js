@@ -1,4 +1,3 @@
-// TODO: different colors for higher amounts
 export class Orb extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'tiles', 'shot.png')

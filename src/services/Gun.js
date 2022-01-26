@@ -172,6 +172,10 @@ export class Gun {
       damage: resolve('damage'),
     }
 
+    if (this.scene.player.adrenaline) {
+      stats.delay *= 0.25
+    }
+
     Object.values(UPGRADES).forEach((upgrade) => {
       const boost = upgrade.levels[reg(upgrade.key) - 1]
       if (boost) Object.entries(boost).forEach((u) => applyUpgrade(u, stats))

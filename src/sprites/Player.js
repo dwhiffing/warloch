@@ -45,7 +45,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       if (light) this.guns.push(new Gun(this.scene, light, w))
       if (dark) this.guns.push(new Gun(this.scene, dark, w))
     })
-    // TODO: blast gun needs to be based on existing guns?
     this.guns.push(new Gun(this.scene, 'blast'))
   }
 
@@ -129,6 +128,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.play(this.form === 'light' ? 'player2' : 'player')
 
+    // if turning dark
     if (this.form === 'light') {
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
@@ -136,6 +136,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.scene.time.delayedCall(500, () =>
         this.body.setMaxSpeed(this.moveSpeed),
       )
+    } else {
+      this.adrenaline = true
+      this.setTint(0xff0000)
+      this.scene.time.delayedCall(5000, () => {
+        this.clearTint()
+        this.adrenaline = false
+      })
     }
 
     this.scene.sound.play(this.form === 'light' ? 'transform2' : 'transform', {
