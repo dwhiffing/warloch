@@ -3,7 +3,6 @@ tp should go up when getting kills as human
 tp should go up when getting hit as beast
 human should get fire rate boost for short time after transform
 beast burst should be weaker
-leveling up should refill health
 allow triggering transform manually in a window, automatically triggers after a few seconds
 make human weapons more ordered, beast weapons more chaotic
 bug where shotgun doesn't aim at pointer

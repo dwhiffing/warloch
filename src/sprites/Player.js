@@ -171,6 +171,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.prevXP = this.xp
     this.scene.hud?.set('xp', this.xp - this.prevXP, this.nextXP - this.prevXP)
     if (value !== 1) {
+      this.hp = this.maxHP
       this.scene.sound.play('level', { volume: 0.1 })
       this.scene.showUpgradeMenu()
     }
