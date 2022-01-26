@@ -28,6 +28,10 @@ export class Bar {
     this.inner.setActive(true).setVisible(true)
     this.outer.setActive(true).setVisible(true)
     this.value = Math.max(value, 0)
+    if (this.hideWhenFull && value === maxValue) {
+      this.inner.setVisible(false)
+      this.outer.setVisible(false)
+    }
     if (typeof maxValue === 'number') this.maxValue = maxValue
     this.update()
   }
