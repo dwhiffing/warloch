@@ -66,8 +66,13 @@ export class EnemySpawner {
       )
 
   spawn = (count = 1) => {
+    let angles = []
+    while (angles.length < count) {
+      angles.push(Phaser.Math.RND.angle())
+      angles = Array.from(new Set(angles))
+    }
     for (let i = 0; i < count; i++) {
-      const angle = Phaser.Math.RND.angle()
+      const angle = angles[i]
       const vel = this.physics.velocityFromAngle(angle, SPAWN_DISTANCE)
       const x = this.target.x + vel.x
       const y = this.target.y + vel.y
