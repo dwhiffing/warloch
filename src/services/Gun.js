@@ -57,7 +57,10 @@ export class Gun {
       volume: 0.1,
     })
 
-    const { target, count: c = 1 } = this.stats
+    let { x: px, y: py } = this.source
+    py += 5
+
+    let { target, count = 1, spread } = this.stats
     const getDist = Phaser.Math.Distance.Between
     const getAngle = Phaser.Math.Angle.Between
 
@@ -69,21 +72,28 @@ export class Gun {
       duration: Math.max(10000 - this.stats.speed * 40, 1500),
     })
 
-    for (let i = 0; i < c; i++) {
+    const nearbyEnemies = this.scene.enemySpawner.enemies
+      .getChildren()
+      .filter((e) => e.active)
+      .filter((e) => getDist(px, py, e.x, e.y) < this.stats.range)
+      .sort((a, b) => getDist(px, py, a.x, a.y) - getDist(px, py, b.x, b.y))
+
+    const shuffledEnemies = Phaser.Math.RND.shuffle(nearbyEnemies)
+
+    for (let i = 0; i < count; i++) {
       let bullet = this.bullets.get()
       if (!bullet) continue
 
       bullet.gun = this
       bullet.index = i
       bullet.setFlipX(false)
-      let s = this.stats.spread
-      if (this.stats.count > 1 && s < 0.2) {
-        s = 0.2 * this.stats.count
+      if (this.stats.count > 1 && spread < 0.2 && !this.stats.counterSpread) {
+        spread = 0.2 * this.stats.count
       }
 
       const finalSpread = this.stats.randomAngle
         ? Phaser.Math.RND.realInRange(-this.stats.spread, this.stats.spread)
-        : (c / 2 - (c - i) + 0.5) * (s / c)
+        : (count / 2 - (count - i) + 0.5) * (spread / count)
 
       // handle guns that just shoot toward the cursor
       if (!target) {
@@ -91,16 +101,14 @@ export class Gun {
           getAngle(width / 2, height / 2, x, y) + finalSpread,
           this.stats,
         )
+
         continue
       }
-
-      let { x: px, y: py } = this.source
-      py += 5
 
       // handle guns that orbit around the player
       if (target === 'orbit') {
         const { x, y } = this.circle.getPoint(
-          (this.circle.tween + i * (1 / c)) % 1,
+          (this.circle.tween + i * (1 / count)) % 1,
         )
         bullet.fire({ x, y }, this.stats)
         continue
@@ -124,20 +132,12 @@ export class Gun {
 
       // handle guns that target an in range enemy
       if (target === 'nearestEnemy' || target === 'randomEnemy') {
-        const enemies = this.scene.enemySpawner.enemies
-          .getChildren()
-          .filter((e) => e.active)
-          .filter((e) => getDist(px, py, e.x, e.y) < this.stats.range)
-          .sort((a, b) => getDist(px, py, a.x, a.y) - getDist(px, py, b.x, b.y))
-
-        if (target === 'nearestEnemy') {
-          if (!enemies[0]) return
-          baseAngle = getAngle(px, py, enemies[0].x, enemies[0].y)
-        } else if (target === 'randomEnemy') {
-          let enemy = Phaser.Math.RND.pick(enemies)
-          if (!enemy) return
-          baseAngle = getAngle(px, py, enemy.x, enemy.y)
-        }
+        finalSpread = 0
+        const _i = i % nearbyEnemies.length
+        const enemy =
+          target === 'nearestEnemy' ? nearbyEnemies[_i] : shuffledEnemies[_i]
+        if (!enemy) return
+        baseAngle = getAngle(px, py, enemy.x, enemy.y)
       }
 
       bullet.fire(baseAngle + finalSpread, this.stats)
