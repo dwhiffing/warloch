@@ -50,7 +50,7 @@ export class InputHandler {
       'B',
       () => (this.player.tp += this.player.form === 'light' ? 100 : -100),
     )
-    this.onKey('N', () => (this.scene.registry.values.gameTimer += 30))
+    this.onKey('N', () => (this.scene.registry.values.gameTimer += 60))
     this.onKey('M', () => this.scene.hud.toggleMute())
 
     const speed = this.player.moveSpeed * 1.5
