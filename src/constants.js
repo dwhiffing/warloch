@@ -688,12 +688,12 @@ export const PURCHASES = {
     type: 'upgrade',
     description: 'Attacks go further before vanishing',
   },
-  bulletSpeed: {
-    name: 'Bullet Speed',
-    key: 'bulletSpeed',
-    type: 'upgrade',
-    description: 'Attacks move faster',
-  },
+  // bulletSpeed: {
+  //   name: 'Bullet Speed',
+  //   key: 'bulletSpeed',
+  //   type: 'upgrade',
+  //   description: 'Attacks move faster',
+  // },
   bulletSize: {
     name: 'Bullet Size',
     key: 'bulletSize',
