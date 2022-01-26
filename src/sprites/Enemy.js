@@ -12,7 +12,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.active) return
 
     if (this.hitTimer > 0) this.hitTimer--
-    this.hpBar.move(this.x, this.y)
+    this.hpBar.move(this.x, this.y + 32 - this.body.height)
 
     if (this.updateTimer-- > 0) return
 
@@ -35,7 +35,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
-    this.play(type).setOrigin(0.5).setDepth(2)
+    this.play(type).setOrigin(0.5, 0).setDepth(2)
     this.body.enable = true
 
     this.speed = speed

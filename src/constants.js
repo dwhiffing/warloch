@@ -20,8 +20,8 @@ export const ENEMIES = {
   },
   eliteKnight: {
     type: 'eliteKnight',
-    bodySize: [8, 16],
-    bodyOffset: [8, 14],
+    bodySize: [12, 19],
+    bodyOffset: [10, 12],
     speed: 20,
     hp: 20,
     damage: 1,
@@ -30,8 +30,8 @@ export const ENEMIES = {
   },
   largeKnight: {
     type: 'largeKnight',
-    bodySize: [18, 18],
-    bodyOffset: [8, 14],
+    bodySize: [24, 28],
+    bodyOffset: [4, 4],
     speed: 10,
     hp: 50,
     damage: 1,
@@ -40,8 +40,8 @@ export const ENEMIES = {
   },
   goblin: {
     type: 'goblin',
-    bodySize: [18, 18],
-    bodyOffset: [8, 14],
+    bodySize: [24, 28],
+    bodyOffset: [4, 4],
     speed: 10,
     hp: 50,
     damage: 1,
@@ -50,8 +50,8 @@ export const ENEMIES = {
   },
   largeEliteKnight: {
     type: 'largeEliteKnight',
-    bodySize: [18, 18],
-    bodyOffset: [6, 10],
+    bodySize: [24, 28],
+    bodyOffset: [4, 4],
     speed: 10,
     hp: 100,
     damage: 1,

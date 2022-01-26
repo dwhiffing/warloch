@@ -148,7 +148,7 @@ export class Gun {
     let stats = {
       count: 1,
       health: 1,
-      offset: 16,
+      offset: 10,
       spread: 0,
       lifetime: 9999,
       damage: 1,
