@@ -24,7 +24,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     )
     this.setFlipX(angle < 0)
     if (dist > 20) {
-      this.scene.physics.moveTo(this, x, y, this.speed)
+      this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
     } else {
       this.setVelocity(0)
     }
@@ -35,7 +35,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
-    this.play(type).setOrigin(0.5)
+    this.play(type).setOrigin(0.5).setDepth(2)
     this.body.enable = true
 
     this.speed = speed
@@ -44,6 +44,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimer = 0
     this.hitTimerMax = 80
     this.xp = xp
+    this.movePenalty = 1
     this.setMass(stats.mass)
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)
@@ -64,7 +65,17 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       volume: 0.1,
       rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
     })
-    this.flash()
+
+    if (bullet.stats.poison) {
+      this.setTint(0x00ff00)
+      this.movePenalty = 0.5
+      this.scene.time.delayedCall(bullet.stats.poison, () => {
+        this.clearTint()
+        this.movePenalty = 1
+      })
+    } else {
+      this.flash()
+    }
 
     if (this.hp <= 0) this.die()
   }
