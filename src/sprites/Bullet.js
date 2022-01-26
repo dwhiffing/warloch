@@ -124,6 +124,6 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       this.x,
       this.y,
     )
-    if (dist >= this.range) this.die(true)
+    if (dist >= this.range) this.die(!this.gun.stats.explode)
   }
 }
