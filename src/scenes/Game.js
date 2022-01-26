@@ -19,6 +19,11 @@ export default class extends Phaser.Scene {
 
     SPRITES.forEach(({ key, name }) => createAnim(this, key, `${name}_Walk_`))
     this.anims.create({
+      key: 'goblin',
+      frames: [{ key: 'tiles', frame: 'goblin.png' }],
+      repeat: -1,
+    })
+    this.anims.create({
       key: 'explosion',
       frames: this.anims.generateFrameNames('tiles', {
         prefix: 'explosion',

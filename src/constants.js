@@ -38,6 +38,16 @@ export const ENEMIES = {
     xp: 20,
     mass: 10,
   },
+  goblin: {
+    type: 'goblin',
+    bodySize: [18, 18],
+    bodyOffset: [8, 14],
+    speed: 10,
+    hp: 50,
+    damage: 1,
+    xp: 20,
+    mass: 10,
+  },
   largeEliteKnight: {
     type: 'largeEliteKnight',
     bodySize: [18, 18],
