@@ -26,12 +26,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setFlipX(angle < 0)
     this.updateTimer = RND.between(30, 60)
 
-    if (dist > 20) {
-      const { x, y } = this.target
-      this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
-    } else {
-      this.setVelocity(0)
-    }
+    const { x, y } = this.target
+    this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
   }
 
   spawn(x, y, stats) {

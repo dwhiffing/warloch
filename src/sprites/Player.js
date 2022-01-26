@@ -98,10 +98,34 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.form === 'dark') this.tp -= 2
   }
 
-  transform() {
-    if (this.form === 'light' ? this._tp < this.maxTP : this._tp > 0) {
-      return
-    }
+  startTransforming(duration = 3) {
+    let i = 0
+    this.transforming = true
+    this.transformDelay = this.scene.time.delayedCall(3000, this.transform)
+    const callsPerSecond = 20
+
+    this.transformFlash = this.scene.time.addEvent({
+      delay: 1000 / callsPerSecond,
+      repeat: callsPerSecond * duration,
+      callback: () => {
+        // increases frequency of flashing as time passes
+        if (i++ % (6 - Math.floor(i / callsPerSecond) * 2) !== 0) return
+        if (!this.tintFill) {
+          this.setTintFill(0xffffff)
+        } else {
+          this.clearTint()
+        }
+      },
+    })
+  }
+
+  transform = () => {
+    if (this.form === 'light' ? this._tp < this.maxTP : this._tp > 0) return
+
+    if (this.transformDelay) this.transformDelay.remove()
+    if (this.transformFlash) this.transformFlash.remove()
+    this.clearTint()
+    this.transforming = false
 
     this.play(this.form === 'light' ? 'player2' : 'player')
 
@@ -224,11 +248,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   set tp(val) {
+    if (this.transforming) return
+
     this._tp = val
     if (this._tp > 100) this._tp = 100
     if (this._tp < 0) this._tp = 0
 
     this.scene.hud?.set('tp', this._tp)
+
+    if (
+      (this._tp === 100 && this.form === 'light') ||
+      (this._tp === 0 && this.form === 'dark')
+    ) {
+      this.startTransforming()
+    }
   }
 
   get maxTP() {
