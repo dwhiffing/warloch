@@ -15,16 +15,19 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (this.hitTimer > 0) this.hitTimer--
     this.hpBar.move(this.x, this.y + 16 - this.body.height)
 
+    const { Distance, Angle, RND } = Phaser.Math
+    const dist = Distance.BetweenPoints(this, this.target)
+    this.setPushable(dist > 20)
+
     if (this.updateTimer-- > 0) return
 
-    this.updateTimer = 20
-    const { x, y } = this.scene.player
-    const dist = Phaser.Math.Distance.BetweenPoints(this, this.scene.player)
-    const angle = Phaser.Math.Angle.Wrap(
-      Phaser.Math.Angle.BetweenPoints(this, this.scene.player) + Math.PI / 2,
-    )
+    const offset = Math.PI / 2
+    const angle = Angle.Wrap(Angle.BetweenPoints(this, this.target) + offset)
     this.setFlipX(angle < 0)
+    this.updateTimer = RND.between(30, 60)
+
     if (dist > 20) {
+      const { x, y } = this.target
       this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
     } else {
       this.setVelocity(0)
@@ -46,6 +49,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimerMax = 80
     this.xp = xp
     this.movePenalty = 1
+    this.target = this.scene.player
     this.setMass(stats.mass)
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)

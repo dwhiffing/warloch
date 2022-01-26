@@ -53,10 +53,14 @@ export class InputHandler {
     this.onKey('M', () => this.scene.hud.toggleMute())
 
     const speed = this.player.moveSpeed * 1.5
+    this.player.setPushable(true)
+
     if (this.upKey.isDown) {
       this.player.setAccelerationY(-speed)
     } else if (this.downKey.isDown) {
       this.player.setAccelerationY(speed)
+    } else {
+      this.player.setPushable(false)
     }
 
     if (this.leftKey.isDown) {
@@ -65,6 +69,8 @@ export class InputHandler {
     } else if (this.rightKey.isDown) {
       this.player.setFlipX(false)
       this.player.setAccelerationX(speed)
+    } else {
+      this.player.setPushable(false)
     }
   }
 }

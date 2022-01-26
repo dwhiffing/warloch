@@ -1,8 +1,24 @@
-work on enemy/weapon balance
+allow triggering transform manually in a window, automatically triggers after a few seconds
 tp should go up when getting kills as human
 tp should go up when getting hit as beast
+
 human should get fire rate boost for short time after transform
-beast burst should be weaker
-allow triggering transform manually in a window, automatically triggers after a few seconds
-make human weapons more ordered, beast weapons more chaotic
+beast burst should be based on currently unlocked weapons
+
+work on enemy/weapon balance
+  make human weapons more ordered, beast weapons more chaotic
 bug where shotgun doesn't aim at pointer
+
+bullet trails
+add saves
+add high score table
+polish menu
+add instructions
+polish audio (probably fewer bullet impact sounds)
+mobile controls
+
+add dodge roll?
+add bosses after certain amount of kills/time?
+flying enemies?
+ranged enemies?
+dropped powerups?
