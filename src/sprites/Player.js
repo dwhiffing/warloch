@@ -92,6 +92,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   transform() {
+    if (this.form === 'light' ? this._tp < this.maxTP : this._tp > 0) {
+      return
+    }
+
     this.play(this.form === 'light' ? 'player2' : 'player')
 
     if (this.form === 'light') {
@@ -213,9 +217,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this._tp = val
     if (this._tp > 100) this._tp = 100
     if (this._tp < 0) this._tp = 0
-    if (this.form === 'light' ? this._tp >= this.maxTP : this._tp <= 0) {
-      this.transform()
-    }
+
     this.scene.hud?.set('tp', this._tp)
   }
 

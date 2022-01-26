@@ -1,6 +1,6 @@
 export class InputHandler {
   constructor(scene) {
-    const { W, A, S, D } = Phaser.Input.Keyboard.KeyCodes
+    const { W, A, S, D, SPACE } = Phaser.Input.Keyboard.KeyCodes
     this.scene = scene
     this.input = scene.input
     this.player = scene.player
@@ -8,6 +8,7 @@ export class InputHandler {
     this.leftKey = this.input.keyboard.addKey(A)
     this.downKey = this.input.keyboard.addKey(S)
     this.rightKey = this.input.keyboard.addKey(D)
+    this.spaceKey = this.input.keyboard.addKey(SPACE)
 
     this.debugKeys = this.input.keyboard.addKeys(
       'R,T,Y,U,I,O,P,F,G,H,J,K,L,M,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE',
@@ -54,6 +55,10 @@ export class InputHandler {
 
     const speed = this.player.moveSpeed * 1.5
     this.player.setPushable(true)
+
+    if (this.spaceKey.isDown) {
+      this.player.transform()
+    }
 
     if (this.upKey.isDown) {
       this.player.setAccelerationY(-speed)
