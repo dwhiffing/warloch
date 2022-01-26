@@ -94,7 +94,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   hit(damage) {
     if (this.form === 'dark') damage *= 0.25
     this.hp -= damage
-    if (this.form === 'dark') this.tp -= 2
+    if (this.form === 'dark') this.tp -= 3
   }
 
   startTransforming(duration = 3) {
@@ -132,7 +132,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.form === 'light') {
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
+
+      // TODO: need to make the blast gun stats based on all player unlocked guns
+      // or maybe instead, can do a modified fire of each gun
       this.guns.find((g) => g.type === 'blast')?.shoot()
+
       this.scene.time.delayedCall(500, () =>
         this.body.setMaxSpeed(this.moveSpeed),
       )

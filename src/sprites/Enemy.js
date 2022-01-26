@@ -42,7 +42,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.damage = damage
     this.hp = hp
     this.hitTimer = 0
-    this.hitTimerMax = 80
+    this.hitTimerMax = 40
     this.xp = xp
     this.movePenalty = 1
     this.target = this.scene.player
@@ -93,7 +93,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.y,
       Phaser.Math.RND.between(6, 12) / 10,
     )
-    if (this.scene.player.form === 'light') this.scene.player.tp += 1
+    if (this.scene.player.form === 'light') this.scene.player.tp += 2.5
     this.scene.enemySpawner.emitter.explode(
       Phaser.Math.RND.between(3, 6),
       this.x,
