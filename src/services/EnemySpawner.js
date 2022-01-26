@@ -97,11 +97,11 @@ export class EnemySpawner {
   }
 
   getSpawnTimer() {
-    return [3, 3, 3, 2, 2, 1][this.getLevel()]
+    return [3, 3, 3, 2, 2, 2][this.getLevel()]
   }
 
   getSpeedMultiplier() {
-    return [1, 1, 1.1, 1.2, 1.3, 1.4][this.getLevel()]
+    return [1, 1, 1.1, 1.15, 1.2, 1.25][this.getLevel()]
   }
 
   getDamageMultiplier() {
@@ -119,11 +119,11 @@ export class EnemySpawner {
   getSpawnTypes() {
     return [
       { knight: 1 },
-      { knight: 1, eliteKnight: 19 },
-      { knight: 1, eliteKnight: 17, largeKnight: 19 },
-      { knight: 1, eliteKnight: 16, largeKnight: 18 },
-      { knight: 1, eliteKnight: 15, largeKnight: 18, largeEliteKnight: 20 },
-      { knight: 1, eliteKnight: 15, largeKnight: 18, largeEliteKnight: 19 },
+      { knight: 1, eliteKnight: 20 },
+      { knight: 1, eliteKnight: 19, largeKnight: 20 },
+      { knight: 1, eliteKnight: 18, largeKnight: 19 },
+      { knight: 1, eliteKnight: 18, largeKnight: 19, largeEliteKnight: 20 },
+      { knight: 1, eliteKnight: 18, largeKnight: 19, largeEliteKnight: 20 },
     ][this.getLevel()]
   }
 
@@ -131,10 +131,10 @@ export class EnemySpawner {
     return [
       [3, 6],
       [5, 8],
-      [7, 12],
-      [10, 18],
-      [20, 30],
-      [26, 42],
+      [6, 9],
+      [8, 12],
+      [8, 12],
+      [8, 12],
     ][this.getLevel()]
   }
 
