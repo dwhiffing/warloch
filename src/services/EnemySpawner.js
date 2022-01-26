@@ -47,12 +47,15 @@ export class EnemySpawner {
 
   spawn = (count = 1) => {
     for (let i = 0; i < count; i++) {
-      console.log('spawn')
       const angle = Phaser.Math.RND.angle()
       const vel = this.physics.velocityFromAngle(angle, SPAWN_DISTANCE)
       const x = this.target.x + vel.x
       const y = this.target.y + vel.y
-      const type = Phaser.Math.RND.pick(this.getSpawnTypes())
+      const typeRoll = Phaser.Math.RND.between(1, 20)
+      let type
+      Object.entries(this.getSpawnTypes()).forEach(([k, v]) => {
+        if (typeRoll >= v) type = k
+      })
       const stats = { ...ENEMIES[type] }
 
       stats.hp *= this.getHPMultiplier()
@@ -95,12 +98,12 @@ export class EnemySpawner {
 
   getSpawnTypes() {
     return [
-      ['knight'], // 100% fodder
-      ['knight'], // 70% fodder, 30% moderate
-      ['knight'], // 50% fodder, 40% moderate, 10% strong
-      ['knight'], // 25% fodder, 60% moderate, 15% strong
-      ['knight'], // 20% fodder, 50% moderate, 25% strong, 5% elite
-      ['knight'], // 20% fodder, 50% moderate, 25% strong, 5% elite
+      { knight: 1 },
+      { knight: 1, eliteKnight: 19 },
+      { knight: 1, eliteKnight: 17, largeKnight: 19 },
+      { knight: 1, eliteKnight: 16, largeKnight: 18 },
+      { knight: 1, eliteKnight: 15, largeKnight: 18, largeEliteKnight: 20 },
+      { knight: 1, eliteKnight: 15, largeKnight: 18, largeEliteKnight: 19 },
     ][this.getLevel()]
   }
 
