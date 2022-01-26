@@ -336,7 +336,7 @@ export const GUNS = {
   },
   rocketExplode: {
     damage: 1,
-    delay: 1,
+    delay: 0,
     speed: 1,
     offset: 1,
     range: 1,

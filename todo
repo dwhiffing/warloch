@@ -1,18 +1,17 @@
-beast burst should be based on currently unlocked weapons
-
-bullet trails
-add saves
 add high score table
-polish menu
-add instructions
+add saves
+better spawning logic so groups of enemies spawn and swarm from random directions
 different orb colors for higher amounts of xp
-polish audio (probably fewer bullet impact sounds)
-mobile controls
+add bullet trails effects for all weapons
 
 
 work on enemy/weapon balance
   make human weapons more ordered, beast weapons more chaotic
 bug where shotgun doesn't aim at pointer
+
+polish menu (add instructions)
+polish audio (probably fewer bullet impact sounds)
+mobile controls
 
 add dodge roll?
 add bosses after certain amount of kills/time?
