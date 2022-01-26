@@ -1,5 +1,6 @@
 import { ENEMIES } from '../constants'
 import { Enemy } from '../sprites/Enemy'
+import { Explosions } from './Explosions'
 
 const SPAWN_DISTANCE = 300
 // fodder are always slow, weak, small, and collide
@@ -18,6 +19,25 @@ export class EnemySpawner {
     this.target = this.scene.player
     this.physics = this.scene.physics
     this.spawnTimer = 3
+
+    this.particles = this.scene.add.particles('tiles')
+    this.emitter = this.particles
+      .createEmitter({
+        frame: ['bit1.png', 'bit1.png', 'bit1.png', 'bit2.png'],
+        speed: { min: 60, max: -60 },
+        scale: { max: 1.25, min: 0.75 },
+        lifespan: { max: 1200, min: 600 },
+        alpha: { start: 1, end: 0 },
+        rotate: {
+          onEmit: (p) => (p.speed = Phaser.Math.RND.between(-2, 2)),
+          onUpdate: (p) => p.angle + p.speed,
+        },
+      })
+      .stop()
+    // this.emitter.setDepth(3)
+    this.particles.setDepth(3)
+
+    this.explosions = new Explosions(this.scene)
 
     this.enemies = scene.physics.add.group({
       classType: Enemy,

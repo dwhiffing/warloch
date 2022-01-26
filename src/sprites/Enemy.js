@@ -12,7 +12,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.active) return
 
     if (this.hitTimer > 0) this.hitTimer--
-    this.hpBar.move(this.x, this.y - this.body.height / 2)
+    this.hpBar.move(this.x, this.y)
 
     if (this.updateTimer-- > 0) return
 
@@ -76,6 +76,16 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.body.enable = false
     this.hpBar.die()
     this.scene.orbSpawner.spawn(this.x, this.y, this.xp)
+    this.scene.enemySpawner.explosions.makeExplosion(
+      this.x,
+      this.y,
+      Phaser.Math.RND.between(6, 12) / 10,
+    )
+    this.scene.enemySpawner.emitter.explode(
+      Phaser.Math.RND.between(3, 6),
+      this.x,
+      this.y,
+    )
 
     this.scene.sound.play(`death-${Phaser.Math.RND.between(0, 3)}`, {
       volume: 0.1,

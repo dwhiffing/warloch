@@ -4,7 +4,7 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.physics.world.enableBody(this, 0)
 
-    this.setScale(2).setTint(0xffff00)
+    this.setScale(2).setTint(0xffff00).setDepth(1)
     this.resize()
   }
 
