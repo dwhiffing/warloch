@@ -79,7 +79,8 @@ export default class Upgrade extends Phaser.Scene {
   }
 
   wake() {
-    this.levelText.text = `Level ${this.registry.get('level')}`
+    const level = this.registry.get('level')
+    this.levelText.text = `Level ${level}`
     const possiblePurchases = Object.values(PURCHASES)
       .map((p) => {
         const upgrade = UPGRADES[p.key] || WEAPONS[p.key]
@@ -95,10 +96,10 @@ export default class Upgrade extends Phaser.Scene {
     const purchases = [
       ...Phaser.Math.RND.shuffle(
         possiblePurchases.filter((p) => p.type === 'weapon'),
-      ).slice(0, 1),
+      ).slice(0, level === 2 ? 3 : 1),
       ...Phaser.Math.RND.shuffle(
         possiblePurchases.filter((p) => p.type === 'upgrade'),
-      ).slice(0, 2),
+      ).slice(0, level === 2 ? 0 : 2),
     ]
     this.buttons.forEach((b, i) => {
       const purchase = purchases[i]
