@@ -93,7 +93,7 @@ export const GUNS = {
   },
   cross: {
     name: 'cross',
-    damage: 0.5,
+    damage: 1,
     delay: 80,
     speed: 140,
     range: 200,
@@ -465,9 +465,9 @@ export const WEAPONS = {
     dark: 'cross',
     levels: [
       {},
-      { damage: ['*', 2], delay: ['*', 0.8] },
-      { damage: ['*', 3], delay: ['*', 0.7] },
-      { damage: ['*', 4], delay: ['*', 0.6] },
+      { damage: ['*', 1.5], delay: ['*', 0.8] },
+      { damage: ['*', 2], delay: ['*', 0.7] },
+      { damage: ['*', 3], delay: ['*', 0.6] },
     ],
   },
   nine: {
