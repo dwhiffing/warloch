@@ -153,10 +153,11 @@ export const GUNS = {
   bone: {
     name: 'bone',
     damage: 1.5,
-    delay: 60,
+    delay: 40,
     speed: 200,
     range: 350,
     depth: 20,
+    count: 3,
     frame: 'shot-bone.png',
     size: 1.5,
     health: 10,
@@ -209,7 +210,7 @@ export const GUNS = {
   },
   chain: {
     name: 'chain',
-    damage: 0.5,
+    damage: 1,
     delay: 80,
     speed: 250,
     range: 140,
