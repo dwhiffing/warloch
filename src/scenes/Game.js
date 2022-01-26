@@ -100,7 +100,7 @@ export default class extends Phaser.Scene {
     if (!player.active || !enemy.active || enemy.hitTimer > 0) return
 
     enemy.hitTimer = enemy.hitTimerMax
-    player.hp -= enemy.damage
+    player.hit(enemy.damage)
   }
 
   getOrb(player, orb) {

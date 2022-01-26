@@ -93,6 +93,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.y,
       Phaser.Math.RND.between(6, 12) / 10,
     )
+    if (this.scene.player.form === 'light') this.scene.player.tp += 1
     this.scene.enemySpawner.emitter.explode(
       Phaser.Math.RND.between(3, 6),
       this.x,

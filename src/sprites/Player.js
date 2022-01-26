@@ -52,7 +52,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     this.setAcceleration(0)
     this.setDrag(150)
-    this.tp += 0.05
+    this.tp += this.form === 'light' ? 0.005 : -0.015
 
     if (this.movePenalty < 1) {
       this.movePenalty += 0.01
@@ -83,6 +83,33 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         Object.entries(boost).forEach((u) => applyUpgrade(u, obj)),
       )
     return obj
+  }
+
+  hit(damage) {
+    if (this.form === 'dark') damage *= 0.25
+    this.hp -= damage
+    if (this.form === 'dark') this.tp -= 2
+  }
+
+  transform() {
+    this.play(this.form === 'light' ? 'player2' : 'player')
+
+    if (this.form === 'light') {
+      this.scene.cameras.main.shake(400, 0.02)
+      this.body.setMaxSpeed(0)
+      this.guns.find((g) => g.type === 'blast')?.shoot()
+      this.scene.time.delayedCall(500, () =>
+        this.body.setMaxSpeed(this.moveSpeed),
+      )
+    }
+
+    this.scene.sound.play(this.form === 'light' ? 'transform2' : 'transform', {
+      volume: this.form === 'light' ? 0.4 : 0.1,
+      rate: this.form === 'light' ? 1 : 2,
+    })
+
+    this.form = this.form === 'light' ? 'dark' : 'light'
+    if (this.form === 'light') this.body.setMaxSpeed(this.moveSpeed)
   }
 
   get regen() {
@@ -184,29 +211,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   set tp(val) {
     this._tp = val
-    if (this._tp > this.maxTP) {
-      this._tp = 0
-      this.play(this.form === 'light' ? 'player2' : 'player')
-
-      if (this.form === 'light') {
-        this.scene.cameras.main.shake(400, 0.02)
-        this.body.setMaxSpeed(0)
-        this.guns.find((g) => g.type === 'blast')?.shoot()
-        this.scene.time.delayedCall(500, () =>
-          this.body.setMaxSpeed(this.moveSpeed),
-        )
-      }
-
-      this.scene.sound.play(
-        this.form === 'light' ? 'transform2' : 'transform',
-        {
-          volume: this.form === 'light' ? 0.4 : 0.1,
-          rate: this.form === 'light' ? 1 : 2,
-        },
-      )
-
-      this.form = this.form === 'light' ? 'dark' : 'light'
-      if (this.form === 'light') this.body.setMaxSpeed(this.moveSpeed)
+    if (this._tp > 100) this._tp = 100
+    if (this._tp < 0) this._tp = 0
+    if (this.form === 'light' ? this._tp >= this.maxTP : this._tp <= 0) {
+      this.transform()
     }
     this.scene.hud?.set('tp', this._tp)
   }
