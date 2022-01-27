@@ -72,7 +72,7 @@ export default class extends Phaser.Scene {
     const bullets = this.player.bullets
 
     this.physics.add.collider(enemies)
-    this.physics.add.collider(this.player, enemies, this.hurtPlayer)
+    this.physics.add.collider(this.player, enemies)
     this.physics.add.overlap(bullets, enemies, this.shootEnemy)
     this.physics.add.overlap(this.player, orbs, this.getOrb)
 
@@ -105,13 +105,6 @@ export default class extends Phaser.Scene {
     if (!bullet.active || bullet.dying || !enemy.active) return
     enemy.hit(bullet)
     bullet.hit(enemy)
-  }
-
-  hurtPlayer(player, enemy) {
-    if (!player.active || !enemy.active || enemy.hitTimer > 0) return
-
-    enemy.hitTimer = enemy.hitTimerMax
-    player.hit(enemy.damage)
   }
 
   getOrb(player, orb) {
