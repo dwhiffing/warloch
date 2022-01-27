@@ -13,7 +13,7 @@ export const ENEMIES = {
     bodySize: [12, 19],
     bodyOffset: [10, 12],
     speed: 30,
-    hp: 3,
+    hp: 2,
     damage: 3,
     xp: 5,
     mass: 10,

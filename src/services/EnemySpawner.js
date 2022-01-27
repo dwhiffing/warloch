@@ -114,7 +114,7 @@ export class EnemySpawner {
   }
 
   getHPMultiplier() {
-    return [1, 1, 1.5, 2, 3, 4][this.getLevel()]
+    return [1, 1.5, 2, 3, 4, 5][this.getLevel()]
   }
 
   getXPMultiplier() {
@@ -134,9 +134,9 @@ export class EnemySpawner {
 
   getSpawnCount() {
     return [
-      [3, 6],
       [5, 8],
       [6, 9],
+      [8, 12],
       [8, 12],
       [8, 12],
       [8, 12],
