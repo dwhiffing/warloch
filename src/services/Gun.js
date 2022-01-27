@@ -39,6 +39,7 @@ export class Gun {
   }
 
   update() {
+    if (this.stop) return
     if (this.shotTimer > 0) this.shotTimer--
     if (this.explodeGun) this.explodeGun.update()
     if (this.circle && this.source) {
