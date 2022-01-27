@@ -1,7 +1,6 @@
-import { filter } from 'lodash'
 import { Orb } from '../sprites/Orb'
 
-const ORB_MAX = 300
+const ORB_MAX = 500
 
 export class OrbSpawner {
   constructor(scene) {
@@ -24,6 +23,7 @@ export class OrbSpawner {
 
   spawn = (x, y, value) => {
     const orb = this.orbs.get()
+    if (!orb) return
     orb.spawn(x, y, value)
   }
 
