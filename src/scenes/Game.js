@@ -37,28 +37,23 @@ export default class extends Phaser.Scene {
     this.sound.play('game-music', { loop: true, volume: 0.5 })
   }
 
-  create() {
-    this.registry.events.removeAllListeners()
-    this.game.events.removeAllListeners()
-    this.time.removeAllEvents()
-    this.registry.reset()
+  create({ newGame }) {
+    const hasSave = this.loadGame()
 
-    this.game.events.addListener(Phaser.Core.Events.BLUR, () => {
-      if (!this.scene.isPaused()) {
-        this.shouldUnpause = true
-        this.scene.pause()
-      }
-    })
-    this.game.events.addListener(Phaser.Core.Events.FOCUS, () => {
-      if (this.shouldUnpause) {
-        this.shouldUnpause = false
-        this.scene.resume()
-      }
-    })
+    if (newGame || !hasSave) {
+      this.registry.events.removeAllListeners()
+      this.game.events.removeAllListeners()
+      this.time.removeAllEvents()
+      this.registry.reset()
+      this.registry.set('gameTimer', 0)
+      this.registry.set('score', 0)
+      this.registry.set('killCount', 0)
+    }
 
-    this.registry.set('gameTimer', 0)
-    this.registry.set('score', 0)
-    this.registry.set('killCount', 0)
+    this.game.events.addListener(Phaser.Core.Events.BLUR, this.pause)
+    this.game.events.addListener(Phaser.Core.Events.FOCUS, this.unpause)
+
+    this.time.addEvent({ repeat: -1, delay: 15000, callback: this.saveGame })
 
     this.physics.world.setBounds(0, 0, WIDTH, HEIGHT)
     this.cameras.main.setBounds(0, 0, WIDTH, HEIGHT)
@@ -81,7 +76,23 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(bullets, enemies, this.shootEnemy)
     this.physics.add.overlap(this.player, orbs, this.getOrb)
 
+    if (newGame || !hasSave) {
+      this.player.levelUpgrade('one')
+    }
+
     this.hud = new Hud(this)
+  }
+
+  pause = () => {
+    if (this.scene.isPaused()) return
+    this.shouldUnpause = true
+    this.scene.pause()
+  }
+
+  unpause = () => {
+    if (!this.shouldUnpause) return
+    this.shouldUnpause = false
+    this.scene.resume()
   }
 
   update(time, delta) {
@@ -113,5 +124,20 @@ export default class extends Phaser.Scene {
   showUpgradeMenu() {
     this.scene.pause()
     this.scene.wake('Upgrade')
+  }
+
+  loadGame = () => {
+    const save = localStorage.getItem('ggj22-save')
+    if (save) {
+      Object.entries(JSON.parse(save)).forEach(([k, v]) => {
+        this.registry.set(k, v)
+      })
+    }
+
+    return !!save
+  }
+
+  saveGame = () => {
+    localStorage.setItem('ggj22-save', JSON.stringify(this.registry.values))
   }
 }

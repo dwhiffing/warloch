@@ -29,14 +29,6 @@ export default class extends Phaser.Scene {
       .on('pointerdown', this.toggleMute.bind(this))
 
     this.add
-      .sprite(width / 2, height / 2, 'tiles', 'bar.png')
-      .setScale(4)
-      .setInteractive()
-      .on('pointerdown', () => {
-        this.scene.start('Game', { lives: 3 })
-      })
-
-    this.add
       .text(width / 2, height / 4, 'GGJ2022', {
         color: 'white',
         fontSize: 42,
@@ -45,11 +37,39 @@ export default class extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.add
-      .text(width / 2, height / 2, 'play', {
+      .sprite(width / 2, height / 2, 'tiles', 'bar.png')
+      .setScale(4)
+      .setInteractive()
+      .on('pointerdown', this.newGame)
+
+    this.add
+      .text(width / 2, height / 2, 'new game', {
         color: 'black',
         fontFamily: 'sans-serif',
       })
       .setOrigin(0.5)
+
+    this.add
+      .sprite(width / 2, height / 2 + 30, 'tiles', 'bar.png')
+      .setScale(4)
+      .setInteractive()
+      .on('pointerdown', this.continue)
+
+    this.add
+      .text(width / 2, height / 2 + 30, 'continue', {
+        color: 'black',
+        fontFamily: 'sans-serif',
+      })
+      .setOrigin(0.5)
+  }
+
+  newGame = () => {
+    localStorage.removeItem('ggj22-save')
+    this.scene.start('Game')
+  }
+
+  continue = () => {
+    this.scene.start('Game')
   }
 
   toggleMute() {

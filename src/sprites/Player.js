@@ -7,14 +7,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'tiles')
     this.scene.physics.world.enableBody(this, 0)
 
-    this._maxHP = 100
-    this._xpRate = 1
-    this._pickupRange = 15
-    this.hp = this.maxHP
-    this.xp = 0
-    this.tp = 0
-    this.level = 1
-    this.form = 'light'
     this.movePenalty = 1
     this.setDepth(70)
 
@@ -24,11 +16,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         return scene.registry.get(`${w.name}`) || 0
       },
     }))
-    this.levelUpgrade('one')
 
     this.body.setMaxSpeed(this.moveSpeed)
 
-    this.play('player')
+    this.play(this.form === 'light' ? 'player' : 'player2')
       .setCollideWorldBounds(true)
       .setOrigin(0.5)
       .setBodySize(8, 8)
@@ -97,6 +88,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.form === 'dark') this.tp -= 3
   }
 
+  die() {
+    this.scene.hud?.set('hp', 0, this.maxHP)
+    this.scene.sound.play('death', { volume: 0.4 })
+    this.scene.scene.start('Game', { newGame: true })
+    localStorage.removeItem('ggj22-save')
+  }
+
   startTransforming(duration = 3) {
     let i = 0
     this.transforming = true
@@ -119,7 +117,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   transform = () => {
-    if (this.form === 'light' ? this._tp < this.maxTP : this._tp > 0) return
+    if (this.form === 'light' ? this.tp < this.maxTP : this.tp > 0) return
 
     if (this.transformDelay) this.transformDelay.remove()
     if (this.transformFlash) this.transformFlash.remove()
@@ -130,6 +128,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // if turning dark
     if (this.form === 'light') {
+      // TODO: trigger spawn of a bunch of enemies right before spawn?
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
 
@@ -158,6 +157,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.form === 'light') this.body.setMaxSpeed(this.moveSpeed)
   }
 
+  get form() {
+    return this.scene.registry.get('playerForm') || 'light'
+  }
+
+  set form(val) {
+    return this.scene.registry.set('playerForm', val)
+  }
+
   get regen() {
     const obj = this.applyUpgrade('healthRegen', { regen: 0 })
     return obj.regen
@@ -175,60 +182,68 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get hp() {
-    return this._hp
+    return this.scene.registry.get('hp') || 100
   }
 
   set hp(val) {
-    if (this._hp > val) {
+    // taking damage
+    if (this.hp > val) {
       this.movePenalty = 0.5
-      if (this._hp <= this.maxHP) {
+      if (this.hp <= this.maxHP) {
         this.scene.cameras.main.shake(200, 0.01)
-        this.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
+        this.setTint(0xff0000)
         this.scene.time.delayedCall(100, this.clearTint.bind(this))
         this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
           volume: 0.3,
         })
       }
     }
-    this._hp = val
-    this.scene.hud?.set('hp', this._hp, this.maxHP)
-    if (this._hp <= 0) {
-      this._hp = 0
-      this.scene.sound.play('death', { volume: 0.4 })
-      this.scene.scene.start('Game')
+
+    this.scene.registry.set('hp', val)
+    this.scene.hud?.set('hp', this.hp, this.maxHP)
+
+    // game over
+    if (this.hp <= 0) {
+      this.die()
     }
   }
 
   get maxHP() {
-    const obj = this.applyUpgrade('maxHP', { maxHP: this._maxHP })
+    const obj = this.applyUpgrade('maxHP', { maxHP: 100 })
     return obj.maxHP
   }
 
+  get prevXP() {
+    return this.scene.registry.get('prevXP') || 0
+  }
+
   get xp() {
-    return this._xp
+    return this.scene.registry.get('xp') || 0
   }
 
   get pickupRange() {
-    const obj = this.applyUpgrade('pickupRange', {
-      pickupRange: this._pickupRange,
-    })
+    const obj = this.applyUpgrade('pickupRange', { pickupRange: 15 })
     return obj.pickupRange
   }
 
   get xpRate() {
-    const obj = this.applyUpgrade('xpRate', { xpRate: this._xpRate })
+    const obj = this.applyUpgrade('xpRate', { xpRate: 1 })
     return obj.xpRate
   }
 
   set xp(val) {
-    this._xp = val
-    if (this._xp >= this.nextXP) this.level++
+    this.scene.registry.set('xp', val)
+    if (val >= this.nextXP) this.level++
 
     this.scene.sound.play('chord', {
-      rate: 1 + this._xp / this.nextXP || 0,
+      rate: 1 + val / this.nextXP || 0,
       volume: 0.4,
     })
     this.scene.hud?.set('xp', this.xp - this.prevXP)
+  }
+
+  set prevXP(val) {
+    this.scene.registry.set('prevXP', val)
   }
 
   get nextXP() {
@@ -236,7 +251,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get level() {
-    return this.scene.registry.get('level')
+    return this.scene.registry.get('level') || 1
   }
 
   set level(value) {
@@ -255,21 +270,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get tp() {
-    return this._tp
+    return this.scene.registry.get('tp') || 0
   }
 
   set tp(val) {
     if (this.transforming) return
 
-    this._tp = val
-    if (this._tp > 100) this._tp = 100
-    if (this._tp < 0) this._tp = 0
+    this.scene.registry.set('tp', Math.max(0, Math.min(val, 100)))
 
-    this.scene.hud?.set('tp', this._tp)
+    this.scene.hud?.set('tp', this.scene.registry.get('tp'))
 
     if (
-      (this._tp === 100 && this.form === 'light') ||
-      (this._tp === 0 && this.form === 'dark')
+      (this.tp === 100 && this.form === 'light') ||
+      (this.tp === 0 && this.form === 'dark')
     ) {
       this.startTransforming()
     }

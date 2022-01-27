@@ -18,18 +18,29 @@ export class Hud {
     this.tpBar.set(player.tp, player.maxTP)
 
     this.killText = this.scene.add
-      .text(20, 40, '0', { font: '12px Roboto Mono' })
+      .text(20, 40, this.scene.registry.get('killCount'), {
+        font: '12px Roboto Mono',
+      })
       .setScrollFactor(0)
       .setDepth(99)
 
     this.scoreText = this.scene.add
-      .text(w + 20, 40, '0', { font: '12px Roboto Mono' })
+      .text(w + 20, 40, this.scene.registry.get('score'), {
+        font: '12px Roboto Mono',
+      })
       .setScrollFactor(0)
       .setDepth(99)
       .setOrigin(1, 0)
 
     this.timeText = this.scene.add
-      .text((w + 40) / 2, 40, '0:00', { font: '12px Roboto Mono' })
+      .text(
+        (w + 40) / 2,
+        40,
+        this.getTimestamp(this.scene.registry.get('gameTimer')),
+        {
+          font: '12px Roboto Mono',
+        },
+      )
       .setScrollFactor(0)
       .setDepth(99)
       .setOrigin(0.5, 0)
@@ -38,9 +49,7 @@ export class Hud {
       localStorage.getItem('ggj-mute') === '1' ? 'mute.png' : 'unmute.png'
 
     this.scene.registry.events.on('changedata-gameTimer', (_, current) => {
-      this.timeText.text = `${Math.floor(current / 60)}:${(current % 60)
-        .toString()
-        .padStart(2, '0')}`
+      this.timeText.text = this.getTimestamp(current)
     })
 
     this.scene.registry.events.on('changedata-killCount', (_, current) => {
@@ -76,4 +85,7 @@ export class Hud {
   }
 
   update() {}
+
+  getTimestamp = (n) =>
+    `${Math.floor(n / 60)}:${(n % 60).toString().padStart(2, '0')}`
 }
