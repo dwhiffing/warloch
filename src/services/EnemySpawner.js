@@ -73,7 +73,10 @@ export class EnemySpawner {
     }
     for (let i = 0; i < count; i++) {
       const angle = angles[i]
-      const vel = this.physics.velocityFromAngle(angle, SPAWN_DISTANCE)
+      const vel = this.physics.velocityFromAngle(
+        angle,
+        Phaser.Math.RND.between(SPAWN_DISTANCE, SPAWN_DISTANCE + 200),
+      )
       const x = this.target.x + vel.x
       const y = this.target.y + vel.y
       const typeRoll = Phaser.Math.RND.between(1, 20)
