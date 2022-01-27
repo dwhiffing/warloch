@@ -11,11 +11,13 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
   spawn(x, y, value = 1) {
     this.x = x
     this.y = y
-    this.value = value
     this.setActive(true).setVisible(true)
+    this.value = value
   }
 
   hit() {
+    this.x = -99999
+    this.y = -99999
     this.die()
   }
 
