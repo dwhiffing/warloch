@@ -1,3 +1,5 @@
+import { Button } from '../sprites/Button'
+
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'Menu' })
@@ -11,57 +13,39 @@ export default class extends Phaser.Scene {
 
   create() {
     const { height, width } = this.game.config
-
-    this.sound.stopAll()
-    this.sound.play('menu-music', { loop: true, volume: 0.5 })
-    this.keys = this.input.keyboard.addKeys('M')
-
     const w = this.cameras.main.width - 40
     const h = this.cameras.main.height - 40
-
-    const frame =
-      localStorage.getItem('ggj-mute') === '1' ? 'mute.png' : 'unmute.png'
-    this.muteButton = this.add
-      .sprite(w + 20, h + 20, 'tiles', frame)
-      .setScrollFactor(0)
-      .setInteractive()
-      .setScale(0.5)
-      .on('pointerdown', this.toggleMute.bind(this))
+    const _w = width / 2
+    const _h = height / 2
 
     this.add
-      .text(width / 2, height / 4, 'GGJ2022', {
-        color: 'white',
+      .text(_w, height / 4, 'GGJ2022', {
         fontSize: 42,
         fontFamily: 'sans-serif',
       })
       .setOrigin(0.5)
 
-    this.add
-      .sprite(width / 2, height / 2, 'tiles', 'bar.png')
-      .setScale(4)
+    this.add.existing(new Button(this, _w, _h, 'new game', this.newGame))
+
+    if (localStorage.getItem('ggj22-save'))
+      this.add.existing(
+        new Button(this, _w, _h + 30, 'continue', this.continue),
+      )
+
+    this.add.existing(new Button(this, _w, _h + 60, 'scores', this.gotoScores))
+
+    this.sound.stopAll()
+    this.sound.play('menu-music', { loop: true, volume: 0.5 })
+    const muted = localStorage.getItem('ggj-mute') === '1'
+    this.muteButton = this.add
+      .sprite(w + 20, h + 20, 'tiles', muted ? 'mute.png' : 'unmute.png')
+      .setScrollFactor(0)
       .setInteractive()
-      .on('pointerdown', this.newGame)
-
-    this.add
-      .text(width / 2, height / 2, 'new game', {
-        color: 'black',
-        fontFamily: 'sans-serif',
-      })
-      .setOrigin(0.5)
-
-    this.add
-      .sprite(width / 2, height / 2 + 30, 'tiles', 'bar.png')
-      .setScale(4)
-      .setInteractive()
-      .on('pointerdown', this.continue)
-
-    this.add
-      .text(width / 2, height / 2 + 30, 'continue', {
-        color: 'black',
-        fontFamily: 'sans-serif',
-      })
-      .setOrigin(0.5)
+      .setScale(0.5)
+      .on('pointerdown', this.toggleMute.bind(this))
   }
+
+  update() {}
 
   newGame = () => {
     localStorage.removeItem('ggj22-save')
@@ -72,15 +56,13 @@ export default class extends Phaser.Scene {
     this.scene.start('Game')
   }
 
+  gotoScores = () => {
+    this.scene.start('Score')
+  }
+
   toggleMute() {
     this.sound.mute = !this.sound.mute
     localStorage.setItem('ggj-mute', this.sound.mute ? '' : '1')
     this.muteButton.setFrame(this.sound.mute ? 'unmute.png' : 'mute.png')
-  }
-
-  update() {
-    if (Phaser.Input.Keyboard.JustDown(this.keys.M)) {
-      this.toggleMute()
-    }
   }
 }

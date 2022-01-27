@@ -83,6 +83,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   hit(damage) {
+    if (!this.active) return
     if (this.form === 'dark') damage *= 0.25
     this.hp -= damage
     if (this.form === 'dark') this.tp -= 3
@@ -91,8 +92,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   die() {
     this.scene.hud?.set('hp', 0, this.maxHP)
     this.scene.sound.play('death', { volume: 0.4 })
-    this.scene.scene.start('Game', { newGame: true })
-    localStorage.removeItem('ggj22-save')
+    this.scene.enemySpawner.explosions.makeExplosion(this.x, this.y, 1.2)
+    this.setVisible(false).setActive(false)
+    this.guns.forEach((g) => (g.stop = true))
+    this.scene.time.delayedCall(2000, () => {
+      localStorage.removeItem('ggj22-save')
+      const score = this.scene.registry.get('score')
+      this.scene.registry.reset()
+      this.scene.registry.events.removeAllListeners()
+      this.scene.input.removeAllListeners()
+      this.scene.game.events.removeAllListeners()
+      this.scene.time.removeAllEvents()
+      this.scene.scene.start('Score', { score })
+    })
   }
 
   startTransforming(duration = 3) {
@@ -203,7 +215,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.hud?.set('hp', this.hp, this.maxHP)
 
     // game over
-    if (this.hp <= 0) {
+    if (this.hp <= 0 && this.visible) {
       this.die()
     }
   }

@@ -13,8 +13,8 @@ export class InputHandler {
     this.debugKeys = this.input.keyboard.addKeys(
       'R,T,Y,U,I,O,P,F,G,H,J,K,L,M,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE',
     )
-    this.input.on('pointerdown', () => (this.scene.isMouseDown = true))
-    this.input.on('pointerup', () => (this.scene.isMouseDown = false))
+    // this.input.on('pointerdown', () => (this.scene.isMouseDown = true))
+    // this.input.on('pointerup', () => (this.scene.isMouseDown = false))
 
     this.reg = this.scene.registry
     this.onKey = (key, callback) => {
@@ -52,6 +52,8 @@ export class InputHandler {
     )
     this.onKey('N', () => (this.scene.registry.values.gameTimer += 60))
     this.onKey('M', () => this.scene.hud.toggleMute())
+
+    if (!this.player.active) return
 
     const speed = this.player.moveSpeed * 1.5
     this.player.setPushable(true)
