@@ -103,7 +103,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.scene.input.removeAllListeners()
       this.scene.game.events.removeAllListeners()
       this.scene.time.removeAllEvents()
-      this.scene.scene.start('Score', { score })
+      this.scene.scene.start('Score', { score, playMusic: true })
     })
   }
 

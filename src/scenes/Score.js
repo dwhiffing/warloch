@@ -6,7 +6,7 @@ export default class extends Phaser.Scene {
     super({ key: 'Score' })
   }
 
-  create({ score }) {
+  create({ score, playMusic }) {
     this.scoreTexts = []
     const { height, width } = this.game.config
 
@@ -23,8 +23,10 @@ export default class extends Phaser.Scene {
       new Button(this, _w + (score ? 60 : 0), h + 20, 'back', this.back),
     )
 
-    this.sound.stopAll()
-    this.sound.play('menu-music', { loop: true, volume: 0.5 })
+    if (playMusic) {
+      this.sound.stopAll()
+      this.sound.play('menu-music', { loop: true, volume: 0.5 })
+    }
     const muted = localStorage.getItem('ggj-mute') === '1'
     this.muteButton = this.add
       .sprite(w + 20, h + 20, 'tiles', muted ? 'mute.png' : 'unmute.png')
@@ -75,7 +77,7 @@ export default class extends Phaser.Scene {
   }
 
   back = () => {
-    this.scene.start('Menu')
+    this.scene.start('Menu', { playMusic: false })
   }
 
   toggleMute() {

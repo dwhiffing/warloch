@@ -21,6 +21,7 @@ export const postScore = ({ playerName, score }) => {
 }
 
 export const getScores = (playerId = '') => {
+  // TODO: should include player id and show on score screen when player topped their own high score
   return fetch(
     `${prefix}?appId=${HIGHSCORE_APP_ID}&playerId=${playerId}&order=DESC`,
   )

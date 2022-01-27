@@ -11,7 +11,7 @@ export default class extends Phaser.Scene {
     // this.scene.start('Game')
   }
 
-  create() {
+  create({ playMusic }) {
     const { height, width } = this.game.config
     const w = this.cameras.main.width - 40
     const h = this.cameras.main.height - 40
@@ -34,8 +34,11 @@ export default class extends Phaser.Scene {
 
     this.add.existing(new Button(this, _w, _h + 60, 'scores', this.gotoScores))
 
-    this.sound.stopAll()
-    this.sound.play('menu-music', { loop: true, volume: 0.5 })
+    if (playMusic) {
+      this.sound.stopAll()
+      this.sound.play('menu-music', { loop: true, volume: 0.5 })
+    }
+
     const muted = localStorage.getItem('ggj-mute') === '1'
     this.muteButton = this.add
       .sprite(w + 20, h + 20, 'tiles', muted ? 'mute.png' : 'unmute.png')
@@ -57,7 +60,7 @@ export default class extends Phaser.Scene {
   }
 
   gotoScores = () => {
-    this.scene.start('Score')
+    this.scene.start('Score', { playMusic: false })
   }
 
   toggleMute() {
