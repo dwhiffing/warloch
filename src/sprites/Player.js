@@ -261,7 +261,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get nextXP() {
-    return this.prevXP + 400 * Math.pow(1.5, this.level - 1) - 350
+    return this.prevXP + 300 * Math.pow(1.5, this.level - 1) - 250
   }
 
   get level() {
