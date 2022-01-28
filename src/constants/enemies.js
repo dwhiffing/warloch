@@ -23,6 +23,7 @@ export const ENEMIES = {
   },
   skull: {
     type: 'skull',
+    ai: 'flying',
     bodySize: [12, 19],
     bodyOffset: [10, 12],
     speed: 30,

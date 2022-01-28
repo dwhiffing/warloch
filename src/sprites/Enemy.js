@@ -27,7 +27,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setFlipX(angle < 0)
     this.updateTimer = RND.between(30, 60)
 
-    if (this.type === 'skull') {
+    if (this.ai === 'flying') {
       this.target = {}
       this.target.x = player.x + Phaser.Math.RND.between(-200, 200)
       this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
@@ -44,7 +44,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   spawn(x, y, stats) {
-    const { bodySize, bodyOffset, hp, speed, xp, damage, type } = stats
+    const { bodySize, bodyOffset, hp, speed, xp, damage, type, ai } = stats
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
@@ -58,6 +58,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimerMax = 40
     this.xp = xp
     this.type = type
+    this.ai = ai
     this.movePenalty = 1
     this._tint = stats.tint
     this.target = this.scene.player
@@ -65,7 +66,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)
 
-    if (type === 'skull') {
+    if (ai === 'flying') {
       this.anims.currentAnim.msPerFrame = Phaser.Math.RND.between(300, 1200)
     }
   }
@@ -102,7 +103,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
   die() {
     this.scene.registry.inc('killCount')
-    this.scene.registry.values.score += this.xp
+    this.scene.registry.values.score += Math.floor(this.xp)
     this.setVisible(false).setActive(false)
     this.body.enable = false
     this.hpBar.die()
