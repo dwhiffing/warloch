@@ -135,13 +135,13 @@ export class EnemySpawner {
       // prettier-ignore
       { slime: 1, gremlin: 15, skull: 18 },
       // prettier-ignore
-      { slime: 1, gremlin: 8, skull: 14, knight: 17, eliteKnight: 19 },
+      { slime: 1, gremlin: 8, skull: 14, knight: 17, goblin: 19 },
       // prettier-ignore
-      { slime: 1, gremlin: 6, skull: 13, knight: 16, eliteKnight: 18, largeKnight: 19 },
+      { slime: 1, gremlin: 6, skull: 13, knight: 16, goblin: 18, largeKnight: 19 },
       // prettier-ignore
-      { slime: 1, gremlin: 6, skull: 11, knight: 15, eliteKnight: 18, largeKnight: 19, largeEliteKnight: 20, },
+      { slime: 1, gremlin: 6, skull: 11, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
       // prettier-ignore
-      { slime: 1, gremlin: 6, skull: 10, knight: 15, eliteKnight: 18, largeKnight: 19, largeEliteKnight: 20, },
+      { slime: 1, gremlin: 6, skull: 10, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
     ][this.getLevel()]
   }
 

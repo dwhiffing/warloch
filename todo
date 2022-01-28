@@ -1,8 +1,5 @@
-save after level up
-allow big guy to push enemies around and take basically no damage
 add ai/variants to enemy constants, skull ai should be "flying" instead
 add new skull art and split into small/big skull
-skull gun should make different noise
 use different death sounds for different enemies
 use different material sounds for different enemy impacts
 spawn a bunch of weak enemies while you are transformed
