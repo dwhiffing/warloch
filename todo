@@ -1,15 +1,24 @@
+make transform back to light faster
+make upgrade distribution random again
 better spawning logic so groups of enemies spawn and swarm from random directions
+  ( should spawn a large enemy with a bunch of smaller enemies around it)
 different orb colors for higher amounts of xp
-add bullet trails effects for all weapons
-
-
 work on enemy/weapon balance
-  make human weapons more ordered, beast weapons more chaotic
-bug where shotgun doesn't aim at pointer
 
-polish menu (add instructions)
+add instructions
 polish audio (probably fewer bullet impact sounds)
+
+level background art
+menu title art
+menu background
+better gun art
+add bullet trails effects for weapons
+Better weapon names/icons/descriptions
+UI indicating current weapons/upgrades
+better buttons
+
 mobile controls
+bug where shotgun doesn't aim at pointer
 
 add dodge roll?
 add bosses after certain amount of kills/time?
