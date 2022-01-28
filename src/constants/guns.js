@@ -317,7 +317,7 @@ export const GUNS = {
     spread: Math.PI * 2,
     soundRate: 0.5,
   },
-  skeleton: {
+  enemy: {
     name: 'basic',
     damage: 1,
     delay: 0,

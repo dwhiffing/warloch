@@ -48,7 +48,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
-    this.play(type).setOrigin(0.5).setDepth(2)
+    this.play(type).setOrigin(0.5, 1).setDepth(2)
     this.body.enable = true
 
     this.speed = speed
@@ -57,10 +57,11 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimer = 0
     this.hitTimerMax = 40
     this.xp = xp
+    this.particleScale = stats.particleScale
     this.type = type
     this.ai = ai
     this.movePenalty = 1
-    this._tint = stats.tint
+    this.particleTint = stats.particleTint
     this.target = this.scene.player
     this.setMass(stats.mass)
     this.hpBar.set(this.hp, this.hp)
@@ -114,7 +115,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       Phaser.Math.RND.between(6, 12) / 10,
     )
     if (this.scene.player.form === 'light') this.scene.player.tp += 2.5
-    this.scene.enemySpawner.emitter.setTint(this._tint || 0x00aaff)
+    this.scene.enemySpawner.emitter.setTint(this.particleTint || 0x00aaff)
+    this.scene.enemySpawner.emitter.setScale(this.particleScale)
     this.scene.enemySpawner.emitter.explode(
       Phaser.Math.RND.between(3, 6),
       this.x,

@@ -22,7 +22,7 @@ export class EnemySpawner {
     this.physics = this.scene.physics
     this.spawnTimer = 3
 
-    this.gun = new Gun(this.scene, 'skeleton')
+    this.gun = new Gun(this.scene, 'enemy')
 
     this.particles = this.scene.add.particles('tiles')
     this.emitter = this.particles
@@ -88,8 +88,7 @@ export class EnemySpawner {
       Object.entries(this.getSpawnTypes()).forEach(([k, v]) => {
         if (typeRoll >= v) type = k
       })
-      const stats = { ai: 'normal', ...ENEMIES[type] }
-
+      const stats = { ai: 'normal', particleScale: 2, ...ENEMIES[type] }
       stats.hp *= this.getHPMultiplier()
       stats.xp *= this.getXPMultiplier()
       stats.speed *= this.getSpeedMultiplier()
@@ -131,17 +130,17 @@ export class EnemySpawner {
   getSpawnTypes() {
     return [
       // prettier-ignore
-      { slime: 1, gremlin: 17 },
+      { slime_small: 1, gremlin: 17 },
       // prettier-ignore
-      { slime: 1, gremlin: 15, skull: 18 },
+      { slime_small: 1, gremlin: 15, skull_small: 15, slime_big: 18 },
       // prettier-ignore
-      { slime: 1, gremlin: 8, skull: 14, knight: 17, goblin: 19 },
+      { slime_small: 1, gremlin: 8, skull_small: 14, knight: 17, goblin: 19 },
       // prettier-ignore
-      { slime: 1, gremlin: 6, skull: 13, knight: 16, goblin: 18, largeKnight: 19 },
+      { slime_small: 1, gremlin: 6, skull_small: 13, knight: 16, goblin: 18, largeKnight: 19 },
       // prettier-ignore
-      { slime: 1, gremlin: 6, skull: 11, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
+      { slime_small: 1, gremlin: 6, skull_small: 11, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
       // prettier-ignore
-      { slime: 1, gremlin: 6, skull: 10, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
+      { slime_small: 1, gremlin: 6, skull_small: 10, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
     ][this.getLevel()]
   }
 
