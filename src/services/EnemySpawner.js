@@ -6,6 +6,7 @@ const SPAWN_DISTANCE = 300
 // fodder are always slow, weak, small, and collide
 // moderate are flyers or enhanced fodder
 // strong/elite can shoot at player or perform other attacks
+// TODO: make gremlins and skulls do different things
 
 // enemy types:
 // basic melee
@@ -34,7 +35,7 @@ export class EnemySpawner {
         },
       })
       .stop()
-    // this.emitter.setDepth(3)
+
     this.particles.setDepth(3)
 
     this.explosions = new Explosions(this.scene)
@@ -126,12 +127,26 @@ export class EnemySpawner {
 
   getSpawnTypes() {
     return [
-      { knight: 1 },
-      { knight: 1, eliteKnight: 20 },
-      { knight: 1, eliteKnight: 19, largeKnight: 20 },
-      { knight: 1, eliteKnight: 18, largeKnight: 19 },
-      { knight: 1, eliteKnight: 18, largeKnight: 19, largeEliteKnight: 20 },
-      { knight: 1, eliteKnight: 18, largeKnight: 19, largeEliteKnight: 20 },
+      { knight: 1, skull: 8, gremlin: 15 },
+      { knight: 1, skull: 7, gremlin: 14, eliteKnight: 20 },
+      { knight: 1, skull: 7, gremlin: 14, eliteKnight: 19, largeKnight: 20 },
+      { knight: 1, skull: 6, gremlin: 13, eliteKnight: 18, largeKnight: 19 },
+      {
+        knight: 1,
+        skull: 6,
+        gremlin: 13,
+        eliteKnight: 18,
+        largeKnight: 19,
+        largeEliteKnight: 20,
+      },
+      {
+        knight: 1,
+        skull: 6,
+        gremlin: 13,
+        eliteKnight: 18,
+        largeKnight: 19,
+        largeEliteKnight: 20,
+      },
     ][this.getLevel()]
   }
 

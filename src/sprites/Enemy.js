@@ -50,10 +50,15 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimerMax = 40
     this.xp = xp
     this.movePenalty = 1
+    this._tint = stats.tint
     this.target = this.scene.player
     this.setMass(stats.mass)
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)
+
+    if (type === 'skull') {
+      this.anims.currentAnim.msPerFrame = Phaser.Math.RND.between(300, 1200)
+    }
   }
 
   flash(tint = 0xffffff, duration = 150) {
@@ -99,6 +104,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       Phaser.Math.RND.between(6, 12) / 10,
     )
     if (this.scene.player.form === 'light') this.scene.player.tp += 2.5
+    this.scene.enemySpawner.emitter.setTint(this._tint || 0x00aaff)
     this.scene.enemySpawner.emitter.explode(
       Phaser.Math.RND.between(3, 6),
       this.x,

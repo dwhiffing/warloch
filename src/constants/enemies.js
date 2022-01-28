@@ -1,4 +1,26 @@
 export const ENEMIES = {
+  skull: {
+    type: 'skull',
+    bodySize: [12, 19],
+    bodyOffset: [10, 12],
+    speed: 30,
+    tint: 0xffffff,
+    hp: 2,
+    damage: 3,
+    xp: 5,
+    mass: 10,
+  },
+  gremlin: {
+    type: 'gremlin',
+    bodySize: [15, 19],
+    bodyOffset: [8, 12],
+    speed: 30,
+    tint: 0x00aa55,
+    hp: 2,
+    damage: 3,
+    xp: 5,
+    mass: 10,
+  },
   knight: {
     type: 'knight',
     bodySize: [12, 19],

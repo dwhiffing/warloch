@@ -17,7 +17,7 @@ export default class extends Phaser.Scene {
   init() {
     this.input.mouse.disableContextMenu()
 
-    SPRITES.forEach(({ key, name }) => createAnim(this, key, `${name}_Walk_`))
+    SPRITES.forEach((sprite) => createAnim(this, sprite))
     this.anims.create({
       key: 'goblin',
       frames: [{ key: 'tiles', frame: 'goblin.png' }],
