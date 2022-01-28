@@ -6,8 +6,8 @@ import { Player } from '../sprites/Player'
 import { BACKGROUND_TILES, SPRITES } from '../constants'
 import { createAnim } from '../utils'
 
-const WIDTH = 1200
-const HEIGHT = 1200
+const WIDTH = 1024
+const HEIGHT = 1024
 
 export default class extends Phaser.Scene {
   constructor() {

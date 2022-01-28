@@ -322,7 +322,7 @@
 },
 {
 	"filename": "Mage_Idle_1.png",
-	"frame": {"x":512,"y":34,"w":16,"h":20},
+	"frame": {"x":530,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -354,7 +354,7 @@
 },
 {
 	"filename": "Mage_Walk_1.png",
-	"frame": {"x":494,"y":34,"w":16,"h":20},
+	"frame": {"x":512,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -370,7 +370,7 @@
 },
 {
 	"filename": "Mage_Walk_3.png",
-	"frame": {"x":530,"y":34,"w":16,"h":18},
+	"frame": {"x":474,"y":44,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":13,"w":16,"h":18},
@@ -530,7 +530,7 @@
 },
 {
 	"filename": "shot-cross.png",
-	"frame": {"x":459,"y":34,"w":8,"h":8},
+	"frame": {"x":481,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -562,7 +562,7 @@
 },
 {
 	"filename": "shot-rocket.png",
-	"frame": {"x":449,"y":34,"w":8,"h":8},
+	"frame": {"x":471,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -570,7 +570,7 @@
 },
 {
 	"filename": "shot-shotgun.png",
-	"frame": {"x":439,"y":34,"w":8,"h":8},
+	"frame": {"x":461,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -586,7 +586,7 @@
 },
 {
 	"filename": "shot-tracer.png",
-	"frame": {"x":449,"y":34,"w":8,"h":8},
+	"frame": {"x":471,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -618,7 +618,7 @@
 },
 {
 	"filename": "skull_Walk_1.png",
-	"frame": {"x":474,"y":34,"w":18,"h":22},
+	"frame": {"x":492,"y":34,"w":18,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":7,"y":4,"w":18,"h":22},
@@ -647,6 +647,22 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":9,"w":32,"h":14},
 	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "xp1.png",
+	"frame": {"x":451,"y":34,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "xp2.png",
+	"frame": {"x":439,"y":34,"w":10,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":13,"w":10,"h":8},
+	"sourceSize": {"w":32,"h":32}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
@@ -655,6 +671,6 @@
 	"format": "RGBA8888",
 	"size": {"w":712,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:580ce2626613585b87c0c0a5cd7b4d77:1e984206fdeae1e285850e2437ac2ec5:accbe1e7e294ded8391337fc1c446319$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1daf940778905ad25b1933ca1ffff2ad:30a7151f2b126251e878a91721d869f5:accbe1e7e294ded8391337fc1c446319$"
 }
 }
