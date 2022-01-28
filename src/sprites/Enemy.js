@@ -13,7 +13,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.active) return
 
     if (this.hitTimer > 0) this.hitTimer--
-    this.hpBar.move(this.x, this.y + 16 - this.body.height)
+    this.hpBar.move(this.x, this.y + 4 - this.body.height)
 
     const gun = this.scene.enemySpawner.gun
     const player = this.scene.player
