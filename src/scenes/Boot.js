@@ -50,7 +50,10 @@ export default class extends Phaser.Scene {
     this.load.audio(`transform`, `assets/sounds/transform.wav`)
     this.load.audio(`transform2`, `assets/sounds/transform2.wav`)
 
-    this.load.image('background', 'assets/images/background.png')
+    this.load.spritesheet('grass', 'assets/images/grass.png', {
+      frameWidth: 16,
+      frameHeight: 16,
+    })
     this.load.atlas(
       'tiles',
       'assets/images/tiles.png',

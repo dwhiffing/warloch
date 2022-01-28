@@ -3,11 +3,11 @@ import { OrbSpawner } from '../services/OrbSpawner'
 import { InputHandler } from '../services/InputHandler'
 import { Hud } from '../services/Hud'
 import { Player } from '../sprites/Player'
-import { SPRITES } from '../constants'
+import { BACKGROUND_TILES, SPRITES } from '../constants'
 import { createAnim } from '../utils'
 
-const WIDTH = 2240
-const HEIGHT = 2240
+const WIDTH = 1200
+const HEIGHT = 1200
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -57,7 +57,17 @@ export default class extends Phaser.Scene {
 
     this.physics.world.setBounds(0, 0, WIDTH, HEIGHT)
     this.cameras.main.setBounds(0, 0, WIDTH, HEIGHT)
-    this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0)
+
+    let data = []
+    for (let y = 0; y < Math.floor(WIDTH / 16); y++) {
+      let row = []
+      for (let x = 0; x < Math.floor(HEIGHT / 16); x++) {
+        row.push(Phaser.Math.RND.weightedPick(BACKGROUND_TILES))
+      }
+      data.push(row)
+    }
+    const map = this.make.tilemap({ data, tileWidth: 16, tileHeight: 16 })
+    map.createLayer(0, map.addTilesetImage('grass'), 0, 0)
 
     this.player = this.add.existing(new Player(this, WIDTH / 2, HEIGHT / 2))
     this.player.init()

@@ -7,7 +7,7 @@ import BootScene from './scenes/Boot'
 
 new Phaser.Game({
   type: Phaser.AUTO,
-  backgroundColor: '#0377C2',
+  backgroundColor: '#161616',
   parent: 'phaser',
   width: 500,
   height: 270,
