@@ -13,7 +13,7 @@ export default class extends Phaser.Scene {
     const w = this.cameras.main.width - 40
     const h = this.cameras.main.height - 40
     const _w = width / 2
-    this.name = localStorage.getItem('ggj22-name')
+    this.name = localStorage.getItem('warloch-name')
 
     this.add
       .text(_w, 15, 'Highscores', { font: '24px sans-serif' })
@@ -71,7 +71,7 @@ export default class extends Phaser.Scene {
   }
 
   postScore = (score) => {
-    this.name = prompt('Name?', localStorage.getItem('ggj22-name'))
+    this.name = prompt('Name?', localStorage.getItem('warloch-name'))
 
     postScore({ playerName: this.name, score }).then(this.updateScores)
   }

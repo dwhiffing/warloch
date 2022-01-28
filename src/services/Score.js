@@ -5,11 +5,11 @@ const prefix = 'https://www.highscores.ovh/api/highscore'
 const HIGHSCORE_APP_ID = '2433fe8f-c875-44da-b0da-64e2ae4a16c3'
 const HIGHSCORE_APP_SECRET = '0986b41f-9dcf-4192-8e06-f77e0ba2c7e5'
 
-if (!localStorage.getItem('ggj22-id'))
-  localStorage.setItem('ggj22-id', uuidv4())
+if (!localStorage.getItem('warloch-id'))
+  localStorage.setItem('warloch-id', uuidv4())
 
 export const postScore = ({ playerName, score }) => {
-  const playerId = `${playerName}-${localStorage.getItem('ggj22-id')}`
+  const playerId = `${playerName}-${localStorage.getItem('warloch-id')}`
   const checksum = md5.hex(playerId + score + HIGHSCORE_APP_SECRET)
   return fetch(
     `${prefix}?appId=${HIGHSCORE_APP_ID}&playerId=${playerId}&playerName=${playerName}&score=${score}&checksum=${checksum}`,

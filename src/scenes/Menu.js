@@ -22,7 +22,7 @@ export default class extends Phaser.Scene {
 
     this.add.existing(new Button(this, _w, _h, 'new game', this.newGame))
 
-    if (localStorage.getItem('ggj22-save'))
+    if (localStorage.getItem('warloch-save'))
       this.add.existing(
         new Button(this, _w, _h + 30, 'continue', this.continue),
       )
@@ -46,7 +46,7 @@ export default class extends Phaser.Scene {
   update() {}
 
   newGame = () => {
-    localStorage.removeItem('ggj22-save')
+    localStorage.removeItem('warloch-save')
     this.scene.start('Game')
   }
 

@@ -98,7 +98,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.setVisible(false).setActive(false)
     this.guns.forEach((g) => (g.stop = true))
     this.scene.time.delayedCall(2000, () => {
-      localStorage.removeItem('ggj22-save')
+      localStorage.removeItem('warloch-save')
       const score = this.scene.registry.get('score')
       this.scene.registry.reset()
       this.scene.registry.events.removeAllListeners()

@@ -139,7 +139,7 @@ export default class extends Phaser.Scene {
   }
 
   loadGame = () => {
-    const save = localStorage.getItem('ggj22-save')
+    const save = localStorage.getItem('warloch-save')
     if (save) {
       Object.entries(JSON.parse(save)).forEach(([k, v]) => {
         this.registry.set(k, v)
@@ -150,6 +150,6 @@ export default class extends Phaser.Scene {
   }
 
   saveGame = () => {
-    localStorage.setItem('ggj22-save', JSON.stringify(this.registry.values))
+    localStorage.setItem('warloch-save', JSON.stringify(this.registry.values))
   }
 }

@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.3.4</string>
         <key>fileName</key>
-        <string>/Users/dan/code/ggj22/images/packer.tps</string>
+        <string>/Users/dan/code/warloch/images/packer.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">

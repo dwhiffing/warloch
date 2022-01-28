@@ -1,5 +1,5 @@
 {
-  "name": "ggj22",
+  "name": "warloch",
   "version": "0.0.1",
   "description": "A game",
   "main": "game/index.js",
@@ -12,7 +12,7 @@
   "author": "Daniel Whiffing <danielwhiffing@gmail.com> (http://directive.software/)",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
-  "homepage": "https://dwhiffing.github.io/ggj22",
+  "homepage": "https://dwhiffing.github.io/warloch",
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/plugin-transform-runtime": "^7.16.10",
