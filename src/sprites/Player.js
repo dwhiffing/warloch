@@ -145,6 +145,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       // TODO: trigger spawn of a bunch of enemies right before spawn?
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
+      this.setMass(50)
 
       // TODO: need to make the blast gun stats based on all player unlocked guns
       // or maybe instead, can do a modified fire of each gun
@@ -156,6 +157,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     } else {
       this.adrenaline = true
       this.setTint(0xff0000)
+      this.setMass(5)
       this.scene.time.delayedCall(5000, () => {
         this.clearTint()
         this.adrenaline = false

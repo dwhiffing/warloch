@@ -1,20 +1,34 @@
-skulls need to not collide with enemies
+save after level up
+allow big guy to push enemies around and take basically no damage
+add ai/variants to enemy constants, skull ai should be "flying" instead
+add new skull art and split into small/big skull
+skull gun should make different noise
+use different death sounds for different enemies
+use different material sounds for different enemy impacts
+spawn a bunch of weak enemies while you are transformed
 
-better spawning logic so groups of enemies spawn and swarm from random directions
-  ( should spawn a large enemy with a bunch of smaller enemies around it)
-work on enemy/weapon balance
 
+better UI: pixel font, better bars and buttons
 add instructions
 polish audio (probably fewer bullet impact sounds)
+skulls need to not collide with enemies
 
-level background art
+work on enemy/weapon balance
+better spawning logic so groups of enemies spawn and swarm from random directions
+  ( should spawn a large enemy with a bunch of smaller enemies around it)
+  ( should try to ensure that the level is always full of enemies)
+  idea: make circle in random position found by spawn, and instead find a bunch of random positions within it
+  ensure none of those positions are within n distance of eachother
+  place big monster in center
+  place smaller monsters all around
+
 menu title art
-menu background
+menu/score background
 better gun art
 add bullet trails effects for weapons
 Better weapon names/icons/descriptions
 UI indicating current weapons/upgrades
-better buttons
+gremlins need own ai?
 
 mobile controls
 bug where shotgun doesn't aim at pointer
