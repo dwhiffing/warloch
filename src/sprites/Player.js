@@ -48,6 +48,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.movePenalty += 0.01
     }
 
+    const { scrollX, scrollY } = this.scene.cameras.main
+    const { x, y } = this.scene.input.activePointer
     this.hp += this.regen
     if (this.hp > this.maxHP) this.hp = this.maxHP
 
@@ -56,7 +58,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       .map((w) => (this.form === 'light' ? w.light : w.dark))
     this.guns.forEach((gun) => {
       gun.update()
-      if (activeWeapons.includes(gun.type)) gun.shoot()
+      if (activeWeapons.includes(gun.type)) gun.shoot(scrollX + x, scrollY + y)
     })
   }
 

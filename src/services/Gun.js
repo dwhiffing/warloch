@@ -51,8 +51,6 @@ export class Gun {
     if (this.shotTimer > 0) return
 
     this.shotTimer = this.stats.delay
-    const { width, height } = this.scene.cameras.main
-
     this.scene.sound.play(this.stats.soundKey || 'shoot', {
       rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 80,
       volume: 0.1,
@@ -98,10 +96,7 @@ export class Gun {
 
       // handle guns that just shoot toward the cursor
       if (!target) {
-        bullet.fire(
-          getAngle(width / 2, height / 2, x, y) + finalSpread,
-          this.stats,
-        )
+        bullet.fire(getAngle(px, py, x, y) + finalSpread, this.stats)
 
         continue
       }
