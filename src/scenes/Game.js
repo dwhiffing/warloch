@@ -24,6 +24,11 @@ export default class extends Phaser.Scene {
       repeat: -1,
     })
     this.anims.create({
+      key: 'slime',
+      frames: [{ key: 'tiles', frame: 'slime.png' }],
+      repeat: -1,
+    })
+    this.anims.create({
       key: 'explosion',
       frames: this.anims.generateFrameNames('tiles', {
         prefix: 'explosion',

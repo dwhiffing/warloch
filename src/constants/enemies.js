@@ -1,13 +1,13 @@
 export const ENEMIES = {
-  skull: {
-    type: 'skull',
+  slime: {
+    type: 'slime',
     bodySize: [12, 19],
     bodyOffset: [10, 12],
     speed: 30,
     tint: 0xffffff,
-    hp: 2,
+    hp: 1,
     damage: 3,
-    xp: 5,
+    xp: 2,
     mass: 10,
   },
   gremlin: {
@@ -16,9 +16,20 @@ export const ENEMIES = {
     bodyOffset: [8, 12],
     speed: 30,
     tint: 0x00aa55,
-    hp: 12,
+    hp: 3,
     damage: 3,
-    xp: 25,
+    xp: 10,
+    mass: 10,
+  },
+  skull: {
+    type: 'skull',
+    bodySize: [12, 19],
+    bodyOffset: [10, 12],
+    speed: 30,
+    tint: 0xffffff,
+    hp: 5,
+    damage: 3,
+    xp: 5,
     mass: 10,
   },
   knight: {
@@ -26,9 +37,9 @@ export const ENEMIES = {
     bodySize: [12, 19],
     bodyOffset: [10, 12],
     speed: 30,
-    hp: 4,
+    hp: 10,
     damage: 3,
-    xp: 10,
+    xp: 25,
     mass: 10,
   },
   eliteKnight: {

@@ -322,7 +322,7 @@
 },
 {
 	"filename": "Mage_Idle_1.png",
-	"frame": {"x":530,"y":34,"w":16,"h":20},
+	"frame": {"x":548,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -354,7 +354,7 @@
 },
 {
 	"filename": "Mage_Walk_1.png",
-	"frame": {"x":512,"y":34,"w":16,"h":20},
+	"frame": {"x":530,"y":34,"w":16,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":20},
@@ -362,7 +362,7 @@
 },
 {
 	"filename": "Mage_Walk_2.png",
-	"frame": {"x":548,"y":34,"w":16,"h":18},
+	"frame": {"x":492,"y":44,"w":16,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":12,"w":16,"h":18},
@@ -530,7 +530,7 @@
 },
 {
 	"filename": "shot-cross.png",
-	"frame": {"x":481,"y":34,"w":8,"h":8},
+	"frame": {"x":493,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -562,7 +562,7 @@
 },
 {
 	"filename": "shot-rocket.png",
-	"frame": {"x":471,"y":34,"w":8,"h":8},
+	"frame": {"x":483,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -570,7 +570,7 @@
 },
 {
 	"filename": "shot-shotgun.png",
-	"frame": {"x":461,"y":34,"w":8,"h":8},
+	"frame": {"x":473,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -586,7 +586,7 @@
 },
 {
 	"filename": "shot-tracer.png",
-	"frame": {"x":471,"y":34,"w":8,"h":8},
+	"frame": {"x":483,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -618,7 +618,7 @@
 },
 {
 	"filename": "skull_Walk_1.png",
-	"frame": {"x":492,"y":34,"w":18,"h":22},
+	"frame": {"x":510,"y":34,"w":18,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":7,"y":4,"w":18,"h":22},
@@ -630,6 +630,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":9,"y":17,"w":12,"h":12},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "slime.png",
+	"frame": {"x":451,"y":34,"w":10,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":11,"w":10,"h":8},
 	"sourceSize": {"w":32,"h":32}
 },
 {
@@ -650,7 +658,7 @@
 },
 {
 	"filename": "xp1.png",
-	"frame": {"x":451,"y":34,"w":8,"h":8},
+	"frame": {"x":463,"y":34,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":12,"w":8,"h":8},
@@ -671,6 +679,6 @@
 	"format": "RGBA8888",
 	"size": {"w":712,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1daf940778905ad25b1933ca1ffff2ad:30a7151f2b126251e878a91721d869f5:accbe1e7e294ded8391337fc1c446319$"
+	"smartupdate": "$TexturePacker:SmartUpdate:9ddbd46945da5964ec181364045ac525:fafacf2e1c296a54f3cc6d5e1829dccc:accbe1e7e294ded8391337fc1c446319$"
 }
 }
