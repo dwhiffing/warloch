@@ -82,7 +82,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hpBar.set(this.hp)
 
     this.scene.sound.play(`Metal-medium-${Phaser.Math.RND.between(0, 4)}`, {
-      volume: 0.1,
+      volume: 0.05,
       rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
     })
 

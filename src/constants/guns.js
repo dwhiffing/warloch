@@ -187,6 +187,7 @@ export const GUNS = {
     speed: 0,
     range: 1,
     depth: 1,
+    poison: 100,
     maxCount: 1,
     frame: 'shot-garlic.png',
     size: 6,
@@ -225,6 +226,7 @@ export const GUNS = {
     speed: 150,
     range: 120,
     depth: 1,
+    poison: 100,
     maxCount: 3,
     frame: 'shot-water.png',
     size: 2.5,
@@ -325,6 +327,6 @@ export const GUNS = {
     frame: 'shot-tracer.png',
     size: 2,
     bodySize: 4,
-    soundRate: 1.8,
+    soundRate: 0.4,
   },
 }

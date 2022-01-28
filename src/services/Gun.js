@@ -52,8 +52,8 @@ export class Gun {
 
     this.shotTimer = this.stats.delay
     this.scene.sound.play(this.stats.soundKey || 'shoot', {
-      rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 80,
-      volume: 0.1,
+      rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 30,
+      volume: 0.03,
     })
 
     let { x: px, y: py } = this.source
