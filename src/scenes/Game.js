@@ -78,11 +78,13 @@ export default class extends Phaser.Scene {
     this.inputHandler = new InputHandler(this)
 
     const enemies = this.enemySpawner.enemies
+    const enemyBullets = this.enemySpawner.gun.bullets
     const orbs = this.orbSpawner.orbs
     const bullets = this.player.bullets
 
     this.physics.add.collider(enemies)
     this.physics.add.collider(this.player, enemies)
+    this.physics.add.overlap(enemyBullets, this.player, this.shootPlayer)
     this.physics.add.overlap(bullets, enemies, this.shootEnemy)
     this.physics.add.overlap(this.player, orbs, this.getOrb)
 
@@ -109,6 +111,12 @@ export default class extends Phaser.Scene {
     this.player.update(time, delta)
     this.enemySpawner.update(time, delta)
     this.inputHandler.update(time, delta)
+  }
+
+  shootPlayer(player, bullet) {
+    if (!bullet.active || bullet.dying) return
+    player.hit(bullet.damage)
+    bullet.hit(player)
   }
 
   shootEnemy(bullet, enemy) {

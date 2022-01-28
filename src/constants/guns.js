@@ -72,7 +72,7 @@ export const GUNS = {
   bubbler: {
     name: 'bubbler',
     damage: 0.2,
-    delay: 15,
+    delay: 12,
     count: 1,
     speed: 150,
     range: 150,
@@ -314,5 +314,17 @@ export const GUNS = {
     bodySize: 10,
     spread: Math.PI * 2,
     soundRate: 0.5,
+  },
+  skeleton: {
+    name: 'basic',
+    damage: 1,
+    delay: 0,
+    speed: 60,
+    range: 250,
+    depth: 20,
+    frame: 'shot-tracer.png',
+    size: 2,
+    bodySize: 4,
+    soundRate: 1.8,
   },
 }

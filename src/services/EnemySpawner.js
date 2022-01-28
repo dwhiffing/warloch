@@ -1,6 +1,7 @@
 import { ENEMIES } from '../constants'
 import { Enemy } from '../sprites/Enemy'
 import { Explosions } from './Explosions'
+import { Gun } from './Gun'
 
 const SPAWN_DISTANCE = 300
 // fodder are always slow, weak, small, and collide
@@ -20,6 +21,8 @@ export class EnemySpawner {
     this.target = this.scene.player
     this.physics = this.scene.physics
     this.spawnTimer = 3
+
+    this.gun = new Gun(this.scene, 'skeleton')
 
     this.particles = this.scene.add.particles('tiles')
     this.emitter = this.particles
@@ -127,10 +130,10 @@ export class EnemySpawner {
 
   getSpawnTypes() {
     return [
-      { knight: 1, skull: 8, gremlin: 15 },
-      { knight: 1, skull: 7, gremlin: 14, eliteKnight: 20 },
-      { knight: 1, skull: 7, gremlin: 14, eliteKnight: 19, largeKnight: 20 },
-      { knight: 1, skull: 6, gremlin: 13, eliteKnight: 18, largeKnight: 19 },
+      { knight: 1, skull: 18, gremlin: 19 },
+      { knight: 1, skull: 17, gremlin: 18, eliteKnight: 20 },
+      { knight: 1, skull: 16, gremlin: 17, eliteKnight: 19, largeKnight: 20 },
+      { knight: 1, skull: 15, gremlin: 16, eliteKnight: 18, largeKnight: 19 },
       {
         knight: 1,
         skull: 6,
@@ -177,5 +180,7 @@ export class EnemySpawner {
     else return 5
   }
 
-  update() {}
+  update() {
+    this.gun.update()
+  }
 }

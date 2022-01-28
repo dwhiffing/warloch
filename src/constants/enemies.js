@@ -16,9 +16,9 @@ export const ENEMIES = {
     bodyOffset: [8, 12],
     speed: 30,
     tint: 0x00aa55,
-    hp: 2,
+    hp: 12,
     damage: 3,
-    xp: 5,
+    xp: 25,
     mass: 10,
   },
   knight: {
@@ -26,9 +26,9 @@ export const ENEMIES = {
     bodySize: [12, 19],
     bodyOffset: [10, 12],
     speed: 30,
-    hp: 2,
+    hp: 4,
     damage: 3,
-    xp: 5,
+    xp: 10,
     mass: 10,
   },
   eliteKnight: {
@@ -38,7 +38,7 @@ export const ENEMIES = {
     speed: 20,
     hp: 20,
     damage: 6,
-    xp: 50,
+    xp: 25,
     mass: 10,
   },
   largeKnight: {
@@ -48,7 +48,7 @@ export const ENEMIES = {
     speed: 10,
     hp: 50,
     damage: 8,
-    xp: 100,
+    xp: 50,
     mass: 10,
   },
   goblin: {
@@ -58,7 +58,7 @@ export const ENEMIES = {
     speed: 10,
     hp: 50,
     damage: 8,
-    xp: 50,
+    xp: 25,
     mass: 10,
   },
   largeEliteKnight: {
@@ -68,7 +68,7 @@ export const ENEMIES = {
     speed: 10,
     hp: 100,
     damage: 10,
-    xp: 150,
+    xp: 100,
     mass: 10,
   },
 }

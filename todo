@@ -1,7 +1,5 @@
-skull shots need to hit player
 skulls need to not collide with enemies
 
-make upgrade distribution random again
 better spawning logic so groups of enemies spawn and swarm from random directions
   ( should spawn a large enemy with a bunch of smaller enemies around it)
 work on enemy/weapon balance

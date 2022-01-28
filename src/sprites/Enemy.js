@@ -15,20 +15,28 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (this.hitTimer > 0) this.hitTimer--
     this.hpBar.move(this.x, this.y + 16 - this.body.height)
 
+    const gun = this.scene.enemySpawner.gun
+    const player = this.scene.player
     const { Distance, Angle, RND } = Phaser.Math
-    const dist = Distance.BetweenPoints(this, this.target)
+    const dist = Distance.BetweenPoints(this, player)
     this.setPushable(dist > 20)
 
     if (this.updateTimer-- > 0) return
 
-    const offset = Math.PI / 2
-    const angle = Angle.Wrap(Angle.BetweenPoints(this, this.target) + offset)
+    const angle = Angle.Wrap(Angle.BetweenPoints(this, player) + Math.PI / 2)
     this.setFlipX(angle < 0)
     this.updateTimer = RND.between(30, 60)
 
-    if (dist < 19 && this.hitTimer <= 0) {
+    if (this.type === 'skull') {
+      this.target = {}
+      this.target.x = player.x + Phaser.Math.RND.between(-200, 200)
+      this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
+      this.updateTimer = RND.between(300, 200)
+      gun.source = this
+      gun.shoot(player.x, player.y)
+    } else if (dist < 19 && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
-      this.target.hit(this.damage)
+      player.hit(this.damage)
     }
 
     const { x, y } = this.target
@@ -49,6 +57,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitTimer = 0
     this.hitTimerMax = 40
     this.xp = xp
+    this.type = type
     this.movePenalty = 1
     this._tint = stats.tint
     this.target = this.scene.player
