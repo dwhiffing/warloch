@@ -18,12 +18,7 @@ export default class extends Phaser.Scene {
     const _w = width / 2
     const _h = height / 2
 
-    this.add
-      .text(_w, height / 4, 'GGJ2022', {
-        fontSize: 42,
-        fontFamily: 'sans-serif',
-      })
-      .setOrigin(0.5)
+    this.add.image(_w, height / 4, 'title')
 
     this.add.existing(new Button(this, _w, _h, 'new game', this.newGame))
 
