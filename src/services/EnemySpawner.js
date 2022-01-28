@@ -125,7 +125,7 @@ export class EnemySpawner {
   }
 
   getXPMultiplier() {
-    return [1, 1, 1, 1, 1, 1][this.getLevel()]
+    return [1, 1, 1.25, 1.5, 1.75, 2][this.getLevel()]
   }
 
   getSpawnTypes() {
