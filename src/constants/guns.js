@@ -324,7 +324,7 @@ export const GUNS = {
     speed: 60,
     range: 250,
     depth: 20,
-    frame: 'shot-tracer.png',
+    frame: 'shot-enemy.png',
     size: 2,
     bodySize: 4,
     soundRate: 0.4,

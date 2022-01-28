@@ -120,7 +120,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.enemySpawner.emitter.explode(
       Phaser.Math.RND.between(3, 6),
       this.x,
-      this.y,
+      this.y - 10,
     )
 
     this.scene.sound.play(`death-${Phaser.Math.RND.between(0, 3)}`, {

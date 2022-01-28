@@ -88,7 +88,7 @@ export class EnemySpawner {
       Object.entries(this.getSpawnTypes()).forEach(([k, v]) => {
         if (typeRoll >= v) type = k
       })
-      const stats = { ai: 'normal', particleScale: 2, ...ENEMIES[type] }
+      const stats = { ai: 'normal', particleScale: 1, ...ENEMIES[type] }
       stats.hp *= this.getHPMultiplier()
       stats.xp *= this.getXPMultiplier()
       stats.speed *= this.getSpeedMultiplier()
