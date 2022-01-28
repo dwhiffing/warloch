@@ -42,7 +42,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     this.setAcceleration(0)
     this.setDrag(150)
-    this.tp += this.form === 'light' ? 0.005 : -0.015
+    this.tp += this.form === 'light' ? 0.005 : -0.05
 
     if (this.movePenalty < 1) {
       this.movePenalty += 0.01
