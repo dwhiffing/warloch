@@ -57,6 +57,7 @@ export default class extends Phaser.Scene {
 
     this.game.events.addListener(Phaser.Core.Events.BLUR, this.pause)
     this.game.events.addListener(Phaser.Core.Events.FOCUS, this.unpause)
+    this.events.on('resume', this.saveGame)
 
     this.time.addEvent({ repeat: -1, delay: 15000, callback: this.saveGame })
 
