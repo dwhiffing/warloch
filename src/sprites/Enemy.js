@@ -150,6 +150,16 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       Phaser.Math.RND.between(6, 12) / 10,
     )
 
+    if (this.type === 'slime_big') {
+      this.scene.enemySpawner.spawnGroup(
+        this.x,
+        this.y,
+        'slime_small',
+        Phaser.Math.RND.between(4, 8),
+        3,
+      )
+    }
+
     if (this.scene.player.form === 'light') this.scene.player.tp += this.level
 
     this.scene.enemySpawner.emitter.setTint(this.particleTint || 0x00aaff)

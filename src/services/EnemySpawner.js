@@ -56,14 +56,12 @@ export class EnemySpawner {
     }
   }
 
-  spawnGroup = (type, count = this.getSpawnCount()) => {
+  spawnGroup = (x, y, type, count = this.getSpawnCount(), size = 50) => {
     const dist = this.spawnDistance
     const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
-    const circle = new Phaser.Geom.Circle(
-      this.target.x + vel.x,
-      this.target.y + vel.y,
-      50,
-    )
+    x = x || this.target.x + vel.x
+    y = y || this.target.y + vel.y
+    const circle = new Phaser.Geom.Circle(x, y, size)
     for (let i = 0; i < count; i++) {
       const { x, y } = circle.getRandomPoint()
       if (this.target.form === 'dark') {
@@ -136,7 +134,7 @@ export class EnemySpawner {
     return [
       { slime_small: 1, goblin_small: 17 },
       // prettier-ignore
-      { slime_small: 1, goblin_small: 15, skull_small: 15, slime_big: 18 },
+      { slime_small: 1, goblin_small: 6, skull_small: 15, slime_big: 18 },
       // prettier-ignore
       { slime_small: 1, goblin_small: 8, skull_small: 14, knight_small: 17, goblin_big: 19 },
       // prettier-ignore
