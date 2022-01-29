@@ -1,31 +1,39 @@
+# work on enemy/weapon balance
+
+only allow up to 4 weapons?
+make weapons/upgrades distribution random after 1st level
+
+start 1-2 (level 1-5)
+  small slimes + small goblins
+early 2-5 (level 5-10)
+  small slimes + small goblins + small skulls
+mid 5-10 (level 10-15)
+  small/big slimes + small/big goblins + small skulls + small knights
+late 10-15 (level 15-20)
+  small/big slimes + small/big goblins + small/big knights + small/big skulls
+end 15+ (level 20+)
+  big slimes + big goblins + big knights + big skulls
+
 Gameplay
-  duplicator shouldn't effect enemy gun
-  work on enemy/weapon balance
-  only allow up to 4 weapons?
   spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
-  add dodge roll?
-  add bosses after certain amount of kills/time?
-  dropped powerups?
+  make small skulls fly through level
 
 UX
+  better menu (add instructions/credits)
   pixel font
   better bars
   better buttons
+  Better weapon names/icons/descriptions
   better score screen (should show if you topped your own score)
-  better menu (needs instructions/credits)
   better menu title art
   menu/score background
-  add instructions/credits
   mobile controls
-  Better weapon names/icons/descriptions
 
 visual
   better gun art
   add bullet trails effects for weapons
   UI indicating current weapons/upgrades
-  make slimes hop around
 
 audio
-  probably fewer bullet impact sounds
   use different death sounds for different enemies
   use different material sounds for different enemy impacts

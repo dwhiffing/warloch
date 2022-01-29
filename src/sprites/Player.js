@@ -82,9 +82,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   hit(damage) {
     if (!this.active) return
-    if (this.form === 'dark') damage *= 0.25
-    this.hp -= damage
-    if (this.form === 'dark') this.tp -= 3
+    if (this.form === 'dark') {
+      this.tp -= damage
+      this.damaged()
+    } else {
+      this.hp -= damage
+    }
   }
 
   die() {
@@ -126,6 +129,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
+  damaged = () => {
+    this.scene.cameras.main.shake(200, 0.01)
+    this.setTint(0xff0000)
+    this.scene.time.delayedCall(100, this.clearTint.bind(this))
+    this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
+      volume: 0.3,
+    })
+  }
+
   transform = () => {
     if (this.form === 'light' ? this.tp < this.maxTP : this.tp > 0) return
 
@@ -138,6 +150,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // if turning dark
     if (this.form === 'light') {
+      this.transformCount++
       // TODO: trigger spawn of a bunch of enemies right before spawn?
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
@@ -167,6 +180,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.form = this.form === 'light' ? 'dark' : 'light'
     if (this.form === 'light') this.body.setMaxSpeed(this.moveSpeed)
+  }
+
+  get transformCount() {
+    return this.scene.registry.get('transformCount') || 0
+  }
+
+  set transformCount(val) {
+    return this.scene.registry.set('transformCount', val)
   }
 
   get form() {
@@ -202,12 +223,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.hp > val) {
       this.movePenalty = 0.5
       if (this.hp <= this.maxHP) {
-        this.scene.cameras.main.shake(200, 0.01)
-        this.setTint(0xff0000)
-        this.scene.time.delayedCall(100, this.clearTint.bind(this))
-        this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
-          volume: 0.3,
-        })
+        this.damaged()
       }
     }
 
@@ -259,7 +275,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get nextXP() {
-    return Math.floor(this.prevXP + 300 * Math.pow(1.3, this.level - 1) - 250)
+    return Math.floor(this.prevXP + (200 * Math.pow(1.4, this.level - 1) - 150))
   }
 
   get level() {
@@ -288,12 +304,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   set tp(val) {
     if (this.transforming) return
 
-    this.scene.registry.set('tp', Math.max(0, Math.min(val, 100)))
+    this.scene.registry.set('tp', Math.max(0, Math.min(val, this.maxTP)))
 
     this.scene.hud?.set('tp', this.scene.registry.get('tp'))
 
     if (
-      (this.tp === 100 && this.form === 'light') ||
+      (this.tp === this.maxTP && this.form === 'light') ||
       (this.tp === 0 && this.form === 'dark')
     ) {
       this.startTransforming()
@@ -301,6 +317,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get maxTP() {
-    return 100
+    return 100 + (this.transformCount + 50)
   }
 }

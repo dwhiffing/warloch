@@ -6,9 +6,9 @@ export const WEAPONS = {
     dark: 'shotgun',
     levels: [
       {},
-      { health: ['+', 1], count: ['+', 1], damage: ['+', 0.3] },
-      { health: ['+', 2], count: ['+', 1], damage: ['+', 0.6] },
-      { health: ['+', 3], count: ['+', 2], damage: ['+', 1] },
+      { health: ['+', 0], count: ['+', 1], damage: ['+', 0.3] },
+      { health: ['+', 1], count: ['+', 1], damage: ['+', 0.6] },
+      { health: ['+', 2], count: ['+', 2], damage: ['+', 1] },
     ],
   },
   two: {
@@ -88,15 +88,15 @@ export const WEAPONS = {
       { damage: ['*', 3], delay: ['*', 0.6] },
     ],
   },
-  nine: {
-    name: 'nine',
-    light: 'tracer',
-    dark: 'tracer',
-    levels: [
-      {},
-      { damage: ['+', 1], delay: ['*', 0.9], range: ['*', 1.2] },
-      { damage: ['+', 2], delay: ['*', 0.8], range: ['*', 1.4] },
-      { damage: ['+', 3], delay: ['*', 0.7], range: ['*', 1.6] },
-    ],
-  },
+  // nine: {
+  //   name: 'nine',
+  //   light: 'tracer',
+  //   dark: 'tracer',
+  //   levels: [
+  //     {},
+  //     { damage: ['+', 1], delay: ['*', 0.9], range: ['*', 1.2] },
+  //     { damage: ['+', 2], delay: ['*', 0.8], range: ['*', 1.4] },
+  //     { damage: ['+', 3], delay: ['*', 0.7], range: ['*', 1.6] },
+  //   ],
+  // },
 }

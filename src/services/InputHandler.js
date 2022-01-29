@@ -31,7 +31,7 @@ export class InputHandler {
     this.onKey('SIX', () => this.player.levelUpgrade('six'))
     this.onKey('SEVEN', () => this.player.levelUpgrade('seven'))
     this.onKey('EIGHT', () => this.player.levelUpgrade('eight'))
-    this.onKey('NINE', () => this.player.levelUpgrade('nine'))
+    // this.onKey('NINE', () => this.player.levelUpgrade('nine'))
 
     this.onKey('Y', () => this.player.levelUpgrade('maxHP'))
     this.onKey('U', () => this.player.levelUpgrade('healthRegen'))

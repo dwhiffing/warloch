@@ -32,7 +32,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.target.x = player.x + Phaser.Math.RND.between(-200, 200)
       this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
       gun.source = this
-      gun.shoot(player.x, player.y)
+      let roll = Phaser.Math.RND.between(1, 20)
+      if (roll > 14) gun.shoot(player.x, player.y)
     } else if (dist < 19 && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
       player.hit(this.damage)
@@ -76,9 +77,11 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.speed = speed
     this.damage = damage
     this.hp = hp
+    this.maxHp = hp
     this.hitTimer = 0
     this.hitTimerMax = 40
     this.xp = xp
+    this.level = stats.level
     this.particleScale = stats.particleScale
     this.type = type
     this.ai = ai
@@ -105,7 +108,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hp -= bullet.damage
     this.hpBar.set(this.hp)
 
-    this.updateTimer = 10
+    this.updateTimer += Math.floor(bullet.damage / 2)
     this.setVelocity(0)
     this.tween?.remove()
     const angle = typeof bullet.target === 'number' ? bullet.target : 0
@@ -146,7 +149,9 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.y,
       Phaser.Math.RND.between(6, 12) / 10,
     )
-    if (this.scene.player.form === 'light') this.scene.player.tp += 2.5
+
+    if (this.scene.player.form === 'light') this.scene.player.tp += this.level
+
     this.scene.enemySpawner.emitter.setTint(this.particleTint || 0x00aaff)
     this.scene.enemySpawner.emitter.setScale(this.particleScale)
     this.scene.enemySpawner.emitter.explode(

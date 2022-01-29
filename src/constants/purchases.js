@@ -47,12 +47,12 @@ export const PURCHASES = {
     type: 'weapon',
     description: 'Boomerang shots',
   },
-  nine: {
-    name: 'Tracer',
-    key: 'nine',
-    type: 'weapon',
-    description: 'Piercing attacks',
-  },
+  // nine: {
+  //   name: 'Tracer',
+  //   key: 'nine',
+  //   type: 'weapon',
+  //   description: 'Piercing attacks',
+  // },
   //upgrades
   duplicator: {
     name: 'Duplicator',
