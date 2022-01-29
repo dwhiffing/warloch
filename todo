@@ -1,39 +1,42 @@
-add ai/variants to enemy constants, skull ai should be "flying" instead
-add new skull art and split into small/big skull
-use different death sounds for different enemies
-use different material sounds for different enemy impacts
-spawn a bunch of weak enemies while you are transformed
-make slimes hop around
-make gremlins run to random spots near the player instead of directly toward him
+Gameplay
+  enemies should spawn more frequently
+  player should level up faster (level 20 by 6/7 minutes)
+  better spawning logic so groups of enemies spawn and swarm from random directions
+    should spawn a large enemy with a bunch of smaller enemies around it
+    should try to ensure that the level is always full of enemies
+    spawn a bunch of weak enemies while you are transformed
+    idea: make circle in random position found by spawn, and instead find a bunch of random positions within it
+      ensure none of those positions are within n distance of eachother
+      place big monster in center
+      place smaller monsters all around
 
+  work on enemy/weapon balance
+  spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
+  small skull should shoot different shots than big skull?
+  make slimes hop around
+  make gremlins run to random spots near the player instead of directly toward him
+  add dodge roll?
+  add bosses after certain amount of kills/time?
+  dropped powerups?
 
-better UI: pixel font, better bars and buttons
-add instructions
-polish audio (probably fewer bullet impact sounds)
-skulls need to not collide with enemies
+UX
+  pixel font
+  better bars
+  better buttons
+  better score screen (should show if you topped your own score)
+  better menu (needs instructions/credits)
+  better menu title art
+  menu/score background
+  add instructions/credits
+  mobile controls
+  Better weapon names/icons/descriptions
 
-work on enemy/weapon balance
-better spawning logic so groups of enemies spawn and swarm from random directions
-  ( should spawn a large enemy with a bunch of smaller enemies around it)
-  ( should try to ensure that the level is always full of enemies)
-  idea: make circle in random position found by spawn, and instead find a bunch of random positions within it
-  ensure none of those positions are within n distance of eachother
-  place big monster in center
-  place smaller monsters all around
+visual
+  better gun art
+  add bullet trails effects for weapons
+  UI indicating current weapons/upgrades
 
-menu title art
-menu/score background
-better gun art
-add bullet trails effects for weapons
-Better weapon names/icons/descriptions
-UI indicating current weapons/upgrades
-gremlins need own ai?
-
-mobile controls
-bug where shotgun doesn't aim at pointer
-
-add dodge roll?
-add bosses after certain amount of kills/time?
-flying enemies?
-ranged enemies?
-dropped powerups?
+audio
+  probably fewer bullet impact sounds
+  use different death sounds for different enemies
+  use different material sounds for different enemy impacts

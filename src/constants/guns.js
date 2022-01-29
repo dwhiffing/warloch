@@ -87,6 +87,21 @@ export const GUNS = {
     bodySize: 6,
     soundRate: 1.8,
   },
+  // TODO: give tracer a line, make it randomly change angles
+  tracer: {
+    name: 'tracer',
+    damage: 1.5,
+    delay: 70,
+    speed: 150,
+    range: 150,
+    frame: 'shot-tracer.png',
+    size: 1,
+    bodySize: 5,
+    health: 10,
+    soundRate: 1.8,
+  },
+
+  // things that aim automatically toward an enemy
   bone: {
     name: 'bone',
     damage: 1.5,
@@ -103,21 +118,6 @@ export const GUNS = {
     reacquire: true,
     target: 'randomAngle',
   },
-  // TODO: give tracer a line, make it randomly change angles
-  tracer: {
-    name: 'tracer',
-    damage: 1.5,
-    delay: 70,
-    speed: 150,
-    range: 150,
-    frame: 'shot-tracer.png',
-    size: 1,
-    bodySize: 5,
-    health: 10,
-    soundRate: 1.8,
-  },
-
-  // things that aim automatically toward an enemy
   wand: {
     name: 'wand',
     damage: 1,

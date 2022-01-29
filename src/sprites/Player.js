@@ -238,7 +238,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get pickupRange() {
-    const obj = this.applyUpgrade('pickupRange', { pickupRange: 15 })
+    const obj = this.applyUpgrade('pickupRange', { pickupRange: 30 })
     return obj.pickupRange
   }
 
