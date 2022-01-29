@@ -42,7 +42,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     this.setAcceleration(0)
     this.setDrag(150)
-    this.tp += this.form === 'light' ? 0.005 : -0.05
+    this.tp += this.form === 'light' ? 0.005 : -0.02
 
     if (this.movePenalty < 1) {
       this.movePenalty += 0.01
@@ -150,7 +150,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // if turning dark
     if (this.form === 'light') {
-      this.transformCount++
       // TODO: trigger spawn of a bunch of enemies right before spawn?
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
@@ -164,6 +163,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setMaxSpeed(this.moveSpeed),
       )
     } else {
+      this.transformCount++
       this.adrenaline = true
       this.setTint(0xff0000)
       this.setMass(5)
@@ -275,7 +275,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get nextXP() {
-    return Math.floor(this.prevXP + (200 * Math.pow(1.4, this.level - 1) - 150))
+    return Math.floor(this.prevXP + (200 * Math.pow(1.3, this.level - 1) - 150))
   }
 
   get level() {
@@ -306,11 +306,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.registry.set('tp', Math.max(0, Math.min(val, this.maxTP)))
 
-    this.scene.hud?.set('tp', this.scene.registry.get('tp'))
+    this.scene.hud?.set('tp', this.scene.registry.get('tp'), this.maxTP)
 
     if (
-      (this.tp === this.maxTP && this.form === 'light') ||
-      (this.tp === 0 && this.form === 'dark')
+      (this.tp >= this.maxTP && this.form === 'light') ||
+      (this.tp <= 0 && this.form === 'dark')
     ) {
       this.startTransforming()
     }
