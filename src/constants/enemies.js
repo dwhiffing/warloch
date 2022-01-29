@@ -13,8 +13,8 @@ export const ENEMIES = {
     xp: 2,
     mass: 10,
   },
-  gremlin: {
-    type: 'gremlin',
+  goblin_small: {
+    type: 'goblin_small',
     bodySize: [15, 19],
     bodyOffset: [8, 12],
     speed: 40,
@@ -38,8 +38,8 @@ export const ENEMIES = {
     xp: 5,
     mass: 10,
   },
-  knight: {
-    type: 'knight',
+  knight_small: {
+    type: 'knight_small',
     bodySize: [12, 19],
     bodyOffset: [10, 12],
     level: 2,
@@ -76,8 +76,8 @@ export const ENEMIES = {
     xp: 2,
     mass: 10,
   },
-  goblin: {
-    type: 'goblin',
+  goblin_big: {
+    type: 'goblin_big',
     bodySize: [24, 28],
     bodyOffset: [4, 4],
     speed: 10,
@@ -87,8 +87,8 @@ export const ENEMIES = {
     xp: 25,
     mass: 10,
   },
-  largeKnight: {
-    type: 'largeKnight',
+  knight_big: {
+    type: 'knight_big',
     bodySize: [24, 28],
     bodyOffset: [4, 4],
     speed: 10,

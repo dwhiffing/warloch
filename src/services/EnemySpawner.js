@@ -120,13 +120,15 @@ export class EnemySpawner {
 
   getSpawnTypes() {
     return [
-      { slime_small: 1, gremlin: 17 },
-      { slime_small: 1, gremlin: 15, skull_small: 15, slime_big: 18 },
-      { slime_small: 1, gremlin: 8, skull_small: 14, knight: 17, goblin: 19 },
+      { slime_small: 1, goblin_small: 17 },
       // prettier-ignore
-      { slime_small: 1, gremlin: 6, skull_small: 13, knight: 16, goblin: 18, largeKnight: 19 },
+      { slime_small: 1, goblin_small: 15, skull_small: 15, slime_big: 18 },
       // prettier-ignore
-      { slime_small: 1, gremlin: 6, skull_small: 11, knight: 15, goblin: 18, largeKnight: 19, largeEliteKnight: 20, },
+      { slime_small: 1, goblin_small: 8, skull_small: 14, knight_small: 17, goblin_big: 19 },
+      // prettier-ignore
+      { slime_small: 1, goblin_small: 6, skull_small: 13, knight_small: 16, goblin_big: 18, knight_big: 19 },
+      // prettier-ignore
+      { slime_small: 1, goblin_small: 6, skull_small: 11, knight_small: 15, goblin_big: 18, knight_big: 19, largeEliteKnight: 20, },
     ][this.getLevel()]
   }
 
