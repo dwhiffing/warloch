@@ -104,7 +104,15 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hp -= bullet.damage
     this.hpBar.set(this.hp)
 
+    this.updateTimer = 10
+    this.setVelocity(0)
     this.tween?.remove()
+    const angle = typeof bullet.target === 'number' ? bullet.target : 0
+    this.setPosition(
+      this.x + (bullet.damage / 10) * Math.cos(angle),
+      this.y + (bullet.damage / 10) * Math.sin(angle),
+    )
+
     this.scene.sound.play(`Metal-medium-${Phaser.Math.RND.between(0, 4)}`, {
       volume: 0.05,
       rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
