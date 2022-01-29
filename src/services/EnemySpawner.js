@@ -50,13 +50,17 @@ export class EnemySpawner {
 
   tick = () => {
     this.scene.registry.inc('gameTimer')
-    const spawnRate = this.target.form === 'light' ? 3 : 2
-    if (this.scene.registry.get('gameTimer') % spawnRate === 0) {
+    const spawnRate = this.target.form === 'light' ? 3 : 1
+    if (this.scene.registry.get('gameTimer') % 60 === 0) {
+      this.spawnBoss()
+      this.spawnRing()
+    } else if (this.scene.registry.get('gameTimer') % spawnRate === 0) {
       this.spawnGroup()
     }
   }
 
   spawnGroup = (x, y, type, count = this.getSpawnCount(), size = 50) => {
+    const uniqueCount = Phaser.Math.Clamp(Math.floor(count / 6), 1, 5)
     const dist = this.spawnDistance
     const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
     x = x || this.target.x + vel.x
@@ -64,17 +68,28 @@ export class EnemySpawner {
     const circle = new Phaser.Geom.Circle(x, y, size)
     for (let i = 0; i < count; i++) {
       const { x, y } = circle.getRandomPoint()
-      if (this.target.form === 'dark') {
-        this.spawnRing()
-      } else {
-        // TODO: ensure a consistent distribution of strong vs weak enemies
-        this.spawn(x, y, type)
-      }
+      const key = i >= count - uniqueCount ? 'unique' : 'fodder'
+      const _type =
+        type || Phaser.Math.RND.weightedPick(this.getSpawnTypes()[key])
+      this.spawn(x, y, _type)
+    }
+  }
+
+  spawnBoss = () => {
+    const count = 1
+    for (let i = 0; i < count; i++) {
+      const dist = this.spawnDistance
+      const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
+      const x = this.target.x + vel.x
+      const y = this.target.y + vel.y
+      const type = Phaser.Math.RND.weightedPick(this.getSpawnTypes().boss)
+      if (type) this.spawn(x, y, type)
     }
   }
 
   spawnRing = (type, count) => {
     count = count || Phaser.Math.Clamp(this.getSpawnCount() * 4, 0, 20)
+    type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes().fodder)
     if (count < 10) return
     let angles = []
     for (let i = -180; i < 180; i += 360 / count) {
@@ -87,8 +102,8 @@ export class EnemySpawner {
     })
   }
 
-  spawn = (x, y, type = this.getType()) => {
-    const stats = { ai: 'normal', particleScale: 1, ...ENEMIES[type] }
+  spawn = (x, y, type) => {
+    const stats = { ai: 'normal', particleScale: 1, scale: 1, ...ENEMIES[type] }
     stats.hp *= this.getHPMultiplier()
     stats.xp *= this.getXPMultiplier()
     stats.speed *= this.getSpeedMultiplier()
@@ -98,20 +113,12 @@ export class EnemySpawner {
 
   getSpawnCount = () => {
     // spawn a percentage of the enemies needed to get to target density
-    let targetDensity = [70, 80, 90, 100, 110, 120][this.getLevel()]
-    let ratio = 0.3
+    let targetDensity = [70, 90, 110, 130, 150][this.getLevel()]
+    if (this.target.form === 'dark') targetDensity *= 2
+    let ratio = 0.25
     const numLiving = this.enemies.getChildren().filter((e) => e.active).length
     let count = Math.floor((targetDensity - numLiving) * ratio)
     return count < 4 ? 0 : count
-  }
-
-  getType = () => {
-    const typeRoll = Phaser.Math.RND.between(1, 20)
-    let type
-    Object.entries(this.getSpawnTypes()).forEach(([k, v]) => {
-      if (typeRoll >= v) type = k
-    })
-    return type
   }
 
   getSpeedMultiplier() {
@@ -132,15 +139,15 @@ export class EnemySpawner {
 
   getSpawnTypes() {
     return [
-      { slime_small: 1, goblin_small: 17 },
+      { fodder: ['slime_small'], unique: ['goblin_small'], boss: [] },
       // prettier-ignore
-      { slime_small: 1, goblin_small: 6, skull_small: 15, slime_big: 18 },
+      { fodder: ['slime_small'], unique: ['goblin_small', 'knight_small'], boss: ['slime_jumbo'] },
       // prettier-ignore
-      { slime_small: 1, goblin_small: 8, skull_small: 14, knight_small: 17, goblin_big: 19 },
+      { fodder: ['slime_small', 'goblin_small'], unique: ['knight_small', 'skull_small'], boss: ['slime_big', 'goblin_big'] },
       // prettier-ignore
-      { slime_small: 1, goblin_small: 6, skull_small: 13, knight_small: 16, goblin_big: 18, knight_big: 19 },
+      { fodder: ['goblin_small', 'slime_small'], unique: ['knight_small', 'skull_small', 'skull_big'], boss: ['slime_big', 'goblin_big', 'knight_big'] },
       // prettier-ignore
-      { slime_small: 1, goblin_small: 6, skull_small: 11, knight_small: 15, goblin_big: 18, knight_big: 19, largeEliteKnight: 20, },
+      { fodder: ['goblin_small', 'skull_small', 'knight_small'], unique: [ 'slime_big', 'skull_big'], boss: ['goblin_big', 'knight_big'] },
     ][this.getLevel()]
   }
 

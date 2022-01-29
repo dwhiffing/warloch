@@ -151,6 +151,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     // if turning dark
     if (this.form === 'light') {
       // TODO: trigger spawn of a bunch of enemies right before spawn?
+      this.scene.enemySpawner.spawnRing()
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
       this.setMass(50)
