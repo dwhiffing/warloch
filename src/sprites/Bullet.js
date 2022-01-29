@@ -41,6 +41,21 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       .setBodySize(bodyWidth, bodyHeight)
       .setFrame(stats.frame)
 
+    this.event?.remove()
+    if (stats.name === 'enemy') {
+      this.event = this.scene.time.addEvent({
+        repeat: -1,
+        delay: 100,
+        callback: () => {
+          if (!this.tintFill) {
+            this.setTintFill(0xff0000)
+          } else {
+            this.clearTint()
+          }
+        },
+      })
+    }
+
     if (this.stats.play) this.play(this.stats.play)
 
     if (target.x) {
