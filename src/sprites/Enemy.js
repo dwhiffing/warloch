@@ -17,21 +17,20 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     const gun = this.scene.enemySpawner.gun
     const player = this.scene.player
-    const { Distance, Angle, RND } = Phaser.Math
+    const { Distance, Angle } = Phaser.Math
     const dist = Distance.BetweenPoints(this, player)
     this.setPushable(dist > 25 || this.scene.player.form === 'dark')
 
     if (this.updateTimer-- > 0) return
+    this.resetUpdateTimer()
 
-    const angle = Angle.Wrap(Angle.BetweenPoints(this, player) + Math.PI / 2)
-    this.setFlipX(angle < 0)
-    this.updateTimer = RND.between(30, 60)
+    const angle = Angle.BetweenPoints(this, player)
+    this.setFlipX(Angle.Wrap(angle + Math.PI / 2) < 0)
 
     if (this.ai === 'flying') {
       this.target = {}
       this.target.x = player.x + Phaser.Math.RND.between(-200, 200)
       this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
-      this.updateTimer = RND.between(300, 200)
       gun.source = this
       gun.shoot(player.x, player.y)
     } else if (dist < 19 && this.hitTimer <= 0) {
@@ -39,8 +38,30 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       player.hit(this.damage)
     }
 
-    const { x, y } = this.target
-    this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
+    if (this.ai === 'jump') {
+      this.setVelocity(0)
+      const random = Phaser.Math.Angle.Random() / 10
+      const v = this.scene.physics.velocityFromRotation(angle + random, 20)
+      this.setDrag(this.speed * 1.5)
+      this.scene.physics.moveTo(
+        this,
+        this.x + v.x,
+        this.y + v.y,
+        this.speed * 1.5 * this.movePenalty,
+      )
+    } else {
+      const { x, y } = this.target
+      this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
+    }
+  }
+
+  resetUpdateTimer = () => {
+    this.updateTimer = Phaser.Math.RND.between(30, 60)
+    if (this.ai === 'flying') {
+      this.updateTimer = Phaser.Math.RND.between(200, 300)
+    } else if (this.ai === 'jump') {
+      this.updateTimer = Phaser.Math.RND.between(50, 70)
+    }
   }
 
   spawn(x, y, stats) {
@@ -83,6 +104,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hp -= bullet.damage
     this.hpBar.set(this.hp)
 
+    this.tween?.remove()
     this.scene.sound.play(`Metal-medium-${Phaser.Math.RND.between(0, 4)}`, {
       volume: 0.05,
       rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
@@ -103,6 +125,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   die() {
+    this.tween?.remove()
     this.scene.registry.inc('killCount')
     this.scene.registry.values.score += Math.floor(this.xp)
     this.setVisible(false).setActive(false)
