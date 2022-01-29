@@ -50,6 +50,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.speed * 1.5 * this.movePenalty,
       )
     } else {
+      this.setDrag(0)
       const { x, y } = this.target
       this.scene.physics.moveTo(this, x, y, this.speed * this.movePenalty)
     }
