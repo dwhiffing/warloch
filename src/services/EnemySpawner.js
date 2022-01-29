@@ -32,14 +32,16 @@ export class EnemySpawner {
 
     this.enemies = scene.physics.add.group({
       classType: Enemy,
-      maxSize: 150,
+      maxSize: 250,
       runChildUpdate: true,
     })
-    this.enemies.createMultiple({ quantity: 150, active: false })
+    this.enemies.createMultiple({ quantity: 250, active: false })
+
+    this.spawnDistance = 300
 
     this.scene.time.addEvent({ callback: this.tick, repeat: -1, delay: 1000 })
 
-    this.spawnRandom()
+    this.spawnGroup()
   }
 
   update() {
@@ -47,23 +49,15 @@ export class EnemySpawner {
   }
 
   tick = () => {
-    if (
-      this.scene.registry.get('gameTimer') %
-        (this.target.form === 'light' ? 3 : 1) ===
-      0
-    )
-      this.spawnRandom()
     this.scene.registry.inc('gameTimer')
+    const spawnRate = this.target.form === 'light' ? 3 : 2
+    if (this.scene.registry.get('gameTimer') % spawnRate === 0) {
+      this.spawnGroup()
+    }
   }
 
-  spawnRandom = () => {
-    // spawn a percentage of the enemies needed to get to target density
-    let targetDensity = [50, 70, 90, 110, 130, 150][this.getLevel()]
-    if (this.scene.player.form === 'dark') targetDensity *= 2
-    const numLiving = this.enemies.getChildren().filter((e) => e.active).length
-    const count = Math.floor((targetDensity - numLiving) * 0.33)
-
-    const dist = 300
+  spawnGroup = (type, count = this.getSpawnCount()) => {
+    const dist = this.spawnDistance
     const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
     const circle = new Phaser.Geom.Circle(
       this.target.x + vel.x,
@@ -72,12 +66,30 @@ export class EnemySpawner {
     )
     for (let i = 0; i < count; i++) {
       const { x, y } = circle.getRandomPoint()
-      // TODO: ensure a consistent distribution of strong vs weak enemies
-      this.spawn(x, y, this.getType())
+      if (this.target.form === 'dark') {
+        this.spawnRing()
+      } else {
+        // TODO: ensure a consistent distribution of strong vs weak enemies
+        this.spawn(x, y, type)
+      }
     }
   }
 
-  spawn = (x, y, type) => {
+  spawnRing = (type, count) => {
+    count = count || Phaser.Math.Clamp(this.getSpawnCount() * 4, 0, 20)
+    if (count < 10) return
+    let angles = []
+    for (let i = -180; i < 180; i += 360 / count) {
+      angles.push(i)
+    }
+    angles.forEach((angle) => {
+      const dist = 300
+      const vel = this.physics.velocityFromAngle(angle, dist)
+      this.spawn(this.target.x + vel.x, this.target.y + vel.y, type)
+    })
+  }
+
+  spawn = (x, y, type = this.getType()) => {
     const stats = { ai: 'normal', particleScale: 1, ...ENEMIES[type] }
     stats.hp *= this.getHPMultiplier()
     stats.xp *= this.getXPMultiplier()
@@ -86,11 +98,13 @@ export class EnemySpawner {
     this.enemies.get()?.spawn(x, y, stats)
   }
 
-  getRandomAngles = (count) => {
-    let angles = []
-    while (angles.length < count)
-      angles = Array.from(new Set([...angles, Phaser.Math.RND.angle()]))
-    return angles
+  getSpawnCount = () => {
+    // spawn a percentage of the enemies needed to get to target density
+    let targetDensity = [70, 80, 90, 100, 110, 120][this.getLevel()]
+    let ratio = 0.3
+    const numLiving = this.enemies.getChildren().filter((e) => e.active).length
+    let count = Math.floor((targetDensity - numLiving) * ratio)
+    return count < 4 ? 0 : count
   }
 
   getType = () => {
