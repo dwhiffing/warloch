@@ -109,13 +109,10 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hp -= bullet.damage
     this.hpBar.set(this.hp)
 
-    this.updateTimer += Math.floor(bullet.damage / 2)
-    this.setVelocity(0)
-    this.tween?.remove()
     const angle = typeof bullet.target === 'number' ? bullet.target : 0
     this.setPosition(
-      this.x + (bullet.damage / 10) * Math.cos(angle),
-      this.y + (bullet.damage / 10) * Math.sin(angle),
+      this.x + bullet.damage * Math.cos(angle),
+      this.y + bullet.damage * Math.sin(angle),
     )
 
     this.scene.sound.play(`Metal-medium-${Phaser.Math.RND.between(0, 4)}`, {
@@ -138,7 +135,6 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   die() {
-    this.tween?.remove()
     this.scene.registry.inc('killCount')
     this.scene.registry.values.score += Math.floor(this.xp)
     this.setVisible(false).setActive(false)
