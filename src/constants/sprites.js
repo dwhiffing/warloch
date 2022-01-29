@@ -1,6 +1,7 @@
 export const SPRITES = [
   { name: 'slime_small', key: 'slime_small', frameRate: 3 },
   { name: 'slime_big', key: 'slime_big', frameRate: 3 },
+  { name: 'slime_big', key: 'slime_jumbo', frameRate: 1 },
   { name: 'gremlin', key: 'goblin_small', frameRate: 8 },
   { name: 'goblin', key: 'goblin_big', frameRate: 8 },
   { name: 'skull_small', key: 'skull_small', frameRate: 3 },

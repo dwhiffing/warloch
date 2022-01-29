@@ -84,6 +84,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.level = stats.level
     this.particleScale = stats.particleScale
     this.type = type
+    this.setScale(stats.scale)
     this.ai = ai
     this.movePenalty = 1
     this.particleTint = stats.particleTint
@@ -155,8 +156,16 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.x,
         this.y,
         'slime_small',
-        Phaser.Math.RND.between(4, 8),
+        Phaser.Math.RND.between(6, 12),
         3,
+      )
+    } else if (this.type === 'slime_jumbo') {
+      this.scene.enemySpawner.spawnGroup(
+        this.x,
+        this.y,
+        'slime_big',
+        Phaser.Math.RND.between(3, 6),
+        5,
       )
     }
 
