@@ -64,6 +64,7 @@ export class Hud {
       .sprite(w + 20, h + 20, 'tiles', frame)
       .setScrollFactor(0)
       .setInteractive()
+      .setDepth(99)
       .setScale(0.5)
       .on('pointerdown', this.toggleMute.bind(this))
   }
