@@ -19,7 +19,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     const player = this.scene.player
     const { Distance, Angle } = Phaser.Math
     const dist = Distance.BetweenPoints(this, player)
-    this.setPushable(dist > 25 || this.scene.player.form === 'dark')
+    this.setPushable(dist > 35 || this.scene.player.form === 'dark')
 
     if (this.updateTimer-- > 0) return
     this.resetUpdateTimer()
