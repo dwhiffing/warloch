@@ -1,20 +1,8 @@
 Gameplay
-  enemies should spawn more frequently
-  player should level up faster (level 20 by 6/7 minutes)
-  better spawning logic so groups of enemies spawn and swarm from random directions
-    should spawn a large enemy with a bunch of smaller enemies around it
-    should try to ensure that the level is always full of enemies
-    spawn a bunch of weak enemies while you are transformed
-    idea: make circle in random position found by spawn, and instead find a bunch of random positions within it
-      ensure none of those positions are within n distance of eachother
-      place big monster in center
-      place smaller monsters all around
-
+  duplicator shouldn't effect enemy gun
   work on enemy/weapon balance
+  only allow up to 4 weapons?
   spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
-  small skull should shoot different shots than big skull?
-  make slimes hop around
-  make gremlins run to random spots near the player instead of directly toward him
   add dodge roll?
   add bosses after certain amount of kills/time?
   dropped powerups?
@@ -35,6 +23,7 @@ visual
   better gun art
   add bullet trails effects for weapons
   UI indicating current weapons/upgrades
+  make slimes hop around
 
 audio
   probably fewer bullet impact sounds

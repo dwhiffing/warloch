@@ -153,6 +153,7 @@ export class Gun {
       maxCount: 9,
       ...GUNS[this.type],
     }
+    if (this.type === 'enemy') return stats
     const reg = (key, def) => this.scene.registry.get(key) || def
     const resolve = (key) => {
       const t = stats[key]

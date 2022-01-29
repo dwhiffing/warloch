@@ -4,6 +4,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.initialX = x
     this.initialY = y
     this.scene.physics.world.enableBody(this, 0)
+    this.hitEnemies = []
   }
 
   fire(target, stats) {
