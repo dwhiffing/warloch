@@ -7,16 +7,14 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
     this.setScale(1).setDepth(1)
     this.resize()
 
-    var pipeline = this.scene.postFxPlugin.add(this)
-
-    this.glowTask = this.scene.tweens.add({
-      targets: pipeline,
-      intensity: 0.04,
-      ease: 'Quad.easeInOut',
-      duration: 500,
-      repeat: -1,
-      yoyo: true,
-    })
+    // this.glowTask = this.scene.tweens.add({
+    //   targets: this,
+    //   alpha: 0.7,
+    //   ease: 'Quad.easeInOut',
+    //   duration: 500,
+    //   repeat: -1,
+    //   yoyo: true,
+    // })
   }
 
   spawn(x, y, value = 1) {
