@@ -1,5 +1,7 @@
 import { PURCHASES, UPGRADES, WEAPONS } from '../constants'
 
+const MAX_WEAPON_OR_UPGRADE_COUNT = 5
+
 export default class Upgrade extends Phaser.Scene {
   constructor() {
     super({ key: 'Upgrade', active: true })
@@ -80,6 +82,13 @@ export default class Upgrade extends Phaser.Scene {
   wake() {
     const level = this.registry.get('level')
     this.levelText.text = `Level ${level}`
+    const unlockedWeapons = Object.keys(WEAPONS).filter(
+      (key) => !!this.registry.values[key],
+    )
+    const unlockedUpgrades = Object.keys(UPGRADES).filter(
+      (key) => !!this.registry.values[key],
+    )
+
     const possiblePurchases = Phaser.Math.RND.shuffle(Object.values(PURCHASES))
       .map((p) => {
         const upgrade = UPGRADES[p.key] || WEAPONS[p.key]
@@ -91,6 +100,16 @@ export default class Upgrade extends Phaser.Scene {
         }
       })
       .filter((p) => p.level < p.maxLevel)
+      .filter((p) =>
+        unlockedWeapons.length < MAX_WEAPON_OR_UPGRADE_COUNT
+          ? true
+          : unlockedWeapons.includes(p.key) || p.type !== 'weapon',
+      )
+      .filter((p) =>
+        unlockedUpgrades.length < MAX_WEAPON_OR_UPGRADE_COUNT
+          ? true
+          : unlockedUpgrades.includes(p.key) || p.type !== 'upgrade',
+      )
 
     let purchases
     if (level === 2) {
