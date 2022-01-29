@@ -64,13 +64,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   levelUpgrade(weapon) {
     const maxLevel = (WEAPONS[weapon] || UPGRADES[weapon]).levels.length
-
     if ((this.scene.registry.get(weapon) || 0) < maxLevel) {
-      if (this.level > 1) {
-        this.skipUpgrade = true
-        this.xp = this.nextXP
-      }
-
+      this.skipUpgrade = true
+      this.xp = this.nextXP
       this.scene.registry.inc(weapon)
     }
   }

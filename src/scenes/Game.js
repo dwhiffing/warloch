@@ -84,7 +84,7 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(this.player, orbs, this.getOrb)
 
     if (newGame || !hasSave) {
-      this.player.levelUpgrade('one')
+      this.registry.inc('one')
     }
 
     this.hud = new Hud(this)
