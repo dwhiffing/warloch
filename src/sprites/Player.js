@@ -317,6 +317,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get maxTP() {
-    return 100 + (this.transformCount + 50)
+    return 100 + this.transformCount * 50
   }
 }
