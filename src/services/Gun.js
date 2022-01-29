@@ -77,7 +77,7 @@ export class Gun {
       .filter((e) => getDist(px, py, e.x, e.y) < this.stats.range)
       .sort((a, b) => getDist(px, py, a.x, a.y) - getDist(px, py, b.x, b.y))
 
-    const shuffledEnemies = Phaser.Math.RND.shuffle(nearbyEnemies)
+    const shuffledEnemies = Phaser.Math.RND.shuffle([...nearbyEnemies])
 
     for (let i = 0; i < count; i++) {
       let bullet = this.bullets.get()
