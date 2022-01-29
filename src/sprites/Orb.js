@@ -6,6 +6,17 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
 
     this.setScale(1).setDepth(1)
     this.resize()
+
+    var pipeline = this.scene.postFxPlugin.add(this)
+
+    this.glowTask = this.scene.tweens.add({
+      targets: pipeline,
+      intensity: 0.04,
+      ease: 'Quad.easeInOut',
+      duration: 500,
+      repeat: -1,
+      yoyo: true,
+    })
   }
 
   spawn(x, y, value = 1) {
@@ -13,9 +24,9 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
     this.y = y
     this.setTint(0xea3333).setFrame('xp2.png')
     if (value < 100) this.setTint(0x82fefb).setFrame('xp2.png')
-    if (value < 50) this.setTint(0xf3d003).setFrame('xp1.png')
-    if (value < 25) this.setTint(0x8b90cb).setFrame('xp1.png')
-    if (value <= 10) this.setTint(0xdc8733).setFrame('xp1.png')
+    if (value < 50) this.setTint(0xfd4b54).setFrame('xp1.png')
+    if (value < 25) this.setTint(0xffc218).setFrame('xp1.png')
+    if (value <= 10) this.setTint(0x00bbff).setFrame('xp1.png')
 
     this.setActive(true).setVisible(true)
     this.value = value

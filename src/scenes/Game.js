@@ -29,6 +29,7 @@ export default class extends Phaser.Scene {
     })
     this.sound.stopAll()
     this.sound.play('game-music', { loop: true, volume: 0.5 })
+    this.postFxPlugin = this.plugins.get('rexglowfilterpipelineplugin')
   }
 
   create({ newGame }) {

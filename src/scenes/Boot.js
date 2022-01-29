@@ -23,6 +23,12 @@ export default class extends Phaser.Scene {
       progress.fillRect(0, height / 2, width * value, 60)
     })
 
+    this.load.plugin(
+      'rexglowfilterpipelineplugin',
+      'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilterpipelineplugin.min.js',
+      true,
+    )
+
     this.load.script(
       'webfont',
       '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js',
