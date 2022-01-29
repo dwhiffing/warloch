@@ -8,7 +8,7 @@ export default class extends Phaser.Scene {
   init(opts = {}) {
     this.score = opts.score || 0
     this.sound.mute = localStorage.getItem('ggj-mute') === '1'
-    // this.scene.start('Game')
+    // this.continue()
   }
 
   create({ playMusic }) {

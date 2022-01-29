@@ -150,7 +150,7 @@ export class Gun {
       damage: 1,
       range: 200,
       speed: 300,
-      maxCount: 3,
+      maxCount: 5,
       ...GUNS[this.type],
     }
     if (this.type === 'enemy') return stats

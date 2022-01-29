@@ -1,22 +1,9 @@
-# work on enemy/weapon balance
+big skull should shoot more often
+spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
+make small skulls fly through level
+blast based on purchased weapons
+work on weapon balance
 
-next: start game at minute 2/level 5
-
-start 1-2 (level 1-5)
-  small slimes + small goblins
-early 2-5 (level 5-10)
-  small slimes + small goblins + small skulls + small knights
-mid 5-10 (level 10-15)
-  small/big slimes + small/big goblins + small skulls + small knights
-late 10-15 (level 15-20)
-  small/big slimes + small/big goblins + small/big knights + small/big skulls
-end 15+ (level 20+)
-  big slimes + big goblins + big knights + big skulls
-
-Gameplay
-  spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
-  make small skulls fly through level
-  blast based on purchased weapons
 
 UX
   better menu (add instructions/credits)

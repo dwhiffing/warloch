@@ -19,7 +19,9 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     const player = this.scene.player
     const { Distance, Angle } = Phaser.Math
     const dist = Distance.BetweenPoints(this, player)
-    this.setPushable(dist > 35 || this.scene.player.form === 'dark')
+    this.setPushable(
+      this._mass < 30 && (dist > 35 || this.scene.player.form === 'dark'),
+    )
 
     if (this.updateTimer-- > 0) return
     this.resetUpdateTimer()
@@ -33,11 +35,14 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
       gun.source = this
       let roll = Phaser.Math.RND.between(1, 20)
-      if (roll > 14) gun.shoot(player.x, player.y)
+      // TODO: fire rate based on difficulty?
+      if (roll > 12) gun.shoot(player.x, player.y)
     } else if (dist < 19 && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
       player.hit(this.damage)
     }
+
+    // TODO: jumbo goblin/knight should summon small versions of themsevles
 
     if (this.ai === 'jump') {
       this.setVelocity(0)
@@ -87,9 +92,10 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setScale(stats.scale)
     this.ai = ai
     this.movePenalty = 1
+    this._mass = stats.mass
     this.particleTint = stats.particleTint
     this.target = this.scene.player
-    this.setMass(stats.mass)
+    this.setMass(10)
     this.hpBar.set(this.hp, this.hp)
     this.hpBar.move(this.x, this.y)
 
@@ -110,9 +116,10 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hpBar.set(this.hp)
 
     const angle = typeof bullet.target === 'number' ? bullet.target : 0
+    const knockback = Math.min((bullet.damage * 8) / this._mass, 10)
     this.setPosition(
-      this.x + bullet.damage * Math.cos(angle),
-      this.y + bullet.damage * Math.sin(angle),
+      this.x + knockback * Math.cos(angle),
+      this.y + knockback * Math.sin(angle),
     )
 
     this.scene.sound.play(`Metal-medium-${Phaser.Math.RND.between(0, 4)}`, {
@@ -152,7 +159,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.x,
         this.y,
         'slime_small',
-        Phaser.Math.RND.between(6, 12),
+        Phaser.Math.RND.between(3, 6),
         3,
       )
     } else if (this.type === 'slime_jumbo') {

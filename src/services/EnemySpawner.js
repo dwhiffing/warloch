@@ -59,8 +59,14 @@ export class EnemySpawner {
     }
   }
 
-  spawnGroup = (x, y, type, count = this.getSpawnCount(), size = 50) => {
-    const uniqueCount = Phaser.Math.Clamp(Math.floor(count / 6), 1, 5)
+  spawnGroup = (x, y, type, count = this.getSpawnCount()) => {
+    // TODO: sometimes, the whole group should be a single type of uniques
+    let size = [50, 50, 60, 70, 80][this.getLevel()]
+    const uniqueCount = Phaser.Math.Clamp(
+      Math.floor(count / this.getUniqueRatio()),
+      1,
+      10,
+    )
     const dist = this.spawnDistance
     const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
     x = x || this.target.x + vel.x
@@ -113,9 +119,9 @@ export class EnemySpawner {
 
   getSpawnCount = () => {
     // spawn a percentage of the enemies needed to get to target density
-    let targetDensity = [70, 90, 110, 130, 150][this.getLevel()]
-    if (this.target.form === 'dark') targetDensity *= 2
-    let ratio = 0.25
+    let targetDensity = [70, 80, 80, 90, 90][this.getLevel()]
+    if (this.target.form === 'dark') targetDensity *= 1.2
+    let ratio = 0.2
     const numLiving = this.enemies.getChildren().filter((e) => e.active).length
     let count = Math.floor((targetDensity - numLiving) * ratio)
     return count < 4 ? 0 : count
@@ -130,24 +136,29 @@ export class EnemySpawner {
   }
 
   getHPMultiplier() {
-    return [1, 1.5, 2, 3, 4][this.getLevel()]
+    return [1, 2, 3, 4, 5][this.getLevel()]
   }
 
   getXPMultiplier() {
     return [1, 1.25, 1.5, 1.75, 2][this.getLevel()]
   }
 
+  getUniqueRatio() {
+    return [4, 3, 2, 2, 2][this.getLevel()]
+  }
+
   getSpawnTypes() {
     return [
-      { fodder: ['slime_small'], unique: ['goblin_small'], boss: [] },
       // prettier-ignore
-      { fodder: ['slime_small'], unique: ['goblin_small', 'knight_small'], boss: ['slime_jumbo'] },
+      { fodder: ['slime_small'], unique: ['goblin_small'], boss: ['slime_jumbo'], },
       // prettier-ignore
-      { fodder: ['slime_small', 'goblin_small'], unique: ['knight_small', 'skull_small'], boss: ['slime_big', 'goblin_big'] },
+      { fodder: ['slime_small', 'goblin_small'], unique: ['slime_big', 'knight_small'], boss: ['goblin_big'] },
       // prettier-ignore
-      { fodder: ['goblin_small', 'slime_small'], unique: ['knight_small', 'skull_small', 'skull_big'], boss: ['slime_big', 'goblin_big', 'knight_big'] },
+      { fodder: ['goblin_small', 'slime_big'], unique: ['skull_small', 'knight_small'], boss: ['knight_big'] },
       // prettier-ignore
-      { fodder: ['goblin_small', 'skull_small', 'knight_small'], unique: [ 'slime_big', 'skull_big'], boss: ['goblin_big', 'knight_big'] },
+      { fodder: ['knight_small', 'goblin_small'], unique: ['skull_big', 'knight_big'], boss: ['goblin_jumbo', 'knight_jumbo'] },
+      // prettier-ignore
+      { fodder: ['skull_small', 'knight_small'], unique: ['skull_big', 'knight_big', 'goblin_big'], boss: ['goblin_jumbo', 'knight_jumbo'] },
     ][this.getLevel()]
   }
 
