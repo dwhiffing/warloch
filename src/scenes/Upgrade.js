@@ -50,7 +50,6 @@ export default class Upgrade extends Phaser.Scene {
           buttonSizeY - imageBuffer * 2,
         )
         .setOrigin(0, 0)
-        .setFillStyle('black')
 
       this.nameTexts[index] = this.add.text(
         bufferX + bufferY + 4 + buttonSizeY,
@@ -81,7 +80,7 @@ export default class Upgrade extends Phaser.Scene {
   wake() {
     const level = this.registry.get('level')
     this.levelText.text = `Level ${level}`
-    const possiblePurchases = Object.values(PURCHASES)
+    const possiblePurchases = Phaser.Math.RND.shuffle(Object.values(PURCHASES))
       .map((p) => {
         const upgrade = UPGRADES[p.key] || WEAPONS[p.key]
         return {
@@ -93,16 +92,17 @@ export default class Upgrade extends Phaser.Scene {
       })
       .filter((p) => p.level < p.maxLevel)
 
-    const purchases = [
-      ...Phaser.Math.RND.shuffle(
-        possiblePurchases.filter((p) => p.type === 'weapon'),
-      ).slice(0, level === 2 ? 4 : 2),
-      ...Phaser.Math.RND.shuffle(
-        possiblePurchases.filter((p) => p.type === 'upgrade'),
-      ).slice(0, level === 2 ? 0 : 2),
-    ]
+    let purchases
+    if (level === 2) {
+      purchases = possiblePurchases
+        .filter((p) => p.type === 'weapon')
+        .slice(0, 3)
+    } else {
+      purchases = possiblePurchases.slice(0, 3)
+    }
     this.buttons.forEach((b, i) => {
       const purchase = purchases[i]
+      this.images[i].setAlpha(0)
       if (!purchase) return
 
       const { name, level, upgrade, description, type } = purchase
@@ -119,6 +119,7 @@ export default class Upgrade extends Phaser.Scene {
       this.images[i]
         .setFillStyle(type === 'weapon' ? 0xff0000 : 0xffff00)
         .setStrokeStyle(2, 0x333333)
+        .setAlpha(1)
 
       b.setFillStyle(0x777777)
       b.off('pointerdown')
