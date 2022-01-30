@@ -35,8 +35,9 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
       gun.source = this
       let roll = Phaser.Math.RND.between(1, 20)
-      let target = this.type === 'skull_big' ? 8 : 14
-      if (roll >= target) gun.shoot(player.x, player.y)
+      let target = this.type === 'skull_big' ? 5 : 10
+      if (roll >= target)
+        gun.shoot(player.x, player.y, this.type === 'skull_big' ? 7 : 3)
     } else if (dist < this.range && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
       this.flash(0xff0000, 100, false)

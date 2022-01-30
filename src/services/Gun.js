@@ -47,7 +47,7 @@ export class Gun {
     }
   }
 
-  shoot(x = this.target.x, y = this.target.y) {
+  shoot(x = this.target.x, y = this.target.y, count = this.stats?.count || 1) {
     if (this.shotTimer > 0) return
 
     this.shotTimer = this.stats.delay
@@ -55,7 +55,7 @@ export class Gun {
     let { x: px, y: py } = this.source
     py += 5
 
-    let { target, count = 1, spread } = this.stats
+    let { target, spread } = this.stats
     const getDist = Phaser.Math.Distance.Between
     const getAngle = Phaser.Math.Angle.Between
 
@@ -97,7 +97,7 @@ export class Gun {
       bullet.gun = this
       bullet.index = i
       bullet.setFlipX(false)
-      if (this.stats.count > 1 && spread < 0.2 && !this.stats.counterSpread) {
+      if (count > 1 && spread < 0.2 && !this.stats.counterSpread) {
         spread = 0.2 * this.stats.count
       }
 
