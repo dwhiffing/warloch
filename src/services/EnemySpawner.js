@@ -29,6 +29,7 @@ export class EnemySpawner {
     this.particles.setDepth(20)
 
     this.explosions = new Explosions(this.scene)
+    this.lastSpawn = 0
 
     this.walkers = scene.physics.add.group({
       classType: Enemy,
@@ -65,26 +66,29 @@ export class EnemySpawner {
 
   tick = () => {
     this.scene.registry.inc('gameTimer')
-    const spawnRate = this.target.form === 'light' ? 3 : 1
+    let targetDensity = [30, 35, 40, 45, 50][this.getLevel()]
+    const numLiving = this.getAllChildren().filter((e) => e.active).length
+    const ratio = 1 - (targetDensity - numLiving) / targetDensity
+    let spawnRate = Math.ceil((this.target.form === 'light' ? 6 : 4) * ratio)
     if (this.scene.registry.get('gameTimer') % 20 === 0) {
       this.spawnRing()
     }
     if (this.scene.registry.get('gameTimer') % 60 === 0) {
       this.spawnBoss()
     }
-    if (this.scene.registry.get('gameTimer') % spawnRate === 0) {
+    const timeSinceLastSpawn =
+      this.scene.registry.get('gameTimer') - this.lastSpawn
+    if (timeSinceLastSpawn >= spawnRate) {
+      this.lastSpawn = this.scene.registry.get('gameTimer')
       this.spawnGroup()
     }
   }
 
-  spawnGroup = (x, y, type, count = this.getSpawnCount()) => {
-    // TODO: sometimes, the whole group should be a single type of uniques
-    let size = [50, 50, 60, 70, 80][this.getLevel()]
-    const uniqueCount = Phaser.Math.Clamp(
-      Math.floor(count / this.getUniqueRatio()),
-      1,
-      10,
-    )
+  spawnGroup = (x, y, type, count, size = 80) => {
+    count = count || [8, 9, 10, 11, 12][this.getLevel()]
+    const key = Phaser.Math.RND.between(1, 5) === 2 ? 'unique' : 'fodder'
+    if (key === 'unique') count = Math.floor(count / 2)
+    type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes()[key])
     const dist = this.spawnDistance
     if (!x || !y) {
       do {
@@ -96,10 +100,7 @@ export class EnemySpawner {
     const circle = new Phaser.Geom.Circle(x, y, size)
     for (let i = 0; i < count; i++) {
       const { x, y } = circle.getRandomPoint()
-      const key = i >= count - uniqueCount ? 'unique' : 'fodder'
-      const _type =
-        type || Phaser.Math.RND.weightedPick(this.getSpawnTypes()[key])
-      this.spawn(x, y, _type)
+      this.spawn(x, y, type)
     }
   }
 
@@ -153,16 +154,6 @@ export class EnemySpawner {
     this[group].get()?.spawn(x, y, stats)
   }
 
-  getSpawnCount = () => {
-    // spawn a percentage of the walkers needed to get to target density
-    let targetDensity = [50, 60, 70, 80, 80][this.getLevel()]
-    // if (this.target.form === 'dark') targetDensity *= 1.1
-    let ratio = 0.15
-    const numLiving = this.getAllChildren().filter((e) => e.active).length
-    let count = Math.floor((targetDensity - numLiving) * ratio)
-    return count < 4 ? 0 : count
-  }
-
   getAllChildren() {
     return [
       ...this.walkers.getChildren(),
@@ -176,11 +167,11 @@ export class EnemySpawner {
   }
 
   getDamageMultiplier() {
-    return [1, 1.5, 2, 2.5, 3][this.getLevel()]
+    return [1, 1, 1, 1, 1][this.getLevel()]
   }
 
   getHPMultiplier() {
-    return [1, 2, 4, 6, 10][this.getLevel()]
+    return [1, 2, 4, 6, 8][this.getLevel()]
   }
 
   getXPMultiplier() {

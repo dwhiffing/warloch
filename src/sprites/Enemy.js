@@ -166,7 +166,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.y,
         'slime_small',
         Phaser.Math.RND.between(3, 6),
-        3,
+        10,
       )
     } else if (this.type === 'slime_jumbo') {
       this.scene.enemySpawner.spawnGroup(
@@ -174,7 +174,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.y,
         'slime_big',
         Phaser.Math.RND.between(3, 6),
-        5,
+        30,
       )
     }
 
