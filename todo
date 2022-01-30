@@ -1,25 +1,19 @@
 MUST:
-spawner needs to have multiple groups of enemies:
-  flyers
-  small slimes?
-  everything else
-
 instead of random positions, spawner should put enemies int he most empty region
 instead of random types, spawner should try to reach specific distributions
-
 work on weapon/upgrade/enemy balance
 
-UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)
-
 playtest with audio
-clean up unused sounds
 use different death sounds for different enemies
 use different material sounds for different enemy impacts
+clean up unused sounds
+
+add pause button?
+disable debug keys
 
 PROBABLY NOT:
+UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)
 blast based on purchased weapons
 better gun art
 add bullet trails effects for weapons
-menu/score background
-better title art
 mobile controls

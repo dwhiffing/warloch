@@ -72,15 +72,20 @@ export default class extends Phaser.Scene {
     this.enemySpawner = new EnemySpawner(this)
     this.inputHandler = new InputHandler(this)
 
-    const enemies = this.enemySpawner.enemies
+    const walkers = this.enemySpawner.walkers
+    const flyers = this.enemySpawner.flyers
+    const slimes = this.enemySpawner.smallSlimes
     const enemyBullets = this.enemySpawner.gun.bullets
     const orbs = this.orbSpawner.orbs
     const bullets = this.player.bullets
 
-    this.physics.add.collider(enemies)
-    this.physics.add.collider(this.player, enemies)
+    this.physics.add.collider(walkers)
+    this.physics.add.collider(slimes)
+    this.physics.add.collider(this.player, walkers)
+    this.physics.add.overlap(bullets, walkers, this.shootEnemy)
+    this.physics.add.overlap(bullets, slimes, this.shootEnemy)
+    this.physics.add.overlap(bullets, flyers, this.shootEnemy)
     this.physics.add.overlap(enemyBullets, this.player, this.shootPlayer)
-    this.physics.add.overlap(bullets, enemies, this.shootEnemy)
     this.physics.add.overlap(this.player, orbs, this.getOrb)
 
     if (newGame || !hasSave) {

@@ -71,8 +71,8 @@ export class Gun {
       duration: Math.max(10000 - this.stats.speed * 40, 1500),
     })
 
-    const nearbyEnemies = this.scene.enemySpawner.enemies
-      .getChildren()
+    const nearbyEnemies = this.scene.enemySpawner
+      .getAllChildren()
       .filter((e) => e.active)
       .filter((e) => getDist(px, py, e.x, e.y) < this.stats.range)
       .sort((a, b) => getDist(px, py, a.x, a.y) - getDist(px, py, b.x, b.y))

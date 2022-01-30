@@ -30,12 +30,27 @@ export class EnemySpawner {
 
     this.explosions = new Explosions(this.scene)
 
-    this.enemies = scene.physics.add.group({
+    this.walkers = scene.physics.add.group({
       classType: Enemy,
-      maxSize: 250,
+      maxSize: 150,
       runChildUpdate: true,
     })
-    this.enemies.createMultiple({ quantity: 250, active: false })
+
+    this.walkers.createMultiple({ quantity: 150, active: false })
+
+    this.flyers = scene.physics.add.group({
+      classType: Enemy,
+      maxSize: 100,
+      runChildUpdate: true,
+    })
+    this.flyers.createMultiple({ quantity: 100, active: false })
+
+    this.smallSlimes = scene.physics.add.group({
+      classType: Enemy,
+      maxSize: 50,
+      runChildUpdate: true,
+    })
+    this.smallSlimes.createMultiple({ quantity: 50, active: false })
 
     this.spawnDistance = 300
 
@@ -116,22 +131,38 @@ export class EnemySpawner {
   }
 
   spawn = (x, y, type) => {
-    const stats = { ai: 'normal', particleScale: 1, scale: 1, ...ENEMIES[type] }
+    const stats = {
+      ai: 'normal',
+      particleScale: 1,
+      scale: 1,
+      depth: 2,
+      ...ENEMIES[type],
+    }
     stats.hp *= this.getHPMultiplier()
     stats.xp *= this.getXPMultiplier()
     stats.speed *= this.getSpeedMultiplier()
     stats.damage *= this.getDamageMultiplier()
-    this.enemies.get()?.spawn(x, y, stats)
+    const group =
+      stats.ai === 'flying'
+        ? 'flyers'
+        : stats.type === 'slime_small'
+        ? 'smallSlimes'
+        : 'walkers'
+    this[group].get()?.spawn(x, y, stats)
   }
 
   getSpawnCount = () => {
-    // spawn a percentage of the enemies needed to get to target density
+    // spawn a percentage of the walkers needed to get to target density
     let targetDensity = [60, 70, 80, 80, 90][this.getLevel()]
     if (this.target.form === 'dark') targetDensity *= 1.2
     let ratio = 0.2
-    const numLiving = this.enemies.getChildren().filter((e) => e.active).length
+    const numLiving = this.getAllChildren().filter((e) => e.active).length
     let count = Math.floor((targetDensity - numLiving) * ratio)
     return count < 4 ? 0 : count
+  }
+
+  getAllChildren() {
+    return [...this.walkers.getChildren(), ...this.flyers.getChildren()]
   }
 
   getSpeedMultiplier() {
@@ -184,8 +215,7 @@ export class EnemySpawner {
   }
 
   getClosest = (point) =>
-    this.enemies
-      .getChildren()
+    this.getAllChildren()
       .filter((e) => e.active)
       .sort(
         (a, b) =>

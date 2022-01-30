@@ -35,8 +35,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.target.y = player.y + Phaser.Math.RND.between(-200, 200)
       gun.source = this
       let roll = Phaser.Math.RND.between(1, 20)
-      // TODO: fire rate based on difficulty?
-      if (roll > 12) gun.shoot(player.x, player.y)
+      let target = this.type === 'skull_big' ? 8 : 14
+      if (roll >= target) gun.shoot(player.x, player.y)
     } else if (dist < 19 && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
       player.hit(this.damage)
@@ -76,7 +76,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
-    this.play(type).setOrigin(0.5, 1).setDepth(2)
+    this.play(type).setOrigin(0.5, 1).setDepth(stats.depth)
     this.body.enable = true
 
     this.speed = speed
