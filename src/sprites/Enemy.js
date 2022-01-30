@@ -161,21 +161,21 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     )
 
     if (this.type === 'slime_big') {
-      this.scene.enemySpawner.spawnGroup(
-        this.x,
-        this.y,
-        'slime_small',
-        Phaser.Math.RND.between(3, 6),
-        10,
-      )
+      this.scene.enemySpawner.spawnGroup({
+        x: this.x,
+        y: this.y,
+        type: 'slime_small',
+        count: Phaser.Math.RND.between(3, 6),
+        size: 10,
+      })
     } else if (this.type === 'slime_jumbo') {
-      this.scene.enemySpawner.spawnGroup(
-        this.x,
-        this.y,
-        'slime_big',
-        Phaser.Math.RND.between(3, 6),
-        30,
-      )
+      this.scene.enemySpawner.spawnGroup({
+        x: this.x,
+        y: this.y,
+        type: 'slime_big',
+        count: Phaser.Math.RND.between(3, 6),
+        size: 10,
+      })
     }
 
     if (this.scene.player.form === 'light') this.scene.player.tp += this.level

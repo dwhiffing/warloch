@@ -55,8 +55,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.movePenalty += 0.01
     }
 
-    this.hp += this.regen
-    if (this.hp > this.maxHP) this.hp = this.maxHP
+    if (this.regen > 0) {
+      this.hp += this.regen
+      if (this.hp > this.maxHP) this.hp = this.maxHP
+    }
 
     const activeWeapons = this.weapons
       .filter((w) => w.level > 0)
@@ -89,9 +91,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (!this.active) return
     this.damaged(damage)
     if (this.form === 'dark') {
-      this.tp -= damage
+      this.tp -= damage * 2.5
     } else {
-      this.hp -= damage
+      this.hp -= damage * 2
     }
   }
 
@@ -222,7 +224,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   get hp() {
-    return this.scene.registry.get('hp') || 100
+    let value = this.scene.registry.get('hp')
+    return typeof value === 'number' ? value : this.maxHP
   }
 
   set hp(val) {
@@ -282,7 +285,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   get nextXP() {
     return Math.floor(
-      this.prevXP + (150 * Math.pow(1.22, this.level - 1) - 100),
+      this.prevXP + (150 * Math.pow(1.18, this.level - 1) - 100),
     )
   }
 

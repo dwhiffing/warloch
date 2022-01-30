@@ -30,6 +30,7 @@ export class EnemySpawner {
 
     this.explosions = new Explosions(this.scene)
     this.lastSpawn = 0
+    this.spawnCount = 0
 
     this.walkers = scene.physics.add.group({
       classType: Enemy,
@@ -66,12 +67,11 @@ export class EnemySpawner {
 
   tick = () => {
     this.scene.registry.inc('gameTimer')
-    let targetDensity = [30, 35, 40, 45, 50][this.getLevel()]
-    const numLiving = this.getAllChildren().filter((e) => e.active).length
-    const ratio = 1 - (targetDensity - numLiving) / targetDensity
-    let spawnRate = Math.ceil((this.target.form === 'light' ? 6 : 4) * ratio)
+    const ratio = this.getSpawnRatio()
+    let spawnRate = Math.ceil((this.target.form === 'light' ? 10 : 5) * ratio)
+
     if (this.scene.registry.get('gameTimer') % 20 === 0) {
-      this.spawnRing()
+      if (ratio < 1) this.spawnRing()
     }
     if (this.scene.registry.get('gameTimer') % 60 === 0) {
       this.spawnBoss()
@@ -80,15 +80,17 @@ export class EnemySpawner {
       this.scene.registry.get('gameTimer') - this.lastSpawn
     if (timeSinceLastSpawn >= spawnRate) {
       this.lastSpawn = this.scene.registry.get('gameTimer')
-      this.spawnGroup()
+      if (ratio < 2)
+        this.spawnGroup({
+          quality: ++this.spawnCount % 3 === 0 ? 'unique' : 'fodder',
+        })
     }
   }
 
-  spawnGroup = (x, y, type, count, size = 80) => {
+  spawnGroup = ({ x, y, type, count, size = 30, quality = 'fodder' } = {}) => {
     count = count || [8, 9, 10, 11, 12][this.getLevel()]
-    const key = Phaser.Math.RND.between(1, 5) === 2 ? 'unique' : 'fodder'
-    if (key === 'unique') count = Math.floor(count / 2)
-    type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes()[key])
+    if (quality === 'unique') count = Math.floor(count / 2)
+    type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes()[quality])
     const dist = this.spawnDistance
     if (!x || !y) {
       do {
@@ -97,11 +99,15 @@ export class EnemySpawner {
         y = this.target.y + vel.y
       } while (this.scene.cameras.main.worldView.contains(x, y))
     }
-    const circle = new Phaser.Geom.Circle(x, y, size)
-    for (let i = 0; i < count; i++) {
-      const { x, y } = circle.getRandomPoint()
-      this.spawn(x, y, type)
+
+    let angles = []
+    for (let i = -180; i < 180; i += 360 / count) {
+      angles.push(i)
     }
+    angles.forEach((angle) => {
+      const vel = this.physics.velocityFromAngle(angle, size)
+      this.spawn(x + vel.x, y + vel.y, type)
+    })
   }
 
   spawnBoss = () => {
@@ -137,7 +143,7 @@ export class EnemySpawner {
       scale: 1,
       depth: 2,
       soundKey: 0,
-      range: 20,
+      range: 22,
       soundRate: 0.8,
       ...ENEMIES[type],
     }
@@ -209,6 +215,12 @@ export class EnemySpawner {
     else if (timer < 900) return 3
     // 15+ minutes
     else return 4
+  }
+
+  getSpawnRatio = () => {
+    const targetDensity = [30, 35, 40, 45, 50][this.getLevel()]
+    const numLiving = this.getAllChildren().filter((e) => e.active).length
+    return 1 - (targetDensity - numLiving) / targetDensity
   }
 
   getClosest = (point) =>

@@ -34,7 +34,7 @@ export class Hud {
 
     this.timeText = this.scene.add
       .bitmapText(
-        w / 2,
+        w / 2 + 10,
         38,
         'gem',
         this.getTimestamp(this.scene.registry.get('gameTimer')),
