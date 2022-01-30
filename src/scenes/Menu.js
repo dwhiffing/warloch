@@ -16,20 +16,20 @@ export default class extends Phaser.Scene {
     const w = this.cameras.main.width - 40
     const h = this.cameras.main.height - 40
     const _w = width / 2
-    const _h = height / 2
+    const _h = height / 2 + 15
 
-    this.add.image(_w, height / 3.75, 'title')
-
-    const label = localStorage.getItem('warloch-save') ? 'New Game' : 'Play'
+    const save = localStorage.getItem('warloch-save')
+    const label = save ? 'New Game' : 'Play'
+    this.add.image(_w, save ? height / 4 : height / 3, 'title')
     this.add.existing(new Button(this, _w, _h + 30, label, this.newGame))
 
-    if (localStorage.getItem('warloch-save'))
+    if (save)
       this.add.existing(new Button(this, _w, _h, 'Continue', this.continue))
 
+    this.add.existing(new Button(this, _w, _h + 60, 'About', this.about))
     this.add.existing(
-      new Button(this, _w, _h + 60, 'High Scores', this.gotoScores),
+      new Button(this, _w, _h + 90, 'High Scores', this.gotoScores),
     )
-    this.add.existing(new Button(this, _w, _h + 90, 'About', this.about))
 
     if (playMusic) {
       this.sound.stopAll()

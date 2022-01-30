@@ -3,47 +3,54 @@ export class Bar {
     this.scene = scene
     this.width = width
     this.height = height
-    this.outer = this.scene.add.sprite(x, y, 'tiles', 'bar.png')
-    this.inner = this.scene.add.sprite(x, y, 'tiles', 'bar.png')
-    this.inner
-      .setScrollFactor(scroll ? 1 : 0)
-      .setOrigin(0, 0.5)
-      .setDisplaySize(0, height)
-      .setTint(tint)
-      .setDepth(99)
-    this.outer
-      .setScrollFactor(scroll ? 1 : 0)
-      .setOrigin(0, 0.5)
-      .setDisplaySize(width, height)
-      .setTint(0x999999)
-      .setDepth(98)
+
+    const get = (x, y, key, width = 0, height) =>
+      this.scene.add
+        .sprite(x, y, 'tiles', key + '.png')
+        .setDisplaySize(width, height)
+        .setScrollFactor(scroll ? 1 : 0)
+        .setOrigin(0, 0.5)
+        .setDepth(98)
+
+    const o = height > 2 ? 2 : 0
+    this.shadowMid = get(x + 3, y, 'shadow_mid', width - 6, height)
+    this.barMid = get(x + 4, y, 'bar_mid', 0, height - o).setTint(tint)
+
+    if (height > 2) {
+      this.shadowLeft = get(x, y, 'shadow_left', 3, height)
+      this.shadowRight = get(x + width - 3, y, 'shadow_right', 3, height)
+      this.barLeft = get(x + 1, y, 'bar_left', 3, height - o).setTint(tint)
+      this.barRight = get(x + 5, y, 'bar_right', 3, height - o).setTint(tint)
+    }
   }
 
   die() {
-    this.inner.setActive(false).setVisible(false)
-    this.outer.setActive(false).setVisible(false)
+    this.barMid.setActive(false).setVisible(false)
+    this.shadowMid.setActive(false).setVisible(false)
   }
 
   set(value, maxValue) {
-    this.inner.setActive(true).setVisible(true)
-    this.outer.setActive(true).setVisible(true)
+    this.barMid.setActive(true).setVisible(true)
+    this.shadowMid.setActive(true).setVisible(true)
     this.value = Math.max(value, 0)
     if (this.hideWhenFull && value === maxValue) {
-      this.inner.setVisible(false)
-      this.outer.setVisible(false)
+      this.barMid.setVisible(false)
+      this.shadowMid.setVisible(false)
     }
     if (typeof maxValue === 'number') this.maxValue = maxValue
     this.update()
   }
 
   move(x, y) {
-    this.inner.setPosition(x - this.width / 2, y - 6)
-    this.outer.setPosition(x - this.width / 2, y - 6)
+    this.barMid.setPosition(x - this.width / 2, y - 6)
+    this.shadowMid.setPosition(x - this.width / 2, y - 6)
   }
 
   update() {
     let factor = this.value / this.maxValue
     factor = isNaN(factor) ? 0 : factor
-    this.inner.setDisplaySize(this.width * factor, this.height)
+    const w = (this.width - 6) * factor
+    this.barMid.setDisplaySize(w, this.height - (this.height < 3 ? 0 : 2))
+    if (this.barRight) this.barRight.x = w + 12
   }
 }

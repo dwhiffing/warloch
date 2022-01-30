@@ -3,47 +3,53 @@ export class Hud {
   constructor(scene) {
     this.scene = scene
 
-    const o = 20
-    const w = scene.cameras.main.width - 40
-    const h = scene.cameras.main.height - 40
+    const o = 10
+    const w = scene.cameras.main.width - o * 2
+    const h = scene.cameras.main.height - o * 2
+    const _h = 10
     const player = scene.player
 
-    this.xpBar = new Bar(this.scene, o, o, w, 4, 0x00ffff, false)
+    this.xpBar = new Bar(this.scene, o, o, w, _h, 0x00ffff, false)
     this.xpBar.set(player.xp, player.nextXP)
 
-    this.hpBar = new Bar(this.scene, o, o + 5, w, 4, 0xff0000, false)
+    this.hpBar = new Bar(this.scene, o, o + _h + 2, w, _h, 0xff0000, false)
     this.hpBar.set(player.hp, player.hp)
 
-    this.tpBar = new Bar(this.scene, o, o + 10, w, 4, 0xffff00, false)
+    this.tpBar = new Bar(
+      this.scene,
+      o,
+      o + (_h + 2) * 2,
+      w,
+      _h,
+      0xffff00,
+      false,
+    )
     this.tpBar.set(player.tp, player.maxTP)
 
     this.killText = this.scene.add
-      .text(20, 40, this.scene.registry.get('killCount'), {
-        font: '12px Roboto Mono',
-      })
+      .bitmapText(o, 45, 'gem', this.scene.registry.get('killCount'))
       .setScrollFactor(0)
+      .setScale(0.5)
       .setDepth(99)
-
-    this.scoreText = this.scene.add
-      .text(w + 20, 40, this.scene.registry.get('score'), {
-        font: '12px Roboto Mono',
-      })
-      .setScrollFactor(0)
-      .setDepth(99)
-      .setOrigin(1, 0)
 
     this.timeText = this.scene.add
-      .text(
-        (w + 40) / 2,
-        40,
+      .bitmapText(
+        w / 2,
+        45,
+        'gem',
         this.getTimestamp(this.scene.registry.get('gameTimer')),
-        {
-          font: '12px Roboto Mono',
-        },
       )
       .setScrollFactor(0)
       .setDepth(99)
+      .setScale(0.5)
       .setOrigin(0.5, 0)
+
+    this.scoreText = this.scene.add
+      .bitmapText(w + o, 45, 'gem', this.scene.registry.get('score'))
+      .setScrollFactor(0)
+      .setScale(0.5)
+      .setDepth(99)
+      .setOrigin(1, 0)
 
     const frame =
       localStorage.getItem('ggj-mute') === '1' ? 'mute.png' : 'unmute.png'
@@ -61,7 +67,7 @@ export class Hud {
     })
 
     this.muteButton = this.scene.add
-      .sprite(w + 20, h + 20, 'tiles', frame)
+      .sprite(w, h, 'tiles', frame)
       .setScrollFactor(0)
       .setInteractive()
       .setDepth(99)

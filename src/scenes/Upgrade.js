@@ -4,7 +4,7 @@ const MAX_WEAPON_OR_UPGRADE_COUNT = 5
 
 export default class Upgrade extends Phaser.Scene {
   constructor() {
-    super({ key: 'Upgrade', active: true })
+    super({ key: 'Upgrade' })
   }
 
   init() {
@@ -22,10 +22,9 @@ export default class Upgrade extends Phaser.Scene {
       .setStrokeStyle(2, 0x003344)
       .setOrigin(0, 0)
     this.levelText = this.add
-      .text(camera.width / 2, bufferY * 3.7, `Level`, {
-        font: '24px Roboto Mono',
-      })
+      .bitmapText(camera.width / 2, bufferY * 3.7, 'gem', `Level`)
       .setOrigin(0.5)
+      .setScale(0.5)
 
     const buttonSizeX = menuWidth - bufferY * 2
     const buttonSizeY = (menuHeight - bufferY * 2) / 5
@@ -53,27 +52,24 @@ export default class Upgrade extends Phaser.Scene {
         )
         .setOrigin(0, 0)
 
-      this.nameTexts[index] = this.add.text(
-        bufferX + bufferY + 4 + buttonSizeY,
-        yBase + 4,
-        '',
-        { font: '18px Roboto Mono' },
-      )
+      this.nameTexts[index] = this.add
+        .bitmapText(bufferX + bufferY + 2 + buttonSizeY, yBase + 4, 'gem', '')
+        .setScale(0.5)
 
       this.descriptionTexts[index] = this.add
-        .text(
-          bufferX + bufferY + 4 + buttonSizeY,
-          yBase + buttonSizeY - 3,
+        .bitmapText(
+          bufferX + bufferY + 2 + buttonSizeY,
+          yBase + buttonSizeY - 4,
+          'gem',
           '',
-          { font: '14px Roboto Mono' },
         )
+        .setScale(0.5)
         .setOrigin(0, 1)
 
       this.levelTexts[index] = this.add
-        .text(bufferX + buttonSizeX + 2, yBase + 4, '', {
-          font: '16px Roboto Mono',
-        })
+        .bitmapText(bufferX + buttonSizeX + 2, yBase + 4, 'gem', '')
         .setOrigin(1, 0)
+        .setScale(0.5)
     })
 
     this.events.on(Phaser.Scenes.Events.WAKE, this.wake, this)

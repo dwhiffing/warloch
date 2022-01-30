@@ -1,20 +1,27 @@
 MUST:
-spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
-playtest with audio
-clean up unused sounds
+spawner needs to have multiple groups of enemies:
+  flyers
+  small slimes?
+  everything else
+
+instead of random positions, spawner should put enemies int he most empty region
+instead of random types, spawner should try to reach specific distributions
+health orbs follow you on pick up
+
 work on weapon/upgrade/enemy balance
 
-NICE:
 UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)
-better score screen (should show if you topped your own score)
+
+
+playtest with audio
+clean up unused sounds
 use different death sounds for different enemies
 use different material sounds for different enemy impacts
-pixel font
-better bars
 
 PROBABLY NOT:
 blast based on purchased weapons
 better gun art
 add bullet trails effects for weapons
-menu/score background/better buttons/better menu title art
+menu/score background
+better title art
 mobile controls

@@ -15,7 +15,7 @@ export const PURCHASES = {
     name: 'Magic Blade',
     key: 'three',
     type: 'weapon',
-    description: 'Powerful melee attack in facing direction.',
+    description: 'Powerful melee attack in facing direction',
   },
   four: {
     name: 'Poison',
@@ -45,14 +45,14 @@ export const PURCHASES = {
     name: 'Bubble Ray',
     key: 'eight',
     type: 'weapon',
-    description: 'A stream of rapid but weak damage.',
+    description: 'A stream of rapid but weak damage',
   },
   //upgrades
   duplicator: {
     name: 'Mirror',
     key: 'duplicator',
     type: 'upgrade',
-    description: 'Adds one extra instance of your spells',
+    description: 'Adds one extra instance of each spell',
   },
   damageBoost: {
     name: 'Damage Boost',

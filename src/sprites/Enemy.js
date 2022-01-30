@@ -5,7 +5,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'tiles')
     this.scene.physics.world.enableBody(this, 0)
 
-    this.hpBar = new Bar(scene, this.x, this.y, 15, 2, 0xff0000)
+    this.hpBar = new Bar(scene, this.x, this.y, 25, 4, 0xff0000)
     this.hpBar.hideWhenFull = true
   }
 
@@ -13,7 +13,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     if (!this.active) return
 
     if (this.hitTimer > 0) this.hitTimer--
-    this.hpBar.move(this.x, this.y + 4 - this.body.height)
+    this.hpBar.move(this.x + 3, this.y + 4 - this.body.height)
 
     const gun = this.scene.enemySpawner.gun
     const player = this.scene.player

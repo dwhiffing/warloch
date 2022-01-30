@@ -8,19 +8,18 @@ export default class extends Phaser.Scene {
 
   create({ score, playMusic }) {
     this.scoreTexts = []
+    this.currentScore = score
     const { height, width } = this.game.config
 
-    const w = this.cameras.main.width - 40
-    const h = this.cameras.main.height - 40
+    const w = this.cameras.main.width - 20
+    const h = this.cameras.main.height - 20
     const _w = width / 2
     this.name = localStorage.getItem('warloch-name')
 
-    this.add
-      .text(_w, 15, 'Highscores', { font: '24px sans-serif' })
-      .setOrigin(0.5)
+    this.add.bitmapText(_w, 20, 'gem', 'Highscores').setOrigin(0.5)
 
     this.add.existing(
-      new Button(this, _w + (score ? 60 : 0), h + 20, 'Back', this.back),
+      new Button(this, _w + (score ? 60 : 0), h, 'Back', this.back),
     )
 
     if (playMusic) {
@@ -37,44 +36,54 @@ export default class extends Phaser.Scene {
 
     this.updateScores()
 
-    if (!score) return
-
-    this.add
-      .text(_w, h - 30, `Your score: ${score}`, { font: '21px sans-serif' })
+    this.currentScoreText = this.add
+      .bitmapText(_w, h - 30, 'gem', ``)
+      .setScale(0.5)
       .setOrigin(0.5)
 
-    this.postButton = this.add
-      .existing(
-        new Button(this, _w - 60, h + 20, 'Post Score', () =>
-          this.postScore(score),
-        ),
-      )
-      .setAlpha(this.name ? 1 : 0.5)
+    if (!score) return
+
+    this.postButton = this.add.existing(
+      new Button(this, _w - 60, h, 'Post Score', () => this.postScore(score)),
+    )
   }
 
   update() {}
 
   updateScores = () => {
-    getScores().then((scores) => {
+    getScores().then(({ score, top }) => {
       if (!this.cameras.main) return
-      scores.forEach(([name, score], i) => {
+      top.forEach(([name, _score], i) => {
         let scoreText =
           this.scoreTexts[i] ||
           this.add
-            .text(this.cameras.main.width / 2, 41 + 15 * i, '', {
-              font: '12px sans-serif',
-            })
-            .setOrigin(0.5)
+            .bitmapText(150, 50 + 15 * i, 'gem', '')
+            .setScale(0.5)
+            .setOrigin(0, 0.5)
         this.scoreTexts[i] = scoreText
-        scoreText.setText(`${i + 1}. ${score} - ${name}`)
+        this.currentScoreText.setText(
+          score && this.currentScore
+            ? `Last Game: ${this.currentScore} Your Highest: ${score}`
+            : score
+            ? ` Your High Score: ${score}`
+            : `Last Game: ${this.currentScore} `,
+        )
+        scoreText.setText(`${i + 1}. ${_score} - ${name}`)
       })
     })
   }
 
   postScore = (score) => {
-    this.name = prompt('Name?', localStorage.getItem('warloch-name'))
-
+    if (this.postButton.alpha < 1) return
+    this.name = prompt(
+      'Enter your name (6 chars max)',
+      localStorage.getItem('warloch-name') || 'Enter Name',
+    )
+    this.name = this.name.replaceAll(' ', '')
+    if (this.name === '' || this.name.length > 6) return
+    localStorage.setItem('warloch-name', this.name)
     postScore({ playerName: this.name, score }).then(this.updateScores)
+    this.postButton.setAlpha(0.5)
   }
 
   back = () => {

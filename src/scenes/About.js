@@ -1,8 +1,8 @@
 import { Button } from '../sprites/Button'
 
 const INSTRUCTIONS = [
-  'Use WASD/Arrows to move and your mouse to aim your spells.\n\nDefeat enemies and pick up gems to level up.\n\nWhen you deal enough damage, you will erupt into War form.\n\nWhile War, you cannot be harmed and your spells become chaotic.',
-  'Enemies will get stronger as time passes.\n\nWhile War, push enemies around to grab gems and level up quickly.\n\nPick your upgrades wisely and stay ahead of the curve.\n\nGood luck!',
+  "You are 'Loch', a wizard with a dual nature.\n\nWASD/Arrows to move, mouse to aim spells.\n\nDefeat foes and grab gems to level up.\n\nErupt into War form when you deal enough damage.\n\nWar form is invulnerable and corrupts your spells.",
+  'Enemies will get stronger as time passes.\n\nThis is another useful tip for enjoying the game\n\nThis is another useful tip for enjoying the game\n\nWhile War, push enemies away to grab gems.\n\nGood luck!',
   'Daniel Whiffing - Design, Coding and Sound\n\nSam Braithwaite - Art\n\nAsh Dadoun - Art\n\nCREDIT PLACEHOLDER ARTIST - Art\n\nPurple Planet - Music',
 ]
 
@@ -16,20 +16,23 @@ export default class extends Phaser.Scene {
     const { height, width } = this.game.config
 
     const w = this.cameras.main.width - 40
-    const h = this.cameras.main.height - 40
+    const h = this.cameras.main.height - 20
     const _w = width / 2
 
     this.index = 0
 
-    this.add.text(_w, 25, 'About', { font: '24px sans-serif' }).setOrigin(0.5)
+    this.add.bitmapText(_w, 30, 'gem', 'Warloch').setOrigin(0.5)
 
-    this.add.existing(new Button(this, _w - 60, h + 20, 'Back', this.back))
+    this.add.existing(new Button(this, _w - 80, h - 10, 'Back', this.back))
 
-    this.add.existing(new Button(this, _w + 60, h + 20, 'Next', this.next))
+    this.nextButton = this.add.existing(
+      new Button(this, _w + 80, h - 10, 'Next', this.next),
+    )
 
     this.text = this.add
-      .text(_w, 60, INSTRUCTIONS[0], { font: '16px sans-serif' })
+      .bitmapText(_w, 60, 'gem', INSTRUCTIONS[0])
       .setOrigin(0.5, 0)
+      .setScale(0.5)
 
     if (playMusic) {
       this.sound.stopAll()
@@ -37,7 +40,7 @@ export default class extends Phaser.Scene {
     }
     const muted = localStorage.getItem('ggj-mute') === '1'
     this.muteButton = this.add
-      .sprite(w + 20, h + 20, 'tiles', muted ? 'mute.png' : 'unmute.png')
+      .sprite(w + 20, h, 'tiles', muted ? 'mute.png' : 'unmute.png')
       .setScrollFactor(0)
       .setInteractive()
       .setScale(0.5)
@@ -46,6 +49,7 @@ export default class extends Phaser.Scene {
 
   back = () => {
     this.text.setText(INSTRUCTIONS[--this.index])
+    this.nextButton.setText('Next')
     if (this.index < 0) {
       this.scene.start('Menu', { playMusic: false })
     }
@@ -53,6 +57,9 @@ export default class extends Phaser.Scene {
 
   next = () => {
     this.text.setText(INSTRUCTIONS[++this.index])
+    if (this.index === INSTRUCTIONS.length - 1) {
+      this.nextButton.setText('Play')
+    }
     if (this.index >= INSTRUCTIONS.length) {
       localStorage.setItem('warloch-has-seen-about', '1')
       this.scene.start('Game')
