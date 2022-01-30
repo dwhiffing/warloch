@@ -39,6 +39,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       if (roll >= target) gun.shoot(player.x, player.y)
     } else if (dist < 19 && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
+      this.flash(0xff0000, 100, false)
       player.hit(this.damage)
     }
 
@@ -104,8 +105,9 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  flash(tint = 0xffffff, duration = 150) {
-    this.setTintFill(tint)
+  flash(tint = 0xffffff, duration = 150, fill = true) {
+    if (fill) this.setTintFill(tint)
+    else this.setTint(tint)
     this.scene.time.delayedCall(duration, this.clearTint.bind(this))
   }
 
