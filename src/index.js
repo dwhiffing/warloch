@@ -3,6 +3,7 @@ import GameScene from './scenes/Game'
 import UpgradeScene from './scenes/Upgrade'
 import MenuScene from './scenes/Menu'
 import ScoreScene from './scenes/Score'
+import AboutScene from './scenes/About'
 import BootScene from './scenes/Boot'
 
 new Phaser.Game({
@@ -14,6 +15,13 @@ new Phaser.Game({
   scale: { mode: Phaser.Scale.FIT, autoCenter: true },
   physics: { default: 'arcade', arcade: { debug: false } },
   zoom: 2,
-  scene: [BootScene, MenuScene, GameScene, UpgradeScene, ScoreScene],
+  scene: [
+    BootScene,
+    MenuScene,
+    GameScene,
+    UpgradeScene,
+    ScoreScene,
+    AboutScene,
+  ],
   pixelArt: true,
 })

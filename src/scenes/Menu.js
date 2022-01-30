@@ -20,14 +20,14 @@ export default class extends Phaser.Scene {
 
     this.add.image(_w, height / 4, 'title')
 
-    this.add.existing(new Button(this, _w, _h, 'new game', this.newGame))
+    const label = localStorage.getItem('warloch-save') ? 'new game' : 'play'
+    this.add.existing(new Button(this, _w, _h + 30, label, this.newGame))
 
     if (localStorage.getItem('warloch-save'))
-      this.add.existing(
-        new Button(this, _w, _h + 30, 'continue', this.continue),
-      )
+      this.add.existing(new Button(this, _w, _h, 'continue', this.continue))
 
     this.add.existing(new Button(this, _w, _h + 60, 'scores', this.gotoScores))
+    this.add.existing(new Button(this, _w, _h + 90, 'about', this.about))
 
     if (playMusic) {
       this.sound.stopAll()
@@ -46,6 +46,10 @@ export default class extends Phaser.Scene {
   update() {}
 
   newGame = () => {
+    if (!localStorage.getItem('warloch-has-seen-about')) {
+      this.about()
+      return
+    }
     localStorage.removeItem('warloch-save')
     this.scene.start('Game')
   }
@@ -56,6 +60,10 @@ export default class extends Phaser.Scene {
 
   gotoScores = () => {
     this.scene.start('Score', { playMusic: false })
+  }
+
+  about = () => {
+    this.scene.start('About', { playMusic: false })
   }
 
   toggleMute() {

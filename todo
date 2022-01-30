@@ -1,26 +1,21 @@
+MUST:
 spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
+ensure player adrenaline tint doesn't go away
+playtest with audio
+clean up unused sounds
+work on weapon/upgrade/enemy balance
+
+NICE:
+UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)
+better score screen (should show if you topped your own score)
+use different death sounds for different enemies
+use different material sounds for different enemy impacts
+pixel font
+better bars
+
+PROBABLY NOT:
 blast based on purchased weapons
-work on weapon balance
-
-
-UX
-  better menu (add instructions/credits)
-  pixel font
-  better bars
-  better buttons
-  Better weapon names/icons/descriptions
-  better score screen (should show if you topped your own score)
-  better menu title art
-  menu/score background
-  mobile controls
-
-visual
-  better gun art
-  add bullet trails effects for weapons
-  UI indicating current weapons/upgrades
-  ensure player adrenaline tint doesn't go away
-  use bullet art as icons for shop and ui for current upgrades
-
-audio
-  use different death sounds for different enemies
-  use different material sounds for different enemy impacts
+better gun art
+add bullet trails effects for weapons
+menu/score background/better buttons/better menu title art
+mobile controls

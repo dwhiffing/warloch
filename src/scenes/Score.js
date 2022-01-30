@@ -56,6 +56,7 @@ export default class extends Phaser.Scene {
 
   updateScores = () => {
     getScores().then((scores) => {
+      if (!this.cameras.main) return
       scores.forEach(([name, score], i) => {
         let scoreText =
           this.scoreTexts[i] ||
