@@ -7,7 +7,7 @@ export class Gun {
     this.source = scene.player
     this.scene = scene
     this.type = type
-    this.target = this.scene.input.activePointer
+    this.target = this.scene.player.crosshair
     this.weapon = weapon
 
     this.bullets = this.scene.physics.add.group({

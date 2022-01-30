@@ -1,13 +1,18 @@
 export class InputHandler {
   constructor(scene) {
-    const { W, A, S, D, SPACE, M } = Phaser.Input.Keyboard.KeyCodes
+    const { W, A, S, D, UP, LEFT, RIGHT, DOWN, SPACE, M } =
+      Phaser.Input.Keyboard.KeyCodes
     this.scene = scene
     this.input = scene.input
     this.player = scene.player
-    this.upKey = this.input.keyboard.addKey(W)
-    this.leftKey = this.input.keyboard.addKey(A)
-    this.downKey = this.input.keyboard.addKey(S)
-    this.rightKey = this.input.keyboard.addKey(D)
+    this.wKey = this.input.keyboard.addKey(W)
+    this.aKey = this.input.keyboard.addKey(A)
+    this.sKey = this.input.keyboard.addKey(S)
+    this.dKey = this.input.keyboard.addKey(D)
+    this.upKey = this.input.keyboard.addKey(UP)
+    this.leftKey = this.input.keyboard.addKey(LEFT)
+    this.downKey = this.input.keyboard.addKey(DOWN)
+    this.rightKey = this.input.keyboard.addKey(RIGHT)
     this.spaceKey = this.input.keyboard.addKey(SPACE)
     this.mKey = this.input.keyboard.addKey(M)
 
@@ -20,6 +25,32 @@ export class InputHandler {
     this.reg = this.scene.registry
   }
 
+  createJoystick = (x, y) => {
+    return this.scene.plugins.get('rexvirtualjoystickplugin').add(this.scene, {
+      x,
+      y,
+      radius: 30,
+      base: this.scene.add
+        .circle(0, 0, 30, 0x888888)
+        .setDepth(99)
+        .setAlpha(0.5),
+      thumb: this.scene.add
+        .circle(0, 0, 25, 0xcccccc)
+        .setDepth(99)
+        .setAlpha(0.5),
+      enable: true,
+      fixed: true,
+    })
+  }
+
+  createMobileControls = () => {
+    this.joysticks = [
+      this.createJoystick(50, 220),
+      this.createJoystick(450, 220),
+    ]
+    this.joystickKeys = this.joysticks.map((j) => j.createCursorKeys())
+  }
+
   update() {
     // this.handleDebugKeys()
 
@@ -27,6 +58,9 @@ export class InputHandler {
 
     if (!this.player.active) return
 
+    const pointer = this.scene.input.activePointer
+    const { scrollX, scrollY } = this.scene.cameras.main
+    this.player.crosshair.setPosition(pointer.x + scrollX, pointer.y + scrollY)
     const speed = this.player.moveSpeed * 1.5
     this.player.setPushable(true)
 
@@ -34,23 +68,44 @@ export class InputHandler {
       this.player.transform()
     }
 
-    if (this.upKey.isDown) {
+    const js = this.joystickKeys?.[0]
+
+    if (this.wKey.isDown || this.upKey.isDown || js?.up.isDown) {
       this.player.setAccelerationY(-speed)
-    } else if (this.downKey.isDown) {
+    } else if (this.sKey.isDown || this.downKey.isDown || js?.down.isDown) {
       this.player.setAccelerationY(speed)
     } else {
       this.player.setPushable(false)
     }
 
-    if (this.leftKey.isDown) {
+    if (this.aKey.isDown || this.leftKey.isDown || js?.left.isDown) {
       this.player.setAccelerationX(-speed)
       this.player.setFlipX(true)
-    } else if (this.rightKey.isDown) {
+    } else if (this.dKey.isDown || this.rightKey.isDown || js?.right.isDown) {
       this.player.setFlipX(false)
       this.player.setAccelerationX(speed)
     } else {
       this.player.setPushable(false)
     }
+
+    if (!this.joystickKeys) return
+
+    let { x, y } = this.player
+    y += 5
+    const offset = 15
+
+    if (this.joystickKeys?.[1].up.isDown) {
+      y -= offset
+    } else if (this.joystickKeys?.[1].down.isDown) {
+      y += offset
+    }
+
+    if (this.joystickKeys?.[1].left.isDown) {
+      x -= offset
+    } else if (this.joystickKeys?.[1].right.isDown) {
+      x += offset
+    }
+    this.player.crosshair.setPosition(x, y)
   }
 
   handleDebugKeys = () => {

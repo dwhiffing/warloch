@@ -51,6 +51,12 @@ export default class extends Phaser.Scene {
       'assets/images/tiles.json',
     )
 
+    this.load.plugin(
+      'rexvirtualjoystickplugin',
+      'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js',
+      true,
+    )
+
     this.load.on('complete', () => {
       progress.destroy()
       this.scene.start('Menu', { playMusic: true })

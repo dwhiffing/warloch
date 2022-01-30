@@ -93,6 +93,10 @@ export default class extends Phaser.Scene {
     }
 
     this.hud = new Hud(this)
+
+    if (!this.sys.game.device.os.desktop) {
+      this.inputHandler.createMobileControls()
+    }
   }
 
   pause = () => {
