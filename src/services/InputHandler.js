@@ -16,9 +16,9 @@ export class InputHandler {
     this.spaceKey = this.input.keyboard.addKey(SPACE)
     this.mKey = this.input.keyboard.addKey(M)
 
-    this.debugKeys = this.input.keyboard.addKeys(
-      'R,T,Y,U,I,O,P,F,G,H,J,K,L,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE',
-    )
+    // this.debugKeys = this.input.keyboard.addKeys(
+    //   'R,T,Y,U,I,O,P,F,G,H,J,K,L,C,V,B,N,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE',
+    // )
 
     this.reg = this.scene.registry
   }
@@ -50,7 +50,7 @@ export class InputHandler {
   }
 
   update() {
-    this.handleDebugKeys()
+    // this.handleDebugKeys()
 
     if (Phaser.Input.Keyboard.JustDown(this.mKey)) this.scene.hud.toggleMute()
 
