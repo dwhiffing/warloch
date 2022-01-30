@@ -43,29 +43,44 @@ export default class extends Phaser.Scene {
       .setInteractive()
       .setScale(0.5)
       .on('pointerdown', this.toggleMute.bind(this))
+
+    window.addEventListener('resize', () => {
+      this.game.scale.setGameSize(500, 270)
+    })
   }
 
   update() {}
 
   newGame = () => {
-    if (!localStorage.getItem('warloch-has-seen-about')) {
-      this.about()
-      return
-    }
-    localStorage.removeItem('warloch-save')
-    this.scene.start('Game')
+    this.fullscreen(() => {
+      if (!localStorage.getItem('warloch-has-seen-about')) {
+        this.about()
+        return
+      }
+      localStorage.removeItem('warloch-save')
+      this.scene.start('Game')
+    })
   }
 
   continue = () => {
-    this.scene.start('Game')
+    this.fullscreen(() => this.scene.start('Game'))
   }
 
   gotoScores = () => {
-    this.scene.start('Score', { playMusic: false })
+    this.fullscreen(() => this.scene.start('Score', { playMusic: false }))
   }
 
   about = () => {
-    this.scene.start('About', { playMusic: false })
+    this.fullscreen(() => this.scene.start('About', { playMusic: false }))
+  }
+
+  fullscreen = (cb) => {
+    if (!this.sys.game.device.os.desktop && !this.scale.isFullscreen) {
+      this.scale.startFullscreen()
+      this.time.delayedCall(1000, cb)
+    } else {
+      cb()
+    }
   }
 
   toggleMute() {

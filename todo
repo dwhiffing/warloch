@@ -1,10 +1,5 @@
-instead of random positions, spawner should put enemies in the most empty region
-instead of random types, spawner should try to reach specific distributions
 work on weapon/upgrade/enemy balance
-
-Not during jam:
 add bullet trails effects for weapons
 UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)
 blast based on purchased weapons
 better gun art
-mobile controls

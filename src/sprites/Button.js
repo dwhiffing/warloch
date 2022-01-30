@@ -8,14 +8,14 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
 
     this.setDisplaySize(width, height)
       .setInteractive()
-      .on('pointerdown', callback)
+      .on('pointerup', callback)
       .setTint(0x22449f)
       .setOrigin(0.5)
 
     this.left = this.scene.add
       .sprite(x - width / 2, y, 'tiles', 'bar_left.png')
       .setInteractive()
-      .on('pointerdown', callback)
+      .on('pointerup', callback)
       .setTint(0x22449f)
       .setOrigin(1, 0.5)
       .setDisplaySize(6, height)
@@ -23,7 +23,7 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
     this.right = this.scene.add
       .sprite(x + width / 2, y, 'tiles', 'bar_right.png')
       .setInteractive()
-      .on('pointerdown', callback)
+      .on('pointerup', callback)
       .setTint(0x22449f)
       .setOrigin(0, 0.5)
       .setDisplaySize(6, height)

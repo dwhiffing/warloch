@@ -34,6 +34,10 @@ export default class extends Phaser.Scene {
   create({ newGame }) {
     const hasSave = this.loadGame()
 
+    window.addEventListener('resize', () => {
+      this.game.scale.setGameSize(500, 270)
+    })
+
     if (newGame || !hasSave) {
       this.registry.events.removeAllListeners()
       this.game.events.removeAllListeners()
@@ -96,6 +100,7 @@ export default class extends Phaser.Scene {
 
     if (!this.sys.game.device.os.desktop) {
       this.inputHandler.createMobileControls()
+      this.input.addPointer()
     }
   }
 

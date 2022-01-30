@@ -31,11 +31,11 @@ export class InputHandler {
       y,
       radius: 30,
       base: this.scene.add
-        .circle(0, 0, 30, 0x888888)
+        .circle(0, 0, 35, 0x888888)
         .setDepth(99)
         .setAlpha(0.5),
       thumb: this.scene.add
-        .circle(0, 0, 25, 0xcccccc)
+        .circle(0, 0, 30, 0xcccccc)
         .setDepth(99)
         .setAlpha(0.5),
       enable: true,
@@ -45,8 +45,8 @@ export class InputHandler {
 
   createMobileControls = () => {
     this.joysticks = [
-      this.createJoystick(50, 220),
-      this.createJoystick(450, 220),
+      this.createJoystick(80, 200),
+      this.createJoystick(420, 200),
     ]
     this.joystickKeys = this.joysticks.map((j) => j.createCursorKeys())
   }
