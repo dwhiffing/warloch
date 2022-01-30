@@ -15,30 +15,31 @@ export default class extends Phaser.Scene {
       progress.fillRect(0, height / 2, width * value, 60)
     })
 
-    this.load.bitmapFont('gem', 'assets/gem.png', 'assets/gem.xml')
-
-    this.load.audio('chord', 'assets/sounds/pickup.mp3')
+    const instances = 2
     IMPACT_SOUND_TYPES.forEach((type) => {
       for (let i = 0; i < IMPACT_SOUND_COUNT; i++) {
         this.load.audio(
           `hit-${type}-${i}`,
           `assets/sounds/hit_${type}_${i}.mp3`,
+          { instances },
         )
       }
     })
-    for (let i = 0; i < 4; i++) {
-      this.load.audio(`death-${i}`, `assets/sounds/small_death_${i}.wav`)
+    for (let i = 0; i < 6; i++) {
+      this.load.audio(`death-${i}`, `assets/sounds/death_${i}.wav`, {
+        instances,
+      })
     }
-    this.load.audio(`shoot`, `assets/sounds/shoot.wav`)
-    this.load.audio(`death`, `assets/sounds/death.wav`)
-    this.load.audio(`boss-death`, `assets/sounds/defeat_boss.wav`)
-    this.load.audio(`spawn-boss`, `assets/sounds/spawn_boss.wav`)
-    this.load.audio(`menu-music`, `assets/menu-music.mp3`)
-    this.load.audio(`game-music`, `assets/game-music.mp3`)
-    this.load.audio(`level`, `assets/sounds/level.wav`)
-    this.load.audio(`transform`, `assets/sounds/transform.wav`)
-    this.load.audio(`transform2`, `assets/sounds/transform2.wav`)
+    this.load.audio('chord', 'assets/sounds/pickup.mp3', { instances })
+    this.load.audio(`shoot`, `assets/sounds/shoot.wav`, { instances })
+    this.load.audio(`death`, `assets/sounds/player-death.wav`, { instances })
+    this.load.audio(`menu-music`, `assets/menu-music.mp3`, { instances })
+    this.load.audio(`game-music`, `assets/game-music.mp3`, { instances })
+    this.load.audio(`level`, `assets/sounds/level.wav`, { instances })
+    this.load.audio(`transform`, `assets/sounds/transform.wav`, { instances })
+    this.load.audio(`transform2`, `assets/sounds/transform2.wav`, { instances })
 
+    this.load.bitmapFont('gem', 'assets/gem.png', 'assets/gem.xml')
     this.load.image('title', 'assets/images/title.png')
     this.load.spritesheet('grass', 'assets/images/grass.png', {
       frameWidth: 16,

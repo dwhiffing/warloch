@@ -269,7 +269,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.sound.play('chord', {
       rate: 0.5 + val / this.nextXP || 0,
-      volume: 0.2,
+      volume: 0.15,
     })
     this.scene.hud?.set('xp', this.xp - this.prevXP)
   }

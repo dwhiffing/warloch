@@ -37,7 +37,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       let roll = Phaser.Math.RND.between(1, 20)
       let target = this.type === 'skull_big' ? 8 : 14
       if (roll >= target) gun.shoot(player.x, player.y)
-    } else if (dist < 19 && this.hitTimer <= 0) {
+    } else if (dist < 20 && this.hitTimer <= 0) {
       this.hitTimer = this.hitTimerMax
       this.flash(0xff0000, 100, false)
       player.hit(this.damage)
@@ -86,6 +86,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.maxHp = hp
     this.hitTimer = 0
     this.hitTimerMax = 40
+    this.soundKey = stats.soundKey
+    this.soundRate = stats.soundRate
     this.xp = xp
     this.level = stats.level
     this.particleScale = stats.particleScale
@@ -125,8 +127,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     )
 
     this.scene.sound.play(`hit-metal-${Phaser.Math.RND.between(0, 4)}`, {
-      volume: 0.05,
-      rate: 0.8 + Phaser.Math.RND.between(1, 3) / 10,
+      volume: 0.015,
+      rate: 0.7 + Phaser.Math.RND.between(1, 4) / 10,
     })
 
     if (bullet.stats.poison) {
@@ -184,9 +186,9 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.y - 10,
     )
 
-    this.scene.sound.play(`death-${Phaser.Math.RND.between(0, 3)}`, {
-      volume: 0.1,
-      rate: 0.8,
+    this.scene.sound.play(`death-${this.soundKey}`, {
+      volume: 0.15,
+      rate: this.soundRate,
     })
   }
 }

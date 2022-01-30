@@ -6,7 +6,7 @@ export const createAnim = (scene, sprite) => {
       prefix: `${name}_Walk_`,
       suffix: '.png',
       start: 1,
-      end: 4,
+      end: sprite.end || 4,
     }),
     frameRate,
     repeat: -1,

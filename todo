@@ -1,15 +1,10 @@
-MUST:
-instead of random positions, spawner should put enemies int he most empty region
+instead of random positions, spawner should put enemies in the most empty region
 instead of random types, spawner should try to reach specific distributions
 work on weapon/upgrade/enemy balance
-
 playtest with audio
-use different death sounds for different enemies
-use different material sounds for different enemy impacts
-clean up unused sounds
-
 add pause button?
 disable debug keys
+player idle animations
 
 PROBABLY NOT:
 UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)

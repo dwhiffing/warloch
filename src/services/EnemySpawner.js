@@ -136,6 +136,8 @@ export class EnemySpawner {
       particleScale: 1,
       scale: 1,
       depth: 2,
+      soundKey: 0,
+      soundRate: 0.8,
       ...ENEMIES[type],
     }
     stats.hp *= this.getHPMultiplier()
