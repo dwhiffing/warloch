@@ -1,6 +1,6 @@
 export class InputHandler {
   constructor(scene) {
-    const { W, A, S, D, UP, LEFT, RIGHT, DOWN, SPACE, M } =
+    const { W, A, S, D, UP, LEFT, RIGHT, DOWN, SPACE, M, ESC } =
       Phaser.Input.Keyboard.KeyCodes
     this.scene = scene
     this.input = scene.input
@@ -14,6 +14,7 @@ export class InputHandler {
     this.downKey = this.input.keyboard.addKey(DOWN)
     this.rightKey = this.input.keyboard.addKey(RIGHT)
     this.spaceKey = this.input.keyboard.addKey(SPACE)
+    this.escKey = this.input.keyboard.addKey(ESC)
     this.mKey = this.input.keyboard.addKey(M)
 
     // this.debugKeys = this.input.keyboard.addKeys(
@@ -68,6 +69,14 @@ export class InputHandler {
 
     const js = this.joystickKeys?.[0]
 
+    if (Phaser.Input.Keyboard.JustDown(this.escKey)) {
+      this.scene.scene.start('Menu')
+      this.scene.registry.reset()
+      this.scene.registry.events.removeAllListeners()
+      this.scene.input.removeAllListeners()
+      this.scene.game.events.removeAllListeners()
+      this.scene.time.removeAllEvents()
+    }
     if (this.wKey.isDown || this.upKey.isDown || js?.up.isDown) {
       this.player.setAccelerationY(-speed)
     } else if (this.sKey.isDown || this.downKey.isDown || js?.down.isDown) {
