@@ -26,7 +26,7 @@ export class EnemySpawner {
       })
       .stop()
 
-    this.particles.setDepth(3)
+    this.particles.setDepth(20)
 
     this.explosions = new Explosions(this.scene)
 

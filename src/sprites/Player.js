@@ -8,7 +8,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enableBody(this, 0)
 
     this.movePenalty = 1
-    this.setDepth(70)
+    this.setDepth(10)
 
     this.weapons = Object.values(WEAPONS).map((w) => ({
       ...w,
