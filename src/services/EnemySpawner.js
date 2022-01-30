@@ -87,10 +87,10 @@ export class EnemySpawner {
     }
   }
 
-  spawnGroup = ({ x, y, type, count, size = 30, quality = 'fodder' } = {}) => {
+  spawnGroup = ({ x, y, type, count, size = 60, quality = 'fodder' } = {}) => {
     count = count || [8, 9, 10, 11, 12][this.getLevel()]
     if (quality === 'unique') count = Math.floor(count / 2)
-    type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes()[quality])
+    type = type || Phaser.Math.RND.pick(this.getSpawnTypes()[quality])
     const dist = this.spawnDistance
     if (!x || !y) {
       do {
@@ -193,11 +193,11 @@ export class EnemySpawner {
       // prettier-ignore
       { fodder: ['slime_small'], unique: ['goblin_small'], boss: ['slime_jumbo'], },
       // prettier-ignore
-      { fodder: ['slime_small', 'goblin_small'], unique: ['knight_small', 'slime_big'], boss: ['goblin_big'] },
+      { fodder: ['slime_small', 'goblin_small'], unique: ['knight_small', 'slime_big', 'skull_small'], boss: ['goblin_big'] },
       // prettier-ignore
-      { fodder: ['goblin_small', 'slime_big'], unique: ['skull_small', 'knight_small'], boss: ['knight_big'] },
+      { fodder: ['goblin_small', 'knight_small'], unique: ['skull_small', 'skull_big'], boss: ['knight_big'] },
       // prettier-ignore
-      { fodder: ['knight_small', 'goblin_small'], unique: ['skull_big', 'knight_big'], boss: ['goblin_jumbo', 'knight_jumbo'] },
+      { fodder: ['knight_small', 'slime_big'], unique: ['skull_big', 'knight_big'], boss: ['goblin_jumbo', 'knight_jumbo'] },
       // prettier-ignore
       { fodder: ['skull_small', 'knight_small'], unique: ['skull_big', 'knight_big', 'goblin_big'], boss: ['goblin_jumbo', 'knight_jumbo'] },
     ][this.getLevel()]
