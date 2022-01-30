@@ -28,7 +28,7 @@ export default class extends Phaser.Scene {
     }
     const muted = localStorage.getItem('ggj-mute') === '1'
     this.muteButton = this.add
-      .sprite(w + 20, h + 20, 'tiles', muted ? 'mute.png' : 'unmute.png')
+      .sprite(w + 10, h + 10, 'tiles', muted ? 'mute.png' : 'unmute.png')
       .setScrollFactor(0)
       .setInteractive()
       .setScale(0.5)
@@ -51,7 +51,7 @@ export default class extends Phaser.Scene {
   update() {}
 
   updateScores = () => {
-    getScores().then(({ score, top }) => {
+    getScores().then(({ score, top } = {}) => {
       if (!this.cameras.main) return
       top.forEach(([name, _score], i) => {
         let scoreText =
@@ -66,7 +66,9 @@ export default class extends Phaser.Scene {
             ? `Last Game: ${this.currentScore}. Your Highest: ${score}`
             : score
             ? ` Your High Score: ${score}`
-            : `Last Game: ${this.currentScore} `,
+            : this.currentScore
+            ? `Last Game: ${this.currentScore} `
+            : '',
         )
         scoreText.setText(`${i + 1}. ${_score} - ${name}`)
       })

@@ -56,6 +56,7 @@ export class Orb extends Phaser.Physics.Arcade.Sprite {
   }
 
   die = () => {
+    if (!this.active) return
     this.scene.player.xp += this.value * this.scene.player.xpRate
     this.x = -99999
     this.y = -99999

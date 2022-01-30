@@ -20,14 +20,16 @@ export const postScore = ({ playerName, score }) => {
     .catch((error) => console.log('error', error))
 }
 
-export const getScores = (playerId = localStorage.getItem('warloch-id')) => {
+export const getScores = (
+  playerId = localStorage.getItem('warloch-id') || '',
+) => {
   return fetch(
     `${prefix}?appId=${HIGHSCORE_APP_ID}&playerId=${playerId}&order=DESC`,
   )
     .then((response) => response.json())
     .then((r) => {
       return {
-        score: r.currentPlayerScore.score,
+        score: r.currentPlayerScore?.score,
         top: r.topScores
           .reduce((arr, score) => [...arr, [score.playerName, score.score]], [])
           .sort((a, b) => b[1] - a[1])
