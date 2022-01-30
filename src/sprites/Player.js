@@ -138,7 +138,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   damaged = (damage) => {
     const perc = damage / 5
-    this.scene.cameras.main.shake(300, 0.0125 * perc)
+    this.scene.cameras.main.shake(300, Math.min(0.0125 * perc, 0.0125))
     this.scene.sound.play(`hit-glass-${Phaser.Math.RND.between(0, 4)}`, {
       volume: (this.form === 'light' ? 0.5 : 0.4) * perc,
       rate: this.form === 'light' ? 1 : 0.7,

@@ -40,7 +40,7 @@ export const ENEMIES = {
     soundKey: 3,
     depth: 3,
     hp: 15,
-    damage: 3,
+    damage: 4,
     xp: 10,
     mass: 10,
   },
