@@ -77,7 +77,10 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.setActive(true).setVisible(true).setPosition(x, y)
     this.setBodySize(...bodySize).setOffset(...bodyOffset)
-    this.play(type).setOrigin(0.5, 1).setDepth(stats.depth)
+    const anim = stats.variants
+      ? Phaser.Math.RND.weightedPick(stats.variants)
+      : type
+    this.play(anim).setOrigin(0.5, 1).setDepth(stats.depth)
     this.body.enable = true
 
     this.speed = speed

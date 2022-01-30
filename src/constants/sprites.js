@@ -1,7 +1,10 @@
 export const SPRITES = [
   { name: 'slime_small', key: 'slime_small', frameRate: 3, end: 2 },
-  { name: 'slime_big', key: 'slime_big', frameRate: 3, end: 2 },
+  { name: 'slime_big', key: 'slime_big', frameRate: 2, end: 2 },
   { name: 'slime_big', key: 'slime_jumbo', frameRate: 1, end: 2 },
+  { name: 'slime_big_bana', key: 'slime_big_bana', frameRate: 2, end: 2 },
+  { name: 'slime_big_app', key: 'slime_big_app', frameRate: 2, end: 2 },
+  { name: 'slime_big_bone', key: 'slime_big_bone', frameRate: 2, end: 2 },
   { name: 'LargeKnight', key: 'knight_jumbo', frameRate: 1 },
   { name: 'goblin', key: 'goblin_jumbo', frameRate: 1 },
   { name: 'gremlin', key: 'goblin_small', frameRate: 8 },

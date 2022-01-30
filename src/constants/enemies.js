@@ -59,8 +59,14 @@ export const ENEMIES = {
   slime_big: {
     ai: 'jump',
     type: 'slime_big',
-    bodySize: [24, 12],
-    bodyOffset: [3, 20],
+    variants: [
+      'slime_big',
+      'slime_big_bone',
+      'slime_big_app',
+      'slime_big_bana',
+    ],
+    bodySize: [28, 18],
+    bodyOffset: [3, 13],
     speed: 35,
     level: 3,
     particleTint: 0x00aaaa,
