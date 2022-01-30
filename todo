@@ -6,7 +6,6 @@ spawner needs to have multiple groups of enemies:
 
 instead of random positions, spawner should put enemies int he most empty region
 instead of random types, spawner should try to reach specific distributions
-health orbs follow you on pick up
 
 work on weapon/upgrade/enemy balance
 

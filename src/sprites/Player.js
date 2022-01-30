@@ -268,8 +268,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (val >= this.nextXP) this.level++
 
     this.scene.sound.play('chord', {
-      rate: 1 + val / this.nextXP || 0,
-      volume: 0.4,
+      rate: 0.5 + val / this.nextXP || 0,
+      volume: 0.2,
     })
     this.scene.hud?.set('xp', this.xp - this.prevXP)
   }
