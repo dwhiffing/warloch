@@ -2,13 +2,15 @@ instead of random positions, spawner should put enemies in the most empty region
 instead of random types, spawner should try to reach specific distributions
 work on weapon/upgrade/enemy balance
 playtest with audio
-add pause button?
-disable debug keys
-player idle animations
 
-PROBABLY NOT:
+should spawn fewer enemies for first 5-10 minutes
+should reduce max count of some weapon
+
+
+Not during jam:
+player idle animations
+add bullet trails effects for weapons
 UI indicating current weapons/upgrades (use bullet art as icons for shop and ui for current upgrades)
 blast based on purchased weapons
 better gun art
-add bullet trails effects for weapons
 mobile controls

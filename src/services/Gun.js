@@ -153,14 +153,14 @@ export class Gun {
   get stats() {
     let stats = {
       count: 1,
-      health: 1,
+      pierce: 1,
       offset: 10,
       spread: 0,
       lifetime: 9999,
       damage: 1,
       range: 200,
       speed: 300,
-      maxCount: 5,
+      maxCount: 4,
       ...GUNS[this.type],
     }
     if (this.type === 'enemy') return stats

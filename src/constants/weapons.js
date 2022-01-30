@@ -6,9 +6,9 @@ export const WEAPONS = {
     dark: 'shotgun',
     levels: [
       {},
-      { health: ['+', 0], count: ['+', 1], damage: ['+', 0.3] },
-      { health: ['+', 1], count: ['+', 1], damage: ['+', 0.6] },
-      { health: ['+', 2], count: ['+', 2], damage: ['+', 1] },
+      { count: ['+', 1], damage: ['+', 0.3] },
+      { pierce: ['+', 1], count: ['+', 1], damage: ['+', 0.6] },
+      { pierce: ['+', 2], count: ['+', 2], damage: ['+', 1] },
     ],
   },
   two: {
@@ -28,9 +28,9 @@ export const WEAPONS = {
     dark: 'axe',
     levels: [
       {},
-      { size: ['*', 1.05], damage: ['+', 1.5], count: ['+', 1] },
-      { size: ['*', 1.1], damage: ['+', 3], count: ['+', 2] },
-      { size: ['*', 1.15], damage: ['+', 4.5], count: ['+', 2] },
+      { size: ['*', 1.05], damage: ['+', 1.5] },
+      { size: ['*', 1.1], damage: ['+', 3] },
+      { size: ['*', 1.15], damage: ['+', 4.5] },
     ],
   },
   four: {
@@ -39,9 +39,9 @@ export const WEAPONS = {
     dark: 'garlic',
     levels: [
       {},
-      { poison: ['+', 500], size: ['*', 1.15], damage: ['+', 0.4] },
-      { poison: ['+', 1000], size: ['*', 1.3], damage: ['+', 0.8] },
-      { poison: ['+', 1500], size: ['*', 1.45], damage: ['+', 1.2] },
+      { poison: ['+', 500], size: ['*', 1.15], damage: ['+', 0.5] },
+      { poison: ['+', 1000], size: ['*', 1.3], damage: ['+', 1] },
+      { poison: ['+', 1500], size: ['*', 1.45], damage: ['+', 1.5] },
     ],
   },
   five: {
@@ -61,9 +61,9 @@ export const WEAPONS = {
     dark: 'rocket',
     levels: [
       {},
-      { count: ['+', 0], damage: ['+', 1], delay: ['*', 0.9] },
-      { count: ['+', 0], damage: ['+', 2], delay: ['*', 0.8] },
-      { count: ['+', 1], damage: ['+', 3], delay: ['*', 0.7] },
+      { damage: ['*', 1.5], delay: ['*', 0.9] },
+      { damage: ['*', 2], delay: ['*', 0.8] },
+      { damage: ['*', 3], delay: ['*', 0.7] },
     ],
   },
   seven: {

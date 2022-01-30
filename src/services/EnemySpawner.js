@@ -137,6 +137,7 @@ export class EnemySpawner {
       scale: 1,
       depth: 2,
       soundKey: 0,
+      range: 20,
       soundRate: 0.8,
       ...ENEMIES[type],
     }
@@ -192,7 +193,7 @@ export class EnemySpawner {
       // prettier-ignore
       { fodder: ['slime_small'], unique: ['goblin_small'], boss: ['slime_jumbo'], },
       // prettier-ignore
-      { fodder: ['slime_small', 'goblin_small'], unique: ['slime_big', 'knight_small'], boss: ['goblin_big'] },
+      { fodder: ['slime_small', 'goblin_small'], unique: ['knight_small', 'slime_big'], boss: ['goblin_big'] },
       // prettier-ignore
       { fodder: ['goblin_small', 'slime_big'], unique: ['skull_small', 'knight_small'], boss: ['knight_big'] },
       // prettier-ignore

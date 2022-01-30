@@ -14,7 +14,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     let height = stats.height || stats.size
     let bodyWidth = stats.bodyWidth || stats.bodySize
     let bodyHeight = stats.bodyHeight || stats.bodySize
-    this.health = stats.health
+    this.health = stats.pierce
     this.offset = stats.offset
     this.lifetimeTimer = stats.lifetime
     this.damage = stats.damage
