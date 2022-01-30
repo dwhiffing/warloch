@@ -1,4 +1,3 @@
-ensure that enemies spawn off screen(when camera is on edge)
 spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
 blast based on purchased weapons
 work on weapon balance

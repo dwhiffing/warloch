@@ -71,9 +71,13 @@ export class EnemySpawner {
       10,
     )
     const dist = this.spawnDistance
-    const vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
-    x = x || this.target.x + vel.x
-    y = y || this.target.y + vel.y
+    if (!x || !y) {
+      do {
+        let vel = this.physics.velocityFromAngle(Phaser.Math.RND.angle(), dist)
+        x = this.target.x + vel.x
+        y = this.target.y + vel.y
+      } while (this.scene.cameras.main.worldView.contains(x, y))
+    }
     const circle = new Phaser.Geom.Circle(x, y, size)
     for (let i = 0; i < count; i++) {
       const { x, y } = circle.getRandomPoint()
