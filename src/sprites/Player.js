@@ -43,7 +43,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.setAcceleration(0)
     this.setDrag(150)
     this.tp +=
-      this.form === 'light' ? this.maxTP * 0.00005 : this.maxTP * -0.0002
+      this.form === 'light' ? this.maxTP * 0.00005 : this.maxTP * -0.00075
 
     if (this.movePenalty < 1) {
       this.movePenalty += 0.01
@@ -223,8 +223,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   set hp(val) {
     // taking damage
     if (this.hp > val) {
-      this.movePenalty = 0.5
       if (this.hp <= this.maxHP) {
+        this.movePenalty = 0.5
         this.damaged()
       }
     }

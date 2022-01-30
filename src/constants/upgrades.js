@@ -61,8 +61,8 @@ export const UPGRADES = {
     type: 'player',
     levels: [
       { maxHP: ['*', 1.2] },
-      { maxHP: ['*', 1.4] },
-      { maxHP: ['*', 1.6] },
+      { maxHP: ['*', 1.2] },
+      { maxHP: ['*', 1.2] },
     ],
   },
   healthRegen: {
@@ -70,16 +70,16 @@ export const UPGRADES = {
     key: 'healthRegen',
     type: 'player',
     levels: [
-      { regen: ['+', 1.01] },
-      { regen: ['+', 1.02] },
-      { regen: ['+', 1.03] },
+      { regen: ['+', 0.001] },
+      { regen: ['+', 0.001] },
+      { regen: ['+', 0.001] },
     ],
   },
   moveSpeed: {
     name: 'Move Speed',
     key: 'moveSpeed',
     type: 'player',
-    levels: [{ speed: ['+', 5] }, { speed: ['+', 10] }, { speed: ['+', 15] }],
+    levels: [{ speed: ['+', 15] }, { speed: ['+', 15] }, { speed: ['+', 15] }],
   },
   pickupRange: {
     name: 'Pickup Range',

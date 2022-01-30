@@ -51,10 +51,13 @@ export class EnemySpawner {
   tick = () => {
     this.scene.registry.inc('gameTimer')
     const spawnRate = this.target.form === 'light' ? 3 : 1
+    if (this.scene.registry.get('gameTimer') % 20 === 0) {
+      this.spawnRing()
+    }
     if (this.scene.registry.get('gameTimer') % 60 === 0) {
       this.spawnBoss()
-      this.spawnRing()
-    } else if (this.scene.registry.get('gameTimer') % spawnRate === 0) {
+    }
+    if (this.scene.registry.get('gameTimer') % spawnRate === 0) {
       this.spawnGroup()
     }
   }
@@ -96,7 +99,7 @@ export class EnemySpawner {
   spawnRing = (type, count) => {
     count = count || Phaser.Math.Clamp(this.getSpawnCount() * 4, 0, 20)
     type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes().fodder)
-    if (count < 10) return
+    if (count < 8) return
     let angles = []
     for (let i = -180; i < 180; i += 360 / count) {
       angles.push(i)
@@ -119,7 +122,7 @@ export class EnemySpawner {
 
   getSpawnCount = () => {
     // spawn a percentage of the enemies needed to get to target density
-    let targetDensity = [70, 80, 80, 90, 90][this.getLevel()]
+    let targetDensity = [60, 70, 80, 80, 90][this.getLevel()]
     if (this.target.form === 'dark') targetDensity *= 1.2
     let ratio = 0.2
     const numLiving = this.enemies.getChildren().filter((e) => e.active).length
@@ -140,7 +143,7 @@ export class EnemySpawner {
   }
 
   getXPMultiplier() {
-    return [1, 1.25, 1.5, 1.75, 2][this.getLevel()]
+    return [1, 1.5, 2, 2.5, 3][this.getLevel()]
   }
 
   getUniqueRatio() {
