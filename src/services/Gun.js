@@ -84,10 +84,11 @@ export class Gun {
         return
     }
 
-    this.scene.sound.play(this.stats.soundKey || 'shoot', {
-      rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 30,
-      volume: 0.03,
-    })
+    if (target !== 'orbit' && target !== 'randomPositoon')
+      this.scene.sound.play(this.stats.soundKey || 'shoot', {
+        rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 30,
+        volume: 0.03,
+      })
 
     for (let i = 0; i < count; i++) {
       let bullet = this.bullets.get()
