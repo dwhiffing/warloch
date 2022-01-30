@@ -195,7 +195,7 @@ export class EnemySpawner {
       // prettier-ignore
       { fodder: ['slime_small', 'goblin_small'], unique: ['knight_small', 'slime_big', 'skull_small'], boss: ['goblin_big'] },
       // prettier-ignore
-      { fodder: ['goblin_small', 'knight_small'], unique: ['skull_small', 'skull_big'], boss: ['knight_big'] },
+      { fodder: ['goblin_small', 'knight_small'], unique: ['skull_small', 'skull_big', 'slime_big'], boss: ['knight_big'] },
       // prettier-ignore
       { fodder: ['knight_small', 'slime_big'], unique: ['skull_big', 'knight_big'], boss: ['goblin_jumbo', 'knight_jumbo'] },
       // prettier-ignore
