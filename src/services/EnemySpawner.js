@@ -116,9 +116,8 @@ export class EnemySpawner {
   }
 
   spawnRing = (type, count) => {
-    count = count || Phaser.Math.Clamp(this.getSpawnCount() * 4, 0, 20)
+    count = count || [20, 25, 30, 35, 40][this.getLevel()]
     type = type || Phaser.Math.RND.weightedPick(this.getSpawnTypes().fodder)
-    if (count < 8) return
     let angles = []
     for (let i = -180; i < 180; i += 360 / count) {
       angles.push(i)
@@ -156,9 +155,9 @@ export class EnemySpawner {
 
   getSpawnCount = () => {
     // spawn a percentage of the walkers needed to get to target density
-    let targetDensity = [60, 70, 80, 80, 90][this.getLevel()]
-    if (this.target.form === 'dark') targetDensity *= 1.2
-    let ratio = 0.2
+    let targetDensity = [50, 60, 70, 80, 80][this.getLevel()]
+    // if (this.target.form === 'dark') targetDensity *= 1.1
+    let ratio = 0.15
     const numLiving = this.getAllChildren().filter((e) => e.active).length
     let count = Math.floor((targetDensity - numLiving) * ratio)
     return count < 4 ? 0 : count
@@ -181,7 +180,7 @@ export class EnemySpawner {
   }
 
   getHPMultiplier() {
-    return [1, 2, 3, 4, 5][this.getLevel()]
+    return [1, 2, 4, 6, 10][this.getLevel()]
   }
 
   getXPMultiplier() {
