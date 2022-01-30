@@ -74,7 +74,7 @@ export const ENEMIES = {
     range: 25,
     soundKey: 2,
     soundRate: 0.5,
-    hp: 10,
+    hp: 8,
     damage: 3,
     xp: 10,
     mass: 15,

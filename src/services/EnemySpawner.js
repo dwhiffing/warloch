@@ -34,25 +34,25 @@ export class EnemySpawner {
 
     this.walkers = scene.physics.add.group({
       classType: Enemy,
-      maxSize: 150,
+      maxSize: 60,
       runChildUpdate: true,
     })
 
-    this.walkers.createMultiple({ quantity: 150, active: false })
+    this.walkers.createMultiple({ quantity: 60, active: false })
 
     this.flyers = scene.physics.add.group({
       classType: Enemy,
-      maxSize: 100,
+      maxSize: 20,
       runChildUpdate: true,
     })
-    this.flyers.createMultiple({ quantity: 100, active: false })
+    this.flyers.createMultiple({ quantity: 20, active: false })
 
     this.smallSlimes = scene.physics.add.group({
       classType: Enemy,
-      maxSize: 50,
+      maxSize: 40,
       runChildUpdate: true,
     })
-    this.smallSlimes.createMultiple({ quantity: 50, active: false })
+    this.smallSlimes.createMultiple({ quantity: 40, active: false })
 
     this.spawnDistance = 300
 
@@ -218,7 +218,7 @@ export class EnemySpawner {
   }
 
   getSpawnRatio = () => {
-    const targetDensity = [30, 35, 40, 45, 50][this.getLevel()]
+    const targetDensity = [20, 25, 35, 40, 45][this.getLevel()]
     const numLiving = this.getAllChildren().filter((e) => e.active).length
     return 1 - (targetDensity - numLiving) / targetDensity
   }
