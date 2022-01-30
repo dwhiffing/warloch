@@ -128,7 +128,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     )
 
     this.scene.sound.play(`hit-metal-${Phaser.Math.RND.between(0, 4)}`, {
-      volume: 0.015,
+      volume: 0.025,
       rate: 0.7 + Phaser.Math.RND.between(1, 4) / 10,
     })
 
@@ -188,7 +188,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     )
 
     this.scene.sound.play(`death-${this.soundKey}`, {
-      volume: 0.15,
+      volume: 0.1,
       rate: this.soundRate,
     })
   }
