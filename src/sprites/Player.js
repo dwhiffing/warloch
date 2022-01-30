@@ -83,9 +83,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   hit(damage) {
     if (!this.active) return
+    this.damaged(damage)
     if (this.form === 'dark') {
       this.tp -= damage
-      this.damaged()
     } else {
       this.hp -= damage
     }
@@ -130,10 +130,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
-  damaged = () => {
-    this.scene.cameras.main.shake(300, 0.0125)
+  damaged = (damage) => {
+    const perc = damage / 5
+    this.scene.cameras.main.shake(300, 0.0125 * perc)
     this.scene.sound.play(`hit-glass-${Phaser.Math.RND.between(0, 4)}`, {
-      volume: 0.3,
+      volume: (this.form === 'light' ? 0.5 : 0.4) * perc,
+      rate: this.form === 'light' ? 1 : 0.7,
     })
     if (!this.adrenaline) {
       this.setTint(0xff0000)
@@ -153,14 +155,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // if turning dark
     if (this.form === 'light') {
-      // TODO: trigger spawn of a bunch of enemies right before spawn?
       this.scene.enemySpawner.spawnRing()
       this.scene.cameras.main.shake(400, 0.02)
       this.body.setMaxSpeed(0)
       this.setMass(50)
 
-      // TODO: need to make the blast gun stats based on all player unlocked guns
-      // or maybe instead, can do a modified fire of each gun
       this.guns.find((g) => g.type === 'blast')?.shoot()
 
       this.scene.time.delayedCall(500, () =>
@@ -227,7 +226,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.hp > val) {
       if (this.hp <= this.maxHP) {
         this.movePenalty = 0.5
-        this.damaged()
       }
     }
 

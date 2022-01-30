@@ -43,8 +43,6 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       player.hit(this.damage)
     }
 
-    // TODO: jumbo goblin/knight should summon small versions of themsevles
-
     if (this.ai === 'jump') {
       this.setVelocity(0)
       const random = Phaser.Math.Angle.Random() / 10
