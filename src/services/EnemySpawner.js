@@ -165,7 +165,11 @@ export class EnemySpawner {
   }
 
   getAllChildren() {
-    return [...this.walkers.getChildren(), ...this.flyers.getChildren()]
+    return [
+      ...this.walkers.getChildren(),
+      ...this.flyers.getChildren(),
+      ...this.smallSlimes.getChildren(),
+    ]
   }
 
   getSpeedMultiplier() {
