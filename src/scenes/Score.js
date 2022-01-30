@@ -63,7 +63,7 @@ export default class extends Phaser.Scene {
         this.scoreTexts[i] = scoreText
         this.currentScoreText.setText(
           score && this.currentScore
-            ? `Last Game: ${this.currentScore} Your Highest: ${score}`
+            ? `Last Game: ${this.currentScore}. Your Highest: ${score}`
             : score
             ? ` Your High Score: ${score}`
             : `Last Game: ${this.currentScore} `,

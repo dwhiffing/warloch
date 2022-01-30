@@ -2,8 +2,8 @@ import { Button } from '../sprites/Button'
 
 const INSTRUCTIONS = [
   "You are 'Loch', a wizard with a dual nature.\n\nWASD/Arrows to move, mouse to aim spells.\n\nDefeat foes and grab gems to level up.\n\nErupt into War form when you deal enough damage.\n\nWar form is invulnerable and corrupts your spells.",
-  'Enemies will get stronger as time passes.\n\nThis is another useful tip for enjoying the game\n\nThis is another useful tip for enjoying the game\n\nWhile War, push enemies away to grab gems.\n\nGood luck!',
-  'Daniel Whiffing - Design, Coding and Sound\n\nSam Braithwaite - Art\n\nAsh Dadoun - Art\n\nCREDIT PLACEHOLDER ARTIST - Art\n\nPurple Planet - Music',
+  'You start with only your trusty magic missile.\n\nEnemies will get stronger as time passes.\n\nWhile War, push enemies away to grab gems.\n\nGood luck!',
+  'Daniel Whiffing - Design, Coding and Sound\n\nSam Braithwaite - Art\n\nAsh Dadoun - Art\n\nPurple Planet - Music',
 ]
 
 export default class extends Phaser.Scene {

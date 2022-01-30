@@ -6,7 +6,7 @@ export class Hud {
     const o = 10
     const w = scene.cameras.main.width - o * 2
     const h = scene.cameras.main.height - o * 2
-    const _h = 10
+    const _h = 8
     const player = scene.player
 
     this.xpBar = new Bar(this.scene, o, o, w, _h, 0x00ffff, false)
@@ -27,7 +27,7 @@ export class Hud {
     this.tpBar.set(player.tp, player.maxTP)
 
     this.killText = this.scene.add
-      .bitmapText(o, 45, 'gem', this.scene.registry.get('killCount'))
+      .bitmapText(o, 38, 'gem', this.scene.registry.get('killCount'))
       .setScrollFactor(0)
       .setScale(0.5)
       .setDepth(99)
@@ -35,7 +35,7 @@ export class Hud {
     this.timeText = this.scene.add
       .bitmapText(
         w / 2,
-        45,
+        38,
         'gem',
         this.getTimestamp(this.scene.registry.get('gameTimer')),
       )
@@ -45,7 +45,7 @@ export class Hud {
       .setOrigin(0.5, 0)
 
     this.scoreText = this.scene.add
-      .bitmapText(w + o, 45, 'gem', this.scene.registry.get('score'))
+      .bitmapText(w + o, 38, 'gem', this.scene.registry.get('score'))
       .setScrollFactor(0)
       .setScale(0.5)
       .setDepth(99)

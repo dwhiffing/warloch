@@ -19,8 +19,8 @@ export class Bar {
     if (height > 2) {
       this.shadowLeft = get(x, y, 'shadow_left', 3, height)
       this.shadowRight = get(x + width - 3, y, 'shadow_right', 3, height)
-      this.barLeft = get(x + 1, y, 'bar_left', 3, height - o).setTint(tint)
-      this.barRight = get(x + 5, y, 'bar_right', 3, height - o).setTint(tint)
+      this.barLeft = get(x + 2, y, 'bar_left', 2, height - o).setTint(tint)
+      this.barRight = get(x + 5, y, 'bar_right', 2, height - o).setTint(tint)
     }
   }
 
