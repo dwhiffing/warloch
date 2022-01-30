@@ -20,7 +20,7 @@ export default class extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.add.existing(
-      new Button(this, _w + (score ? 60 : 0), h + 20, 'back', this.back),
+      new Button(this, _w + (score ? 60 : 0), h + 20, 'Back', this.back),
     )
 
     if (playMusic) {
@@ -45,7 +45,7 @@ export default class extends Phaser.Scene {
 
     this.postButton = this.add
       .existing(
-        new Button(this, _w - 60, h + 20, 'post score', () =>
+        new Button(this, _w - 60, h + 20, 'Post Score', () =>
           this.postScore(score),
         ),
       )

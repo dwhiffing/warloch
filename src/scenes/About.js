@@ -23,9 +23,9 @@ export default class extends Phaser.Scene {
 
     this.add.text(_w, 25, 'About', { font: '24px sans-serif' }).setOrigin(0.5)
 
-    this.add.existing(new Button(this, _w - 60, h + 20, 'back', this.back))
+    this.add.existing(new Button(this, _w - 60, h + 20, 'Back', this.back))
 
-    this.add.existing(new Button(this, _w + 60, h + 20, 'next', this.next))
+    this.add.existing(new Button(this, _w + 60, h + 20, 'Next', this.next))
 
     this.text = this.add
       .text(_w, 60, INSTRUCTIONS[0], { font: '16px sans-serif' })

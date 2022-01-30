@@ -1,6 +1,5 @@
 MUST:
 spawner needs to have 2 groups of enemies: colliders and non-colliders.  Stats determine if you collide with other enemies
-ensure player adrenaline tint doesn't go away
 playtest with audio
 clean up unused sounds
 work on weapon/upgrade/enemy balance
