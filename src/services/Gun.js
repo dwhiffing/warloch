@@ -51,10 +51,6 @@ export class Gun {
     if (this.shotTimer > 0) return
 
     this.shotTimer = this.stats.delay
-    this.scene.sound.play(this.stats.soundKey || 'shoot', {
-      rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 30,
-      volume: 0.03,
-    })
 
     let { x: px, y: py } = this.source
     py += 5
@@ -78,6 +74,20 @@ export class Gun {
       .sort((a, b) => getDist(px, py, a.x, a.y) - getDist(px, py, b.x, b.y))
 
     const shuffledEnemies = Phaser.Math.RND.shuffle([...nearbyEnemies])
+
+    if (target === 'nearestEnemy' || target === 'randomEnemy') {
+      if (
+        target === 'nearestEnemy'
+          ? nearbyEnemies.length === 0
+          : shuffledEnemies.length === 0
+      )
+        return
+    }
+
+    this.scene.sound.play(this.stats.soundKey || 'shoot', {
+      rate: this.stats.soundRate + Phaser.Math.RND.between(0, 10) / 30,
+      volume: 0.03,
+    })
 
     for (let i = 0; i < count; i++) {
       let bullet = this.bullets.get()

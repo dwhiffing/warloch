@@ -131,13 +131,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   damaged = () => {
-    this.scene.cameras.main.shake(200, 0.01)
-    this.scene.sound.play(`Glass-light-${Phaser.Math.RND.between(0, 4)}`, {
+    this.scene.cameras.main.shake(300, 0.0125)
+    this.scene.sound.play(`hit-glass-${Phaser.Math.RND.between(0, 4)}`, {
       volume: 0.3,
     })
     if (!this.adrenaline) {
       this.setTint(0xff0000)
-      this.scene.time.delayedCall(100, this.clearTint.bind(this))
+      this.scene.time.delayedCall(300, this.clearTint.bind(this))
     }
   }
 
