@@ -1,6 +1,6 @@
 export class InputHandler {
   constructor(scene) {
-    const { W, A, S, D, UP, LEFT, RIGHT, DOWN, SPACE, M, ESC } =
+    const { W, A, S, D, UP, LEFT, RIGHT, DOWN, SPACE, M, BACKSPACE } =
       Phaser.Input.Keyboard.KeyCodes
     this.scene = scene
     this.input = scene.input
@@ -14,7 +14,7 @@ export class InputHandler {
     this.downKey = this.input.keyboard.addKey(DOWN)
     this.rightKey = this.input.keyboard.addKey(RIGHT)
     this.spaceKey = this.input.keyboard.addKey(SPACE)
-    this.escKey = this.input.keyboard.addKey(ESC)
+    this.escKey = this.input.keyboard.addKey(BACKSPACE)
     this.mKey = this.input.keyboard.addKey(M)
 
     // this.debugKeys = this.input.keyboard.addKeys(
