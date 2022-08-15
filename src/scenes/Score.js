@@ -78,11 +78,11 @@ export default class extends Phaser.Scene {
   postScore = (score) => {
     if (this.postButton.alpha < 1) return
     this.name = prompt(
-      'Enter your name (6 chars max)',
+      'Enter your name (8 chars max)',
       localStorage.getItem('warloch-name') || 'Enter Name',
     )
     this.name = this.name.replaceAll(' ', '')
-    if (this.name === '' || this.name.length > 6) return
+    if (this.name === '' || this.name.length > 8) return
     localStorage.setItem('warloch-name', this.name)
     postScore({ playerName: this.name, score }).then(this.updateScores)
     this.postButton.setAlpha(0.5)
